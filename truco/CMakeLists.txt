@@ -1,4 +1,4 @@
-cmake_minimum_required(VERSION 3.22.1)
+cmake_minimum_required(VERSION 3.16.3)
 
 project(TrucoYMate DESCRIPTION "Truco argentino para terminal GNU Linux" LANGUAGES CXX)
 
@@ -18,4 +18,4 @@ target_include_directories(${EXECUTABLE} PUBLIC ${INC_DIR})
 
 include_directories(${NCURSES_INCLUDE_DIRS})
 
-target_link_libraries(${EXECUTABLE} ${NCURSES_LIBRARIES})
+target_link_libraries(${EXECUTABLE} TrucoCurses ${NCURSES_LIBRARIES})

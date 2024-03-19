@@ -1,16 +1,12 @@
 #include <truco.h>
 
-#include <ncurses.h>
-
+#include <tcurses/tcurses.h>
 
 int main(int argc, char *argv[]) {
 
-	initscr();
-	start_color();
+	auto app = TCurses::Application();
 
-	getch();
-
-	endwin();
+	app.run();
 
 	return 0;
 }
