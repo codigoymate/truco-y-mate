@@ -1,5 +1,8 @@
 #pragma once
 
+#include <memory>
+#include <list>
+
 namespace TCurses {
 
 class Component {
@@ -23,8 +26,16 @@ public:
 	void setPos(const short x, const short y) { this->x = x; this->y = y;}
 	void setSize(const short w, const short h) { this->h = h; this->w = w;}
 
+	const Component *getParent() { return parent; }
+
+	const std::list<std::shared_ptr<Component>> getChildren() { return children; }
+
+	void addChild(std::shared_ptr<Component> child);
+
 private:
 	short x, y, w, h;
+	Component *parent;
+	std::list<std::shared_ptr<Component>> children;
 };
 
 }

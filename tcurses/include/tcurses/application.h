@@ -11,6 +11,8 @@ public:
 	Application();
 	virtual ~Application() = default;
 
+	virtual void init() = 0;
+
 	void run();
 
 private:

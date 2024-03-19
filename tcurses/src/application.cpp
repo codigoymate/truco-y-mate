@@ -17,8 +17,10 @@ Application::Application() {
 }
 
 void Application::run() {
-	int ch = 0;
 
+	init();
+
+	int ch = 0;
 	while (ch != 27) {
 		ch = getch();
 	}
