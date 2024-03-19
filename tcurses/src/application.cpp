@@ -3,25 +3,17 @@
 #include <clocale>
 #include <ncurses.h>
 
+#include <tcurses/screen.h>
+
 namespace TCurses {
 
 Application::Application() {
 	setlocale(LC_ALL, "");
 
-    initscr();
-    noecho();
-    curs_set(0);
-    
-    start_color();
-    initColors();
+	screen = std::make_shared<Screen>();
 
-    keypad(stdscr, TRUE);
+	initColors();
 
-    set_escdelay(0);
-}
-
-Application::~Application() {
-	endwin();
 }
 
 void Application::run() {
