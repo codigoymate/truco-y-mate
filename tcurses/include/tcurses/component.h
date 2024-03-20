@@ -21,6 +21,14 @@ namespace TCurses {
  */
 class Component {
 public:
+
+	/**
+	 * @brief Enumeradores para alineación en general.
+	 * 
+	 */
+	enum VAlign {VA_TOP, VA_CENTER, VA_BOTTOM};
+	enum HAlign {HA_LEFT, HA_CENTER, HA_RIGHT};
+
 	/**
 	 * @brief Constructor predeterminado de Component.
 	 */
@@ -142,13 +150,13 @@ protected:
 	 * @brief Virtual para dibujar el componente
 	 * 
 	 */
-	virtual void draw() const = 0;
+	virtual void draw() = 0;
 
 	/**
 	 * @brief Ejecuta draw() y luego dibuja los hijos.
 	 * 
 	 */
-	void internalDraw() const;
+	void internalDraw();
 
 private:
 

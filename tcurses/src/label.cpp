@@ -3,6 +3,7 @@
 #include <ncurses.h>
 
 #include <tcurses/colors.h>
+#include <tcurses/utilities.h>
 
 namespace TCurses {
 
@@ -72,10 +73,8 @@ void Label::draw() const {
 
 	// Dibuja el texto (provisorio)
 	attron(COLOR_PAIR(LABEL_TEXT_PAIR));
-	for (int c = 0; c < text.length(); c ++) {
-		if (c > getW()) break;
-		mvaddch(getAbsY(), getAbsX() + c, text[c]);
-	}
+	drawTextArea(text, getAbsX(), getAbsY(), getAbsX() + getW(), getAbsY() + getH(),
+		hTextAlign, vTextAlign);
 	attroff(COLOR_PAIR(LABEL_TEXT_PAIR));
 
 }

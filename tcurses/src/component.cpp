@@ -73,7 +73,7 @@ void Component::addChild(std::shared_ptr<Component> child) {
  * @brief Ejecuta draw() y luego dibuja los hijos.
  * 
  */
-void Component::internalDraw() const {
+void Component::internalDraw() {
 	draw();
 	for (auto &c : children) {
 		c->internalDraw();

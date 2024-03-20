@@ -87,15 +87,55 @@ public:
 	 * @brief Dibuja el Label.
 	 * 
 	 */
-	void draw() const override;
+	void draw() override;
 
-private:
+	/**
+	 * @brief Obtiene el alineamiento horizontal del texto dentro del Label.
+	 * @return El alineamiento horizontal del texto.
+	 */
+	const Component::HAlign getHTextAlign() const { return hTextAlign; }
+
+	/**
+	 * @brief Establece el alineamiento horizontal del texto dentro del Label.
+	 * @param align El alineamiento horizontal del texto a establecer.
+	 */
+	void setHTextAlign(const Component::HAlign align) { hTextAlign = align; }
+
+	/**
+	 * @brief Obtiene el alineamiento vertical del texto dentro del Label.
+	 * @return El alineamiento vertical del texto.
+	 */
+	const Component::VAlign getVTextAlign() const { return vTextAlign; }
+
+	/**
+	 * @brief Establece el alineamiento vertical del texto dentro del Label.
+	 * @param align El alineamiento vertical del texto a establecer.
+	 */
+	void setVTextAlign(const Component::VAlign align) { vTextAlign = align; }
+
+	/**
+	 * @brief Establece el alineamiento del texto dentro del Label.
+	 * @param hAlign El alineamiento horizontal del texto a establecer.
+	 * @param vAlign El alineamiento vertical del texto a establecer.
+	 */
+	void setTextAlign(const Component::HAlign hAlign, const Component::VAlign vAlign) {
+		hTextAlign = hAlign;
+		vTextAlign = vAlign;
+	}
+protected:
 
 	/**
 	 * @brief Texto del Label;
 	 * 
 	 */
 	std::string text{};
+
+	/**
+	 * @brief Alineación de texto.
+	 * 
+	 */
+	Component::HAlign hTextAlign{};
+	Component::VAlign vTextAlign{};
 };
 
 }
