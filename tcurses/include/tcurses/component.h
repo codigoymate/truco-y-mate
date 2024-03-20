@@ -105,6 +105,20 @@ public:
 	void setSize(const short w, const short h) { this->h = h; this->w = w;}
 
 	/**
+	 * @brief Devuelve la coordenada x sumada con la del componente padre.
+	 * 
+	 * @return const short La coordenada x absoluta.
+	 */
+	const short getAbsX() const;
+
+	/**
+	 * @brief Devuelve la coordenada y sumada con la del componente padre.
+	 * 
+	 * @return const short La coordenada y absoluta.
+	 */
+	const short getAbsY() const;
+
+	/**
 	 * @brief Obtiene el componente padre.
 	 * @return Un puntero al componente padre.
 	 */
@@ -122,7 +136,22 @@ public:
 	 */
 	void addChild(std::shared_ptr<Component> child);
 
+protected:
+
+	/**
+	 * @brief Virtual para dibujar el componente
+	 * 
+	 */
+	virtual void draw() const = 0;
+
+	/**
+	 * @brief Ejecuta draw() y luego dibuja los hijos.
+	 * 
+	 */
+	void internalDraw() const;
+
 private:
+
 	short x, y, w, h; /**< Coordenadas x, y y dimensiones del componente */
 	Component *parent; /**< Puntero al componente padre */
 	std::list<std::shared_ptr<Component>> children; /**< Lista de punteros a los componentes hijos */

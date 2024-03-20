@@ -44,12 +44,13 @@ public:
 	 */
 	void run();
 
-private:
+protected:
 	/**
 	 * @brief Un puntero compartido al objeto Screen utilizado por la aplicación.
 	 */
 	std::shared_ptr<Screen> screen;
 
+private:
 	/**
 	 * @brief Inicializa los colores utilizados por la aplicación.
 	 *        Esta función configura la paleta de colores para la interfaz de la aplicación.

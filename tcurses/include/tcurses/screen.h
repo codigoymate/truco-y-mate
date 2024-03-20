@@ -32,6 +32,18 @@ public:
      * @brief Destructor de la clase Screen.
      */
 	virtual ~Screen();
+
+	/**
+	 * @brief Implementa draw
+	 * 
+	 */
+	void draw() const override {}
+
+	/**
+	 * @brief Dibuja todos los componentes de la pantalla.
+	 * 
+	 */
+	void drawAll() const;
 };
 
 } // namespace TCurses

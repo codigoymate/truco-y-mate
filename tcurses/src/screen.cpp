@@ -46,4 +46,14 @@ Screen::~Screen() {
 	endwin();
 }
 
+/**
+ * @brief Dibuja todos los componentes de la pantalla.
+ * 
+ */
+void Screen::drawAll() const {
+	clear();
+	internalDraw();
+	refresh();
+}
+
 } // namespace TCurses

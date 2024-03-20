@@ -41,12 +41,43 @@ Component::Component(const short x, const short y) : Component(x, y, 10, 1) {}
 Component::Component() : Component(0, 0) {}
 
 /**
+ * @brief Devuelve la coordenada x sumada con la del componente padre.
+ * 
+ * @return const short La coordenada x absoluta.
+ */
+const short Component::getAbsX() const {
+	if (parent == nullptr) return x;
+	else return parent->getAbsX() + x;
+}
+
+/**
+ * @brief Devuelve la coordenada y sumada con la del componente padre.
+ * 
+ * @return const short La coordenada y absoluta.
+ */
+const short Component::getAbsY() const {
+	if (parent == nullptr) return y;
+	else return parent->getAbsY() + y;
+}
+
+/**
  * @brief Añade un componente hijo al componente actual.
  * @param child El componente hijo a añadir.
  */
 void Component::addChild(std::shared_ptr<Component> child) {
 	this->children.push_back(child);
 	child->parent = this;
+}
+
+/**
+ * @brief Ejecuta draw() y luego dibuja los hijos.
+ * 
+ */
+void Component::internalDraw() const {
+	draw();
+	for (auto &c : children) {
+		c->internalDraw();
+	}
 }
 
 } // namespace TCurses

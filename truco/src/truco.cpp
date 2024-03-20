@@ -21,7 +21,7 @@ namespace Truco {
  *        Esta función se encarga de inicializar los componentes necesarios para ejecutar el juego.
  */
 void TrucoApp::init() {
-    // Aquí va la inicialización específica del juego Truco
+    screen->addChild(std::make_shared<TCurses::Label>("Hola", 20, 3));
 }
 
 }
