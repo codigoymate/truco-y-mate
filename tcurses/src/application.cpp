@@ -18,6 +18,7 @@
 #include <ncurses.h>
 
 #include <tcurses/screen.h>
+#include <tcurses/colors.h>
 
 namespace TCurses {
 
@@ -61,6 +62,9 @@ void Application::initColors() {
 			init_pair(p, fg, bg); p ++;
 		}
 	}
+
+	init_pair(LABEL_TEXT_PAIR, COLOR_WHITE, COLOR_GREEN);
+	init_pair(LABEL_BG_PAIR, COLOR_BLACK, COLOR_GREEN);
 }
 
 } // namespace TCurses

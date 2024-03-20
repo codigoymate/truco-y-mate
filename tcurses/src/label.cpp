@@ -2,6 +2,8 @@
 
 #include <ncurses.h>
 
+#include <tcurses/colors.h>
+
 namespace TCurses {
 
 /**
@@ -57,8 +59,25 @@ Label::Label(const std::string text, const short x, const short y,
  * 
  */
 void Label::draw() const {
-	// TODO: Mejorar imprimir texto
-	mvprintw(getAbsY(), getAbsX(), "%s", text.c_str());
+	// TODO: Mover funciones a otro módulo
+
+	// Dibuja el rectángulo. TODO: mejorar
+	attron(COLOR_PAIR(LABEL_BG_PAIR));
+	for (short j = getAbsY(); j < (getAbsY() + getH()); j ++) {
+		for (short i = getAbsX(); i < (getAbsX() + getW()); i ++) {
+			mvaddch(j, i, ' ');
+		}
+	}
+	attroff(COLOR_PAIR(LABEL_BG_PAIR));
+
+	// Dibuja el texto (provisorio)
+	attron(COLOR_PAIR(LABEL_TEXT_PAIR));
+	for (int c = 0; c < text.length(); c ++) {
+		if (c > getW()) break;
+		mvaddch(getAbsY(), getAbsX() + c, text[c]);
+	}
+	attroff(COLOR_PAIR(LABEL_TEXT_PAIR));
+
 }
 
 }
