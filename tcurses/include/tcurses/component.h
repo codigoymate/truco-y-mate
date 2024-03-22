@@ -30,6 +30,12 @@ public:
 	enum HAlign {HA_LEFT, HA_CENTER, HA_RIGHT};
 
 	/**
+	 * @brief Enumerador para el tipo de distribución.
+	 * 
+	 */
+	enum Layout {LY_ABSOLUTE, LY_VERTICAL, LY_HORIZONTAL};
+
+	/**
 	 * @brief Constructor predeterminado de Component.
 	 */
 	Component();
@@ -139,6 +145,18 @@ public:
 	const std::list<std::shared_ptr<Component>> getChildren() { return children; }
 
 	/**
+	 * @brief Establece el diseño del componente.
+	 * @param layout El diseño a establecer para el componente.
+	 */
+	void setLayout(const Layout layout) { this->layout = layout; }
+
+	/**
+	 * @brief Obtiene el diseño actual del componente.
+	 * @return El diseño actual del componente.
+	 */
+	const Layout getLayout() { return layout; }
+
+	/**
 	 * @brief Agrega un componente hijo.
 	 * @param child Un puntero compartido al componente hijo a agregar.
 	 */
@@ -163,6 +181,13 @@ private:
 	short x, y, w, h; /**< Coordenadas x, y y dimensiones del componente */
 	Component *parent; /**< Puntero al componente padre */
 	std::list<std::shared_ptr<Component>> children; /**< Lista de punteros a los componentes hijos */
+	Layout layout{}; /**< Distribución de los hijos */
+
+	/**
+	 * @brief Realiza los ajustes box layout.
+	 * 
+	 */
+	void doBoxLayout();
 };
 
 } // namespace TCurses

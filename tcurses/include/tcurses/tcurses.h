@@ -15,3 +15,4 @@
 #include <tcurses/screen.h>
 #include <tcurses/component.h>
 #include <tcurses/label.h>
+#include <tcurses/box.h>

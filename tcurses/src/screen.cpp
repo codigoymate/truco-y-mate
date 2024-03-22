@@ -50,7 +50,7 @@ Screen::~Screen() {
  * @brief Dibuja todos los componentes de la pantalla.
  * 
  */
-void Screen::drawAll() const {
+void Screen::drawAll() {
 	clear();
 	internalDraw();
 	refresh();

@@ -59,7 +59,7 @@ Label::Label(const std::string text, const short x, const short y,
  * @brief Dibuja el Label.
  * 
  */
-void Label::draw() const {
+void Label::draw() {
 	// TODO: Mover funciones a otro módulo
 
 	// Dibuja el rectángulo. TODO: mejorar

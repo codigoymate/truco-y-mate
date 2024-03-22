@@ -37,13 +37,13 @@ public:
 	 * @brief Implementa draw
 	 * 
 	 */
-	void draw() const override {}
+	void draw() override {}
 
 	/**
 	 * @brief Dibuja todos los componentes de la pantalla.
 	 * 
 	 */
-	void drawAll() const;
+	void drawAll();
 };
 
 } // namespace TCurses

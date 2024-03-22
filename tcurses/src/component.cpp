@@ -75,9 +75,20 @@ void Component::addChild(std::shared_ptr<Component> child) {
  */
 void Component::internalDraw() {
 	draw();
+
+	if (layout != LY_ABSOLUTE) doBoxLayout();
+
 	for (auto &c : children) {
 		c->internalDraw();
 	}
+}
+
+/**
+ * @brief Realiza los ajustes box layout.
+ * 
+ */
+void Component::doBoxLayout() {
+
 }
 
 } // namespace TCurses
