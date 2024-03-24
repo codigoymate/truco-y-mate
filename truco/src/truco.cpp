@@ -23,43 +23,24 @@ namespace Truco {
 void TrucoApp::init() {
 
 	std::string text = "Rojo\nVerde\nAzul";
-	//std::string text = "Rojo 1111111\nVerde 222222\nAzul 33333\nAmarillo 444444\nVioleta\nMarron\nEsmeralda\nCiano";
 
-    auto label = std::make_shared<TCurses::Label>(text, 10, 2, 10, 6);
-	label->setTextAlign(TCurses::Component::HA_LEFT, TCurses::Component::VA_TOP);
-	screen->addChild(label);
-
-	label = std::make_shared<TCurses::Label>(text, 30, 2, 10, 6);
-	label->setTextAlign(TCurses::Component::HA_CENTER, TCurses::Component::VA_TOP);
-	screen->addChild(label);
-
-	label = std::make_shared<TCurses::Label>(text, 50, 2, 10, 6);
-	label->setTextAlign(TCurses::Component::HA_RIGHT, TCurses::Component::VA_TOP);
-	screen->addChild(label);
-
-	label = std::make_shared<TCurses::Label>(text, 10, 10, 10, 6);
-	label->setTextAlign(TCurses::Component::HA_LEFT, TCurses::Component::VA_CENTER);
-	screen->addChild(label);
-
-	label = std::make_shared<TCurses::Label>(text, 30, 10, 10, 6);
+    auto label = std::make_shared<TCurses::Label>(text);
 	label->setTextAlign(TCurses::Component::HA_CENTER, TCurses::Component::VA_CENTER);
 	screen->addChild(label);
 
-	label = std::make_shared<TCurses::Label>(text, 50, 10, 10, 6);
-	label->setTextAlign(TCurses::Component::HA_RIGHT, TCurses::Component::VA_CENTER);
+	label = std::make_shared<TCurses::Label>(text);
+	label->setTextAlign(TCurses::Component::HA_CENTER, TCurses::Component::VA_CENTER);
 	screen->addChild(label);
 
-	label = std::make_shared<TCurses::Label>(text, 10, 18, 10, 6);
-	label->setTextAlign(TCurses::Component::HA_LEFT, TCurses::Component::VA_BOTTOM);
+	label = std::make_shared<TCurses::Label>(text);
+	label->setTextAlign(TCurses::Component::HA_CENTER, TCurses::Component::VA_CENTER);
 	screen->addChild(label);
 
-	label = std::make_shared<TCurses::Label>(text, 30, 18, 10, 6);
-	label->setTextAlign(TCurses::Component::HA_CENTER, TCurses::Component::VA_BOTTOM);
+	label = std::make_shared<TCurses::Label>(text);
+	label->setTextAlign(TCurses::Component::HA_CENTER, TCurses::Component::VA_CENTER);
 	screen->addChild(label);
 
-	label = std::make_shared<TCurses::Label>(text, 50, 18, 10, 6);
-	label->setTextAlign(TCurses::Component::HA_RIGHT, TCurses::Component::VA_BOTTOM);
-	screen->addChild(label);
+	screen->setLayout(TCurses::Component::LY_HORIZONTAL);
 
 }
 

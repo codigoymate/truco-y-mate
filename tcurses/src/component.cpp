@@ -26,6 +26,13 @@ namespace TCurses {
 Component::Component(const short x, const short y, const short w, const short h)
 	: x(x), y(y), w(w), h(h) {	
 	this->parent = nullptr;
+	this->minH = 1;
+	this->minW = 1;
+	this->maxH = 30000;
+	this->maxW = 30000;
+
+	this->w = 1;
+	this->h = 1;
 }
 
 /**
@@ -88,7 +95,157 @@ void Component::internalDraw() {
  * 
  */
 void Component::doBoxLayout() {
+	if (layout == LY_VERTICAL) doBoxVertical();
+	else doBoxHorizontal();
+}
 
+/**
+ * @brief Realiza los ajustes verticales box layout.
+ * 
+ */
+void Component::doBoxVertical() {
+
+	// Establece los anchos
+	for (auto &c : children) {
+		c->setW(w);
+		if (c->getW() > c->getMaxW()) {
+			c->setW(c->getMaxW());
+		}
+		if (c->getW() < c->getMinW()) {
+			c->setW(c->getMinW());
+		}
+		c->setX(0);
+	}
+
+	// Establece los minimos
+	for (auto &c : children) c->setH(c->getMinH());
+
+	// Si ya es lo suficiente alto, cancela.
+	if (h <= getTotalHeightBox()) return;
+
+	// Incrementa los H de los componentes de a uno 
+	//    hasta completar el alto del padre.
+	while (h > getTotalHeightBox()) {
+		if (!addOneToSmallVBox()) return ;
+	}
+
+	// Establece las Y
+	short y = 0;
+	for (auto &c : children) {
+		c->setY(y); y += c->getH();
+	}
+ }
+
+/**
+ * @brief Realiza los ajustes horizontales box layout.
+ * 
+ */
+void Component::doBoxHorizontal() {
+	// Establece los altos
+	for (auto &c : children) {
+		c->setH(h);
+		if (c->getH() > c->getMaxH()) {
+			c->setH(c->getMaxH());
+		}
+		if (c->getH() < c->getMinH()) {
+			c->setH(c->getMinH());
+		}
+		c->setY(0);
+	}
+
+	// Establece los minimos
+	for (auto &c : children) c->setW(c->getMinW());
+
+	// Si ya es lo suficiente ancho, cancela.
+	if (w <= getTotalWidthBox()) return;
+
+	// Incrementa los W de los componentes de a uno 
+	//    hasta completar el ancho del padre.
+	while (w > getTotalWidthBox()) {
+		if (!addOneToSmallHBox()) return ;
+	}
+
+	// Establece las X
+	short x = 0;
+	for (auto &c : children) {
+		c->setX(x); x += c->getW();
+	}
+}
+
+/**
+ * @brief Devuelve la suma total de los altos de los componentes hijos.
+ * 
+ * @return const short la suma total de altos.
+ */
+const short Component::getTotalHeightBox() const {
+	short total = 0;
+	for (auto &c : children) {
+		total += c->getH();
+	}
+	return total;
+}
+
+/**
+ * @brief Devuelve la suma total de los anchos de los componentes hijos.
+ * 
+ * @return const short la suma total de anchos.
+ */
+const short Component::getTotalWidthBox() const {
+	short total = 0;
+	for (auto &c : children) {
+		total += c->getW();
+	}
+	return total;
+}
+
+/**
+ * @brief Suma 1 al componente mas chico (en ancho).
+ * En el caso de que se haya llegado al máximo, lo deja como está.
+ * 
+ * @return true Si se pudo agregar 1 al mas chico.
+ * @return false Si no pudo agregar 1 a ningún componente.
+ */
+const bool Component::addOneToSmallHBox() const {
+	std::shared_ptr<Component> small;
+	short max = 20000;
+	bool smallFound = false;
+
+	for (auto &c : children) {
+		if (c->getW() < max) {
+			if (c->getW() == c->getMaxW()) continue;
+			small = c; max = c->getW();
+			smallFound = true;
+		}
+	}
+
+	if (smallFound) small->setW(small->getW() + 1);
+
+	return smallFound;
+}
+
+/**
+ * @brief Suma 1 al componente mas chico (en alto).
+ * En el caso de que se haya llegado al máximo, lo deja como está.
+ * 
+ * @return true Si se pudo agregar 1 al mas chico.
+ * @return false Si no pudo agregar 1 a ningún componente.
+ */
+const bool Component::addOneToSmallVBox() const {
+	std::shared_ptr<Component> small;
+	short max = 20000;
+	bool smallFound = false;
+
+	for (auto &c : children) {
+		if (c->getH() < max) {
+			if (c->getH() == c->getMaxH()) continue;
+			small = c; max = c->getH();
+			smallFound = true;
+		}
+	}
+
+	if (smallFound) small->setH(small->getH() + 1);
+
+	return smallFound;
 }
 
 } // namespace TCurses

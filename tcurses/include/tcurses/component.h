@@ -162,6 +162,54 @@ public:
 	 */
 	void addChild(std::shared_ptr<Component> child);
 
+	/**
+	 * @brief Obtiene el ancho mínimo del componente.
+	 * @return El ancho mínimo del componente.
+	 */
+	const short getMinW() const { return minW; }
+
+	/**
+	 * @brief Establece el ancho mínimo del componente.
+	 * @param mw El ancho mínimo para el componente.
+	 */
+	void setMinW(const short mw) { this->minW = mw; }
+
+	/**
+	 * @brief Obtiene la altura mínima del componente.
+	 * @return La altura mínima del componente.
+	 */
+	const short getMinH() const { return minH; }
+
+	/**
+	 * @brief Establece la altura mínima del componente.
+	 * @param mh La altura mínima para el componente.
+	 */
+	void setMinH(const short mh) { this->minH = mh; }
+
+	/**
+	 * @brief Obtiene el ancho máximo del componente.
+	 * @return El ancho máximo del componente.
+	 */
+	const short getMaxW() const { return maxW; }
+
+	/**
+	 * @brief Establece el ancho máximo del componente.
+	 * @param mw El ancho máximo para el componente.
+	 */
+	void setMaxW(const short mw) { this->maxW = mw; }
+
+	/**
+	 * @brief Obtiene la altura máxima del componente.
+	 * @return La altura máxima del componente.
+	 */
+	const short getMaxH() const { return maxH; }
+
+	/**
+	 * @brief Establece la altura máxima del componente.
+	 * @param mh La altura máxima para el componente.
+	 */
+	void setMaxH(const short mh) { this->maxH = mh; }
+
 protected:
 
 	/**
@@ -179,6 +227,7 @@ protected:
 private:
 
 	short x, y, w, h; /**< Coordenadas x, y y dimensiones del componente */
+	short minW, minH, maxW, maxH; /**< Máximos y mínimos para Layout*/
 	Component *parent; /**< Puntero al componente padre */
 	std::list<std::shared_ptr<Component>> children; /**< Lista de punteros a los componentes hijos */
 	Layout layout{}; /**< Distribución de los hijos */
@@ -188,6 +237,50 @@ private:
 	 * 
 	 */
 	void doBoxLayout();
+	
+	/**
+	 * @brief Realiza los ajustes verticales box layout.
+	 * 
+	 */
+	void doBoxVertical();
+
+	/**
+	 * @brief Realiza los ajustes horizontales box layout.
+	 * 
+	 */
+	void doBoxHorizontal();
+
+	/**
+	 * @brief Devuelve la suma total de los altos de los componentes hijos.
+	 * 
+	 * @return const short la suma total de altos.
+	 */
+	const short getTotalHeightBox() const;
+
+	/**
+	 * @brief Devuelve la suma total de los anchos de los componentes hijos.
+	 * 
+	 * @return const short la suma total de anchos.
+	 */
+	const short getTotalWidthBox() const;
+
+	/**
+	 * @brief Suma 1 al componente mas chico (en alto).
+	 * En el caso de que se haya llegado al máximo, lo deja como está.
+	 * 
+	 * @return true Si se pudo agregar 1 al mas chico.
+	 * @return false Si no pudo agregar 1 a ningún componente.
+	 */
+	const bool addOneToSmallVBox() const;
+
+	/**
+	 * @brief Suma 1 al componente mas chico (en ancho).
+	 * En el caso de que se haya llegado al máximo, lo deja como está.
+	 * 
+	 * @return true Si se pudo agregar 1 al mas chico.
+	 * @return false Si no pudo agregar 1 a ningún componente.
+	 */
+	const bool addOneToSmallHBox() const;
 };
 
 } // namespace TCurses
