@@ -211,6 +211,47 @@ public:
 	void setMaxH(const short mh) { this->maxH = mh; }
 
 	/**
+	 * @brief Devuelve la alineación horizontal del componente.
+	 * 
+	 * @return const HAlign alineación horizontal del componente.
+	 */
+	const HAlign getHAlign() const { return hAlign; }
+
+	/**
+	 * @brief Establece la alineación horizontal de componente.
+	 * Tiene efecto al aplicar BoxLayout vertical en el componente padre.
+	 * 
+	 * @param hAlign alineación horizontal de componente.
+	 */
+	void setHAlign(const HAlign hAlign) { this->hAlign = hAlign; }
+
+	/**
+	 * @brief Devuelve la alineación vertical del componente.
+	 * 
+	 * @return const VAlign alineación vertical del componente.
+	 */
+	const VAlign getVAlign() const { return vAlign; }
+
+	/**
+	 * @brief Establece la alineación vertical de componente.
+	 * Tiene efecto al aplicar BoxLayout horizontal en el componente padre.
+	 * 
+	 * @param vAlign alineación vertical de componente.
+	 */
+	void setVAlign(const VAlign vAlign) { this->vAlign = vAlign; }
+
+	/**
+	 * @brief Establece la alineación de componente.
+	 * Tiene efecto al aplicar BoxLayout en el componente padre.
+	 * 
+	 * @param hAlign alineación horizontal de componente.
+	 * @param vAlign alineación vertical de componente.
+	 */
+	void setAlign(const HAlign hAlign, const VAlign vAlign) {
+		this->hAlign = hAlign; this->vAlign = vAlign;
+	}
+
+	/**
 	 * @brief Devuelve el color de fondo.
 	 * 
 	 * @return const short color de fondo.
@@ -250,6 +291,8 @@ private:
 	// Distribución
 	short minW, minH, maxW, maxH; /**< Máximos y mínimos para Layout*/
 	Layout layout{}; /**< Distribución de los hijos */
+	HAlign hAlign{}; /**< Alineacion horizontal para el box vertical*/
+	VAlign vAlign{}; /**< Alineacion vertical para el box horizontal*/
 
 	// Colores y estilo:
 	short bgPair{}; /**< Color de fondo del Componente genérico */

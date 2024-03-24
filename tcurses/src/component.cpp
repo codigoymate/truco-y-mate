@@ -114,7 +114,18 @@ void Component::doBoxVertical() {
 		if (c->getW() < c->getMinW()) {
 			c->setW(c->getMinW());
 		}
-		c->setX(0);
+	
+		// Alinea horizontalmente cada componente
+		switch (c->getHAlign()) {
+		case Component::HA_LEFT:
+			c->setX(0);
+			break;
+		case Component::HA_RIGHT:
+			c->setX(w - c->getW());
+			break;
+		case Component::HA_CENTER:
+			c->setX(w / 2 - c->getW() / 2);
+		}
 	}
 
 	// Establece los minimos
@@ -150,7 +161,18 @@ void Component::doBoxHorizontal() {
 		if (c->getH() < c->getMinH()) {
 			c->setH(c->getMinH());
 		}
-		c->setY(0);
+		
+		// Alinea verticalmente cada componente
+		switch (c->getVAlign()) {
+		case Component::VA_TOP:
+			c->setY(0);
+			break;
+		case Component::VA_BOTTOM:
+			c->setY(h - c->getH());
+			break;
+		case Component::VA_CENTER:
+			c->setY(h / 2 - c->getH() / 2);
+		}
 	}
 
 	// Establece los minimos

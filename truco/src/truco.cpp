@@ -26,17 +26,24 @@ void TrucoApp::init() {
 
     auto label = std::make_shared<TCurses::Label>(text);
 	label->setTextAlign(TCurses::Component::HA_CENTER, TCurses::Component::VA_CENTER);
-	label->setMinW(20);
-	label->setMaxW(20);
+	label->setMinH(5);
+	label->setMaxH(5);
+	label->setVAlign(TCurses::Component::VA_BOTTOM);
 	screen->addChild(label);
 
 	label = std::make_shared<TCurses::Label>(text);
 	label->setTextAlign(TCurses::Component::HA_CENTER, TCurses::Component::VA_CENTER);
+	label->setMinH(5);
+	label->setMaxH(5);
+	label->setVAlign(TCurses::Component::VA_CENTER);
 	label->setBGPair(40);
 	screen->addChild(label);
 
 	label = std::make_shared<TCurses::Label>(text);
 	label->setTextAlign(TCurses::Component::HA_CENTER, TCurses::Component::VA_CENTER);
+	label->setMinH(5);
+	label->setMaxH(5);
+	label->setVAlign(TCurses::Component::VA_TOP);
 	screen->addChild(label);
 
 	label = std::make_shared<TCurses::Label>(text);
