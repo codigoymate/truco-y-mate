@@ -210,6 +210,20 @@ public:
 	 */
 	void setMaxH(const short mh) { this->maxH = mh; }
 
+	/**
+	 * @brief Devuelve el color de fondo.
+	 * 
+	 * @return const short color de fondo.
+	 */
+	const short getBGPair() const { return bgPair; }
+
+	/**
+	 * @brief Establece el color de fondo del componente.
+	 * 
+	 * @param color nuevo color de fondo.
+	 */
+	void setBGPair(const short pair) { bgPair = pair; }
+
 protected:
 
 	/**
@@ -226,11 +240,19 @@ protected:
 
 private:
 
+	// Transformación:
 	short x, y, w, h; /**< Coordenadas x, y y dimensiones del componente */
-	short minW, minH, maxW, maxH; /**< Máximos y mínimos para Layout*/
+	
+	// Hijos:
 	Component *parent; /**< Puntero al componente padre */
 	std::list<std::shared_ptr<Component>> children; /**< Lista de punteros a los componentes hijos */
+
+	// Distribución
+	short minW, minH, maxW, maxH; /**< Máximos y mínimos para Layout*/
 	Layout layout{}; /**< Distribución de los hijos */
+
+	// Colores y estilo:
+	short bgPair{}; /**< Color de fondo del Componente genérico */
 
 	/**
 	 * @brief Realiza los ajustes box layout.

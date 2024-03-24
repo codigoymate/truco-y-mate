@@ -27,13 +27,19 @@ Label::Label(const short x, const short y) : Component(x, y) {}
  * @param w El ancho inicial del componente.
  * @param h La altura inicial del componente.
  */
-Label::Label(const short x, const short y, const short w, const short h) : Component(x, y, w, h) {}
+Label::Label(const short x, const short y, const short w, const short h) : Component(x, y, w, h) {
+	setBGPair(LABEL_BG_PAIR);
+	setTextPair(LABEL_TEXT_PAIR);
+}
 
 /**
  * @brief Constructor de Label::Label que establece el texto inicial.
  * @param text El texto inicial del Label::Label.
  */
-Label::Label(const std::string text) : Component(), text(text) {}
+Label::Label(const std::string text) : Component(), text(text) {
+	setBGPair(LABEL_BG_PAIR);
+	setTextPair(LABEL_TEXT_PAIR);
+}
 
 /**
  * @brief Constructor de Label::Label que establece el texto inicial y la posición.
@@ -42,7 +48,10 @@ Label::Label(const std::string text) : Component(), text(text) {}
  * @param y La coordenada y de la posición inicial.
  */
 Label::Label(const std::string text, const short x, const short y)
-		: Component(x, y), text(text) {}
+		: Component(x, y), text(text) {
+	setBGPair(LABEL_BG_PAIR);
+	setTextPair(LABEL_TEXT_PAIR);
+}
 
 /**
  * @brief Constructor de Label::Label que establece el texto inicial, la posición y el tamaño.
@@ -53,7 +62,10 @@ Label::Label(const std::string text, const short x, const short y)
  * @param h La altura inicial del componente.
  */
 Label::Label(const std::string text, const short x, const short y,
-	const short w, const short h) : Component(x, y, w, h), text(text) {}
+	const short w, const short h) : Component(x, y, w, h), text(text) {
+	setBGPair(LABEL_BG_PAIR);
+	setTextPair(LABEL_TEXT_PAIR);
+}
 
 /**
  * @brief Dibuja el Label.
@@ -63,19 +75,19 @@ void Label::draw() {
 	// TODO: Mover funciones a otro módulo
 
 	// Dibuja el rectángulo. TODO: mejorar
-	attron(COLOR_PAIR(LABEL_BG_PAIR));
+	attron(COLOR_PAIR(getBGPair()));
 	for (short j = getAbsY(); j < (getAbsY() + getH()); j ++) {
 		for (short i = getAbsX(); i < (getAbsX() + getW()); i ++) {
 			mvaddch(j, i, ' ');
 		}
 	}
-	attroff(COLOR_PAIR(LABEL_BG_PAIR));
+	attroff(COLOR_PAIR(getBGPair()));
 
 	// Dibuja el texto (provisorio)
-	attron(COLOR_PAIR(LABEL_TEXT_PAIR));
+	attron(COLOR_PAIR(textPair));
 	drawTextArea(text, getAbsX(), getAbsY(), getAbsX() + getW(), getAbsY() + getH(),
 		hTextAlign, vTextAlign);
-	attroff(COLOR_PAIR(LABEL_TEXT_PAIR));
+	attroff(COLOR_PAIR(textPair));
 
 }
 

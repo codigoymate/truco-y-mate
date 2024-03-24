@@ -48,7 +48,7 @@ void Application::run() {
 		ch = getch();
 
 		if (ch == KEY_RESIZE) {
-			screen->setSize(getmaxx(stdscr) - 1, getmaxy(stdscr) - 1);
+			screen->setSize(getmaxx(stdscr), getmaxy(stdscr));
 			screen->drawAll();
 		}
 	}

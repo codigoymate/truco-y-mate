@@ -122,6 +122,20 @@ public:
 		hTextAlign = hAlign;
 		vTextAlign = vAlign;
 	}
+
+	/**
+	 * @brief Devuelve el color de texto.
+	 * 
+	 * @return const short color de texto.
+	 */
+	const short getTextPair() const { return textPair; }
+
+	/**
+	 * @brief Establece el color de texto del componente.
+	 * 
+	 * @param color nuevo color de texto.
+	 */
+	void setTextPair(const short pair) { textPair = pair; }
 protected:
 
 	/**
@@ -136,6 +150,8 @@ protected:
 	 */
 	Component::HAlign hTextAlign{};
 	Component::VAlign vTextAlign{};
+
+	short textPair{}; /**< Color de texto. */
 };
 
 }

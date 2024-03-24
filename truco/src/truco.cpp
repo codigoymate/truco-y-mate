@@ -32,6 +32,7 @@ void TrucoApp::init() {
 
 	label = std::make_shared<TCurses::Label>(text);
 	label->setTextAlign(TCurses::Component::HA_CENTER, TCurses::Component::VA_CENTER);
+	label->setBGPair(40);
 	screen->addChild(label);
 
 	label = std::make_shared<TCurses::Label>(text);
@@ -40,6 +41,7 @@ void TrucoApp::init() {
 
 	label = std::make_shared<TCurses::Label>(text);
 	label->setTextAlign(TCurses::Component::HA_CENTER, TCurses::Component::VA_CENTER);
+	label->setBGPair(40);
 	screen->addChild(label);
 
 	screen->setLayout(TCurses::Component::LY_HORIZONTAL);
