@@ -46,6 +46,11 @@ void Application::run() {
 
 		screen->drawAll(); // Dibuja la pantalla
 		ch = getch();
+
+		if (ch == KEY_RESIZE) {
+			screen->setSize(getmaxx(stdscr) - 1, getmaxy(stdscr) - 1);
+			screen->drawAll();
+		}
 	}
 }
 
