@@ -142,13 +142,14 @@ void Component::doBoxVertical() {
 	// Establece los minimos
 	for (auto &c : children) c->setH(c->getMinH());
 
-	// Si ya es lo suficiente alto, cancela.
-	if (h <= getTotalHeightBox()) return;
+	// Si ya es lo suficiente alto, continua.
+	if (h > getTotalHeightBox()) {
 
-	// Incrementa los H de los componentes de a uno 
-	//    hasta completar el alto del padre.
-	while (h > getTotalHeightBox()) {
-		if (!addOneToSmallVBox()) return ;
+		// Incrementa los H de los componentes de a uno 
+		//    hasta completar el alto del padre.
+		while (h > getTotalHeightBox()) {
+			if (!addOneToSmallVBox()) break ;
+		}
 	}
 
 	// Establece las Y
@@ -190,12 +191,13 @@ void Component::doBoxHorizontal() {
 	for (auto &c : children) c->setW(c->getMinW());
 
 	// Si ya es lo suficiente ancho, cancela.
-	if (w <= getTotalWidthBox()) return;
+	if (w > getTotalWidthBox()) {
 
-	// Incrementa los W de los componentes de a uno 
-	//    hasta completar el ancho del padre.
-	while (w > getTotalWidthBox()) {
-		if (!addOneToSmallHBox()) return ;
+		// Incrementa los W de los componentes de a uno 
+		//    hasta completar el ancho del padre.
+		while (w > getTotalWidthBox()) {
+			if (!addOneToSmallHBox()) break ;
+		}
 	}
 
 	// Establece las X
