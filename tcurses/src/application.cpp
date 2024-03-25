@@ -70,6 +70,7 @@ void Application::initColors() {
 
 	init_pair(LABEL_TEXT_PAIR, COLOR_WHITE, COLOR_GREEN);
 	init_pair(LABEL_BG_PAIR, COLOR_BLACK, COLOR_GREEN);
+	init_pair(LABEL_BORDER_PAIR, COLOR_WHITE, COLOR_GREEN);
 }
 
 } // namespace TCurses

@@ -15,6 +15,8 @@
 
 namespace TCurses {
 
+class Border;
+
 /**
  * @brief La clase Component representa un componente básico de la interfaz de usuario.
  *        Puede ser un contenedor para otros componentes o un elemento visual en sí mismo.
@@ -265,6 +267,34 @@ public:
 	 */
 	void setBGPair(const short pair) { bgPair = pair; }
 
+	/**
+	 * @brief Devuelve el color de borde.
+	 * 
+	 * @return const short color de borde.
+	 */
+	const short getBorderPair() const { return borderPair; }
+
+	/**
+	 * @brief Establece el color de borde del componente.
+	 * 
+	 * @param color nuevo color de borde.
+	 */
+	void setBorderPair(const short pair) { borderPair = pair; }
+
+	/**
+	 * @brief Devuelve el borde.
+	 * 
+	 * @return std::shared_ptr<Border> el borde.
+	 */
+	std::shared_ptr<Border> getBorder() const { return border; }
+
+	/**
+	 * @brief Establece el borde.
+	 * 
+	 * @param border el borde.
+	 */
+	void setBorder(std::shared_ptr<Border> border);
+
 protected:
 
 	/**
@@ -296,6 +326,8 @@ private:
 
 	// Colores y estilo:
 	short bgPair{}; /**< Color de fondo del Componente genérico */
+	short borderPair{}; /**< Color del borde del Componente genérico */
+	std::shared_ptr<Border> border; /**< Borde del componente*/
 
 	/**
 	 * @brief Realiza los ajustes box layout.

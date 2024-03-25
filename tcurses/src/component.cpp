@@ -13,6 +13,7 @@
  */
 
 #include <tcurses/component.h>
+#include <tcurses/border.h>
 
 namespace TCurses {
 
@@ -31,8 +32,8 @@ Component::Component(const short x, const short y, const short w, const short h)
 	this->maxH = 30000;
 	this->maxW = 30000;
 
-	this->w = 1;
-	this->h = 1;
+	border = std::make_shared<EmptyBorder>();
+	border->setComponent(this);
 }
 
 /**
@@ -65,6 +66,16 @@ const short Component::getAbsX() const {
 const short Component::getAbsY() const {
 	if (parent == nullptr) return y;
 	else return parent->getAbsY() + y;
+}
+
+/**
+ * @brief Establece el borde.
+ * 
+ * @param border el borde.
+ */
+void Component::setBorder(std::shared_ptr<Border> border) {
+	this->border = border;
+	this->border->setComponent(this);
 }
 
 /**

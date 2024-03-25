@@ -14,5 +14,6 @@
 #include <tcurses/colors.h>
 #include <tcurses/screen.h>
 #include <tcurses/component.h>
+#include <tcurses/border.h>
 #include <tcurses/label.h>
 #include <tcurses/box.h>

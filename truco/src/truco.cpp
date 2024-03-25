@@ -22,37 +22,27 @@ namespace Truco {
  */
 void TrucoApp::init() {
 
-	std::string text = "Rojo\nVerde\nAzul";
-
-    auto label = std::make_shared<TCurses::Label>(text);
+	/*auto label = std::make_shared<TCurses::Label>("un label", 0, 0, 10, 3);
 	label->setTextAlign(TCurses::Component::HA_CENTER, TCurses::Component::VA_CENTER);
-	label->setMinH(5);
-	label->setMaxH(5);
-	label->setVAlign(TCurses::Component::VA_BOTTOM);
+	label->setBorder(std::make_shared<TCurses::LinedBorder>());
+	screen->addChild(label);*/
+
+    auto label = std::make_shared<TCurses::Label>("un label");
+	label->setTextAlign(TCurses::Component::HA_CENTER, TCurses::Component::VA_CENTER);
+	label->setBorder(std::make_shared<TCurses::LinedBorder>());
 	screen->addChild(label);
 
-	label = std::make_shared<TCurses::Label>(text);
+	label = std::make_shared<TCurses::Label>("otro label");
 	label->setTextAlign(TCurses::Component::HA_CENTER, TCurses::Component::VA_CENTER);
-	label->setMinH(5);
-	label->setMaxH(5);
-	label->setVAlign(TCurses::Component::VA_CENTER);
-	label->setBGPair(40);
+	label->setBorder(std::make_shared<TCurses::LinedBorder>());
 	screen->addChild(label);
 
-	label = std::make_shared<TCurses::Label>(text);
+	label = std::make_shared<TCurses::Label>("y otro");
 	label->setTextAlign(TCurses::Component::HA_CENTER, TCurses::Component::VA_CENTER);
-	label->setMinH(5);
-	label->setMaxH(5);
-	label->setVAlign(TCurses::Component::VA_TOP);
+	label->setBorder(std::make_shared<TCurses::LinedBorder>());
 	screen->addChild(label);
 
-	label = std::make_shared<TCurses::Label>(text);
-	label->setTextAlign(TCurses::Component::HA_CENTER, TCurses::Component::VA_CENTER);
-	label->setBGPair(40);
-	screen->addChild(label);
-
-	screen->setLayout(TCurses::Component::LY_HORIZONTAL);
-
+	screen->setLayout(TCurses::Component::LY_VERTICAL);
 }
 
 }

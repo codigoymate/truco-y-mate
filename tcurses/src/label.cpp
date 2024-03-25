@@ -4,6 +4,7 @@
 
 #include <tcurses/colors.h>
 #include <tcurses/utilities.h>
+#include <tcurses/border.h>
 
 namespace TCurses {
 
@@ -11,14 +12,22 @@ namespace TCurses {
  * @brief Constructor predeterminado de Label::Label.
  * 
  */
-Label::Label() : Component() {}
+Label::Label() : Component() {
+	setBGPair(LABEL_BG_PAIR);
+	setBorderPair(LABEL_BORDER_PAIR);
+	setTextPair(LABEL_TEXT_PAIR);
+}
 
 /**
  * @brief Constructor de Label::Label que establece la posición inicial.
  * @param x La coordenada x de la posición inicial.
  * @param y La coordenada y de la posición inicial.
  */
-Label::Label(const short x, const short y) : Component(x, y) {}
+Label::Label(const short x, const short y) : Component(x, y) {
+	setBGPair(LABEL_BG_PAIR);
+	setBorderPair(LABEL_BORDER_PAIR);
+	setTextPair(LABEL_TEXT_PAIR);
+}
 
 /**
  * @brief Constructor de Label::Label que establece la posición y el tamaño inicial.
@@ -29,7 +38,9 @@ Label::Label(const short x, const short y) : Component(x, y) {}
  */
 Label::Label(const short x, const short y, const short w, const short h) : Component(x, y, w, h) {
 	setBGPair(LABEL_BG_PAIR);
+	setBorderPair(LABEL_BORDER_PAIR);
 	setTextPair(LABEL_TEXT_PAIR);
+	
 }
 
 /**
@@ -38,6 +49,7 @@ Label::Label(const short x, const short y, const short w, const short h) : Compo
  */
 Label::Label(const std::string text) : Component(), text(text) {
 	setBGPair(LABEL_BG_PAIR);
+	setBorderPair(LABEL_BORDER_PAIR);
 	setTextPair(LABEL_TEXT_PAIR);
 }
 
@@ -50,6 +62,7 @@ Label::Label(const std::string text) : Component(), text(text) {
 Label::Label(const std::string text, const short x, const short y)
 		: Component(x, y), text(text) {
 	setBGPair(LABEL_BG_PAIR);
+	setBorderPair(LABEL_BORDER_PAIR);
 	setTextPair(LABEL_TEXT_PAIR);
 }
 
@@ -64,6 +77,7 @@ Label::Label(const std::string text, const short x, const short y)
 Label::Label(const std::string text, const short x, const short y,
 	const short w, const short h) : Component(x, y, w, h), text(text) {
 	setBGPair(LABEL_BG_PAIR);
+	setBorderPair(LABEL_BORDER_PAIR);
 	setTextPair(LABEL_TEXT_PAIR);
 }
 
@@ -83,7 +97,12 @@ void Label::draw() {
 	}
 	attroff(COLOR_PAIR(getBGPair()));
 
-	// Dibuja el texto (provisorio)
+	// Dibuja el borde
+	attron(COLOR_PAIR(getBorderPair()));
+	getBorder()->draw();
+	attroff(COLOR_PAIR(getBorderPair()));
+
+	// Dibuja el texto
 	attron(COLOR_PAIR(textPair));
 	drawTextArea(text, getAbsX(), getAbsY(), getAbsX() + getW(), getAbsY() + getH(),
 		hTextAlign, vTextAlign);

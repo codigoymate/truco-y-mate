@@ -13,4 +13,5 @@
 namespace TCurses {
 	constexpr short LABEL_TEXT_PAIR =		65;
 	constexpr short LABEL_BG_PAIR =			66;
+	constexpr short LABEL_BORDER_PAIR = 	67;
 }

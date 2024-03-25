@@ -54,5 +54,6 @@
         "sstream": "cpp",
         "stop_token": "cpp",
         "thread": "cpp"
-    }
+    },
+    "cmake.configureOnOpen": false
 }
