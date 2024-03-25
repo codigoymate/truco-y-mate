@@ -88,13 +88,9 @@ Label::Label(const std::string text, const short x, const short y,
 void Label::draw() {
 	// TODO: Mover funciones a otro módulo
 
-	// Dibuja el rectángulo. TODO: mejorar
+	// Dibuja el rectángulo de fondo
 	attron(COLOR_PAIR(getBGPair()));
-	for (short j = getAbsY(); j < (getAbsY() + getH()); j ++) {
-		for (short i = getAbsX(); i < (getAbsX() + getW()); i ++) {
-			mvaddch(j, i, ' ');
-		}
-	}
+	drawSolidRect(getAbsX(), getAbsY(), getW(), getH());
 	attroff(COLOR_PAIR(getBGPair()));
 
 	// Dibuja el borde

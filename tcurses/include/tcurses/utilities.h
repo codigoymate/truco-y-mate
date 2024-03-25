@@ -32,4 +32,14 @@ void drawTextArea(const std::string text,
                   const short x1, const short y1, const short x2, const short y2,
                   const Component::HAlign hAlign, const Component::VAlign vAlign);
 
+/**
+ * @brief Dibuja un rectángulo sólido con espacios.
+ * 
+ * @param x La coordenada x del borde superior izquierdo del rectángulo.
+ * @param y La coordenada y del borde superior izquierdo del rectángulo.
+ * @param w El ancho del rectángulo.
+ * @param h El alto del rectángulo.
+ */
+void drawSolidRect(const short x, const short y, const short w, const short h);
+
 } // namespace TCurses
