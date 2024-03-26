@@ -21,28 +21,24 @@ namespace Truco {
  *        Esta función se encarga de inicializar los componentes necesarios para ejecutar el juego.
  */
 void TrucoApp::init() {
+	auto frame = std::make_shared<TCurses::Frame>(30, 4, 20, 15);
+	frame->setBorder(std::make_shared<TCurses::LinedBorder>());
+	frame->setLayout(TCurses::Component::LY_VERTICAL);
 
-	/*auto label = std::make_shared<TCurses::Label>("un label", 0, 0, 10, 3);
+	auto label = std::make_shared<TCurses::Label>("Label 1");
 	label->setTextAlign(TCurses::Component::HA_CENTER, TCurses::Component::VA_CENTER);
-	label->setBorder(std::make_shared<TCurses::LinedBorder>());
-	screen->addChild(label);*/
-
-    auto label = std::make_shared<TCurses::Label>("un label");
+	label->setMaxH(1); label->setMaxW(9);
+	frame->addChild(label);
+	label = std::make_shared<TCurses::Label>("Label 2");
 	label->setTextAlign(TCurses::Component::HA_CENTER, TCurses::Component::VA_CENTER);
-	label->setBorder(std::make_shared<TCurses::LinedBorder>());
-	screen->addChild(label);
-
-	label = std::make_shared<TCurses::Label>("otro label");
+	label->setMaxH(1); label->setMaxW(9);
+	frame->addChild(label);
+	label = std::make_shared<TCurses::Label>("Label 3");
 	label->setTextAlign(TCurses::Component::HA_CENTER, TCurses::Component::VA_CENTER);
-	label->setBorder(std::make_shared<TCurses::LinedBorder>());
-	screen->addChild(label);
+	label->setMaxH(1); label->setMaxW(9);
+	frame->addChild(label);
 
-	label = std::make_shared<TCurses::Label>("y otro");
-	label->setTextAlign(TCurses::Component::HA_CENTER, TCurses::Component::VA_CENTER);
-	label->setBorder(std::make_shared<TCurses::LinedBorder>());
-	screen->addChild(label);
-
-	screen->setLayout(TCurses::Component::LY_VERTICAL);
+	screen->addChild(frame);
 }
 
 }

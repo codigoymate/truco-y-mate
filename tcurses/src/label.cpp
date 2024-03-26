@@ -86,7 +86,6 @@ Label::Label(const std::string text, const short x, const short y,
  * 
  */
 void Label::draw() {
-	// TODO: Mover funciones a otro módulo
 
 	// Dibuja el rectángulo de fondo
 	attron(COLOR_PAIR(getBGPair()));

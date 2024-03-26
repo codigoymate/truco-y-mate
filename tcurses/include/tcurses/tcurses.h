@@ -16,4 +16,4 @@
 #include <tcurses/component.h>
 #include <tcurses/border.h>
 #include <tcurses/label.h>
-#include <tcurses/box.h>
+#include <tcurses/frame.h>
