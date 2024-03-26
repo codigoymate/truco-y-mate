@@ -15,6 +15,7 @@
 
 namespace TCurses {
 
+class Application;
 class Border;
 
 /**
@@ -302,6 +303,8 @@ public:
 	void setBorder(std::shared_ptr<Border> border);
 
 protected:
+
+	Application *application; /**<Referencia a Application.*/
 
 	/**
 	 * @brief Virtual para dibujar el componente

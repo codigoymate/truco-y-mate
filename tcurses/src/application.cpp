@@ -29,7 +29,7 @@ namespace TCurses {
 Application::Application() {
 	setlocale(LC_ALL, "");
 
-	screen = std::make_shared<Screen>();
+	screen = std::make_shared<Screen>(this);
 
 	initColors();
 }

@@ -13,6 +13,7 @@
  */
 
 #include <tcurses/screen.h>
+#include <tcurses/application.h>
 
 #include <ncurses.h>
 
@@ -21,8 +22,12 @@ namespace TCurses {
 /**
  * @brief Constructor de la clase Screen.
  *        Inicializa el entorno ncurses y configura las propiedades de la pantalla.
+ * @param Application* Referencia a Application.
  */
-Screen::Screen() : Component() {
+Screen::Screen(Application *application) : Component() {
+
+	this->application = application;
+
 	initscr();
     noecho();
     curs_set(0);

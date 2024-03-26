@@ -17,6 +17,7 @@
 
 namespace TCurses {
 
+class Application;
 /**
  * @brief La clase Screen representa la pantalla principal de la aplicación.
  *        Hereda de la clase Component.
@@ -25,8 +26,10 @@ class Screen : public Component {
 public:
     /**
      * @brief Constructor por defecto de la clase Screen.
+	 * 
+	 * @param Application* Referencia a Application.
      */
-	Screen();
+	Screen(Application *application);
 
     /**
      * @brief Destructor de la clase Screen.

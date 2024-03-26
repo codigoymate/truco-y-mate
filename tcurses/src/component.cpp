@@ -84,6 +84,7 @@ void Component::setBorder(std::shared_ptr<Border> border) {
  */
 void Component::addChild(std::shared_ptr<Component> child) {
 	this->children.push_back(child);
+	child->application = this->application;
 	child->parent = this;
 }
 
