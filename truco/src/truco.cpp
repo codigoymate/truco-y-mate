@@ -22,20 +22,20 @@ namespace Truco {
  */
 void TrucoApp::init() {
 	auto frame = std::make_shared<TCurses::Frame>(30, 4, 20, 15);
-	frame->setBorder(std::make_shared<TCurses::LinedBorder>());
+	frame->setBorder(std::make_shared<TCurses::LinedBorder>(1));
 	frame->setLayout(TCurses::Component::LY_VERTICAL);
 
 	auto label = std::make_shared<TCurses::Label>("Label 1");
 	label->setTextAlign(TCurses::Component::HA_CENTER, TCurses::Component::VA_CENTER);
-	label->setMaxH(1); label->setMaxW(9);
+	label->setMaxH(1); //label->setMaxW(9);
 	frame->addChild(label);
 	label = std::make_shared<TCurses::Label>("Label 2");
 	label->setTextAlign(TCurses::Component::HA_CENTER, TCurses::Component::VA_CENTER);
-	label->setMaxH(1); label->setMaxW(9);
+	label->setMaxH(1); //label->setMaxW(9);
 	frame->addChild(label);
 	label = std::make_shared<TCurses::Label>("Label 3");
 	label->setTextAlign(TCurses::Component::HA_CENTER, TCurses::Component::VA_CENTER);
-	label->setMaxH(1); label->setMaxW(9);
+	label->setMaxH(1); //label->setMaxW(9);
 	frame->addChild(label);
 
 	screen->addChild(frame);

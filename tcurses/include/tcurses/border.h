@@ -18,7 +18,8 @@ class Component;
 
 class Border {
 public:
-	Border() = default;
+	Border() : Border(0) {}
+	Border(const short pos) { this->pos = pos; }
 
 	virtual void draw() const = 0;
 
@@ -26,18 +27,22 @@ public:
 
 protected:
 	Component *comp;
+	short pos;
 };
 
 class EmptyBorder: public Border {
 public:
-	EmptyBorder() = default;
+	EmptyBorder() : Border() {}
+	EmptyBorder(const short pos) : Border(pos) {}
 
 	void draw() const override {}
 };
 
 class LinedBorder: public Border {
 public:
-	LinedBorder() = default;
+	LinedBorder() : Border() {}
+	LinedBorder(const short pos) : Border(pos) {}
+	
 	void draw() const override;
 };
 
