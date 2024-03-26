@@ -88,6 +88,16 @@ void Component::addChild(std::shared_ptr<Component> child) {
 }
 
 /**
+ * @brief Elminina un componente hijo por referencia.
+ * @param child Componente hijo.
+ */
+void Component::removeChild(std::shared_ptr<Component> child) {
+	children.remove_if([&](std::shared_ptr<Component> c) {
+		return child == c;
+	});
+}
+
+/**
  * @brief Ejecuta draw() y luego dibuja los hijos.
  * 
  */

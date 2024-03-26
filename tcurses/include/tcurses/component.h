@@ -165,6 +165,12 @@ public:
 	void addChild(std::shared_ptr<Component> child);
 
 	/**
+	 * @brief Elminina un componente hijo por referencia.
+	 * @param child Componente hijo.
+	 */
+	void removeChild(std::shared_ptr<Component> child);
+
+	/**
 	 * @brief Obtiene el ancho mínimo del componente.
 	 * @return El ancho mínimo del componente.
 	 */
