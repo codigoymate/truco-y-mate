@@ -12,22 +12,14 @@ namespace TCurses {
  * @brief Constructor predeterminado de Label::Label.
  * 
  */
-Label::Label() : Component() {
-	setBGPair(LABEL_BG_PAIR);
-	setBorderPair(LABEL_BORDER_PAIR);
-	setTextPair(LABEL_TEXT_PAIR);
-}
+Label::Label() : Label("") {}
 
 /**
  * @brief Constructor de Label::Label que establece la posición inicial.
  * @param x La coordenada x de la posición inicial.
  * @param y La coordenada y de la posición inicial.
  */
-Label::Label(const short x, const short y) : Component(x, y) {
-	setBGPair(LABEL_BG_PAIR);
-	setBorderPair(LABEL_BORDER_PAIR);
-	setTextPair(LABEL_TEXT_PAIR);
-}
+Label::Label(const short x, const short y) : Label("", x, y) {}
 
 /**
  * @brief Constructor de Label::Label que establece la posición y el tamaño inicial.
@@ -36,22 +28,14 @@ Label::Label(const short x, const short y) : Component(x, y) {
  * @param w El ancho inicial del componente.
  * @param h La altura inicial del componente.
  */
-Label::Label(const short x, const short y, const short w, const short h) : Component(x, y, w, h) {
-	setBGPair(LABEL_BG_PAIR);
-	setBorderPair(LABEL_BORDER_PAIR);
-	setTextPair(LABEL_TEXT_PAIR);
-	
-}
+Label::Label(const short x, const short y, const short w, const short h) :
+			Label("", x, y, w, h) {}
 
 /**
  * @brief Constructor de Label::Label que establece el texto inicial.
  * @param text El texto inicial del Label::Label.
  */
-Label::Label(const std::string text) : Component(), text(text) {
-	setBGPair(LABEL_BG_PAIR);
-	setBorderPair(LABEL_BORDER_PAIR);
-	setTextPair(LABEL_TEXT_PAIR);
-}
+Label::Label(const std::string text) : Label(text, 0, 0) {}
 
 /**
  * @brief Constructor de Label::Label que establece el texto inicial y la posición.
@@ -60,11 +44,7 @@ Label::Label(const std::string text) : Component(), text(text) {
  * @param y La coordenada y de la posición inicial.
  */
 Label::Label(const std::string text, const short x, const short y)
-		: Component(x, y), text(text) {
-	setBGPair(LABEL_BG_PAIR);
-	setBorderPair(LABEL_BORDER_PAIR);
-	setTextPair(LABEL_TEXT_PAIR);
-}
+		: Label(text, x, y, 20, 1) {}
 
 /**
  * @brief Constructor de Label::Label que establece el texto inicial, la posición y el tamaño.
