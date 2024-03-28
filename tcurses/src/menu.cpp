@@ -1,0 +1,62 @@
+/**
+ * @file menu.cpp
+ * @author Javier Candales (codigo.mate.9@gmail.com)
+ * @brief Implementación de menu.h
+ * @date 2024-03-27
+ * 
+ * @copyright Copyright (c) 2024
+ * 
+ */
+#include <tcurses/menu.h>
+#include <tcurses/colors.h>
+#include <tcurses/utilities.h>
+#include <tcurses/border.h>
+
+#include <ncurses.h>
+
+namespace TCurses {
+
+/**
+ * @brief Constructor predeterminado de Menu.
+ */
+Menu::Menu() : Component(0, 0) {}
+
+/**
+ * @brief Constructor de Menu que establece la posición inicial.
+ * @param x La coordenada x de la posición inicial.
+ * @param y La coordenada y de la posición inicial.
+ */
+Menu::Menu(const short x, const short y) :
+				Component(x, y, 25, 10) {}
+
+/**
+ * @brief Constructor de Menu que establece la posición y el tamaño inicial.
+ * @param x La coordenada x de la posición inicial.
+ * @param y La coordenada y de la posición inicial.
+ * @param w El ancho inicial del menu.
+ * @param h La altura inicial del menu.
+ */
+Menu::Menu(const short x, const short y, const short w, const short h) :
+				Component(x, y, w, h) {
+	setBGPair(MENU_BG_PAIR);
+	setBorderPair(MENU_BORDER_PAIR);
+	setLayout(Component::LY_VERTICAL);
+}
+
+/**
+ * @brief Dibuja el menu.
+ * 
+ */
+void Menu::draw() {
+	// Dibuja el rectángulo de fondo
+	attron(COLOR_PAIR(getBGPair()));
+	drawSolidRect(getAbsX(), getAbsY(), getW(), getH());
+	attroff(COLOR_PAIR(getBGPair()));
+
+	// Dibuja el borde
+	attron(COLOR_PAIR(getBorderPair()));
+	getBorder()->draw();
+	attroff(COLOR_PAIR(getBorderPair()));
+}
+
+}

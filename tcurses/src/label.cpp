@@ -1,3 +1,12 @@
+/**
+ * @file label.cpp
+ * @author Javier Candales (codigo.mate.9@gmail.com)
+ * @brief Implementación de label.h
+ * @date 2024-03-27
+ * 
+ * @copyright Copyright (c) 2024
+ * 
+ */
 #include <tcurses/label.h>
 
 #include <ncurses.h>

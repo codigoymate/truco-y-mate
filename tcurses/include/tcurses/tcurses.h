@@ -17,3 +17,5 @@
 #include <tcurses/border.h>
 #include <tcurses/label.h>
 #include <tcurses/frame.h>
+#include <tcurses/menu.h>
+#include <tcurses/menuitem.h>

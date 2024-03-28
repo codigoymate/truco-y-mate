@@ -21,30 +21,16 @@ namespace Truco {
  *        Esta función se encarga de inicializar los componentes necesarios para ejecutar el juego.
  */
 void TrucoApp::init() {
-	auto frame = std::make_shared<TCurses::Frame>(30, 4, 20, 15);
-	frame->setBorder(std::make_shared<TCurses::LinedBorder>(1));
-	frame->setLayout(TCurses::Component::LY_VERTICAL);
+	auto menu = std::make_shared<TCurses::Menu>(10, 5, 10, 5);
+	screen->addChild(menu);
 
-	auto label = std::make_shared<TCurses::Label>("Label 1");
-	label->setTextAlign(TCurses::Component::HA_CENTER, TCurses::Component::VA_CENTER);
-	label->setMaxH(1); //label->setMaxW(9);
-	frame->addChild(label);
-	label = std::make_shared<TCurses::Label>("Label 2");
-	label->setTextAlign(TCurses::Component::HA_CENTER, TCurses::Component::VA_CENTER);
-	label->setMaxH(1); //label->setMaxW(9);
-	frame->addChild(label);
-	label = std::make_shared<TCurses::Label>("Label 3");
-	label->setTextAlign(TCurses::Component::HA_CENTER, TCurses::Component::VA_CENTER);
-	label->setMaxH(1); //label->setMaxW(9);
-	frame->addChild(label);
-	label = std::make_shared<TCurses::Label>("Label 4");
-	label->setTextAlign(TCurses::Component::HA_CENTER, TCurses::Component::VA_CENTER);
-	label->setMaxH(1); //label->setMaxW(9);
-	frame->addChild(label);
+	auto mi = std::make_shared<TCurses::MenuItem>("Rojo");
+	mi->setSelected(true);
 
-	screen->addChild(frame);
-
-	frame->removeChild(label);
+	menu->addChild(mi);
+	menu->addChild(std::make_shared<TCurses::MenuItem>("Verde"));
+	menu->addChild(std::make_shared<TCurses::MenuItem>("Naranja"));
+	menu->addChild(std::make_shared<TCurses::MenuItem>("Azul"));
 }
 
 }

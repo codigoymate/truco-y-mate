@@ -87,7 +87,7 @@ public:
 	 * @brief Dibuja el Label.
 	 * 
 	 */
-	void draw() override;
+	virtual void draw() override;
 
 	/**
 	 * @brief Obtiene el alineamiento horizontal del texto dentro del Label.
