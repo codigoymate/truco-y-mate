@@ -14,6 +14,8 @@
 
 #include <tcurses/component.h>
 #include <tcurses/border.h>
+#include <tcurses/input_event.h>
+#include <tcurses/application.h>
 
 namespace TCurses {
 
@@ -86,6 +88,11 @@ void Component::addChild(std::shared_ptr<Component> child) {
 	this->children.push_back(child);
 	child->application = this->application;
 	child->parent = this;
+
+	// Agrega a los eventos de entrada
+	if (std::dynamic_pointer_cast<InputListener>(child)) {
+		application->addInputListener(std::dynamic_pointer_cast<InputListener>(child));
+	}
 }
 
 /**
@@ -94,6 +101,10 @@ void Component::addChild(std::shared_ptr<Component> child) {
  */
 void Component::removeChild(std::shared_ptr<Component> child) {
 	children.remove_if([&](std::shared_ptr<Component> c) {
+		// Quita de los eventos de entrada
+		if (std::dynamic_pointer_cast<InputListener>(child)) {
+			application->removeInputListener(std::dynamic_pointer_cast<InputListener>(child));
+		}
 		return child == c;
 	});
 }

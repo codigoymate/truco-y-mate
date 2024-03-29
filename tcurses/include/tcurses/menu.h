@@ -11,10 +11,11 @@
 #pragma once
 
 #include <tcurses/component.h>
+#include <tcurses/input_event.h>
 
 namespace TCurses {
 
-class Menu: public Component {
+class Menu: public Component, public InputListener {
 public:
 	/**
 	 * @brief Constructor predeterminado de Menu.
@@ -42,6 +43,22 @@ public:
 	 * 
 	 */
 	void draw() override;
+
+	/**
+	 * @brief Escucha el teclado.
+	 * 
+	 * @param key tecla de entrada.
+	 */
+	void keyPressed(int key) override;
+
+	/**
+	 * @brief Actualiza el estado de los items;
+	 * 
+	 */
+	void updateItems();
+
+private:
+	int itemIndex{}; /**< El item seleccionado.*/
 
 };
 

@@ -11,6 +11,7 @@
 #include <tcurses/colors.h>
 #include <tcurses/utilities.h>
 #include <tcurses/border.h>
+#include <tcurses/menuitem.h>
 
 #include <ncurses.h>
 
@@ -41,6 +42,8 @@ Menu::Menu(const short x, const short y, const short w, const short h) :
 	setBGPair(MENU_BG_PAIR);
 	setBorderPair(MENU_BORDER_PAIR);
 	setLayout(Component::LY_VERTICAL);
+
+	updateItems();
 }
 
 /**
@@ -57,6 +60,45 @@ void Menu::draw() {
 	attron(COLOR_PAIR(getBorderPair()));
 	getBorder()->draw();
 	attroff(COLOR_PAIR(getBorderPair()));
+}
+
+/**
+ * @brief Escucha el teclado.
+ * 
+ * @param key tecla de entrada.
+ */
+void Menu::keyPressed(int key) {
+	switch (key) {
+
+	case KEY_UP:
+		itemIndex --;
+		if (itemIndex < 0) itemIndex = getChildren().size() - 1;
+		updateItems();
+		break;
+
+	case KEY_DOWN:
+		itemIndex ++;
+		if (itemIndex >= getChildren().size()) itemIndex = 0;
+		updateItems();
+		break;
+
+	}
+}
+
+/**
+ * @brief Actualiza el estado de los items;
+ * 
+ */
+void Menu::updateItems() {
+	unsigned i = 0;
+	for (auto &c : getChildren()) {
+		if (std::static_pointer_cast<MenuItem>(c)) {
+			std::static_pointer_cast<MenuItem>(c)->setSelected(
+				i == itemIndex
+			);
+		}
+		i ++;
+	}
 }
 
 }

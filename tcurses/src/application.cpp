@@ -19,6 +19,7 @@
 
 #include <tcurses/screen.h>
 #include <tcurses/colors.h>
+#include <tcurses/input_event.h>
 
 namespace TCurses {
 
@@ -50,6 +51,10 @@ void Application::run() {
 		if (ch == KEY_RESIZE) {
 			screen->setSize(getmaxx(stdscr), getmaxy(stdscr));
 			screen->drawAll();
+		} else {
+			for (auto &i : inputListeners) {
+				i->keyPressed(ch);
+			}
 		}
 	}
 }
@@ -85,6 +90,24 @@ void Application::initColors() {
 	init_pair(MENUITEM_SEL_TEXT_PAIR, COLOR_WHITE, COLOR_BLUE);
 	init_pair(MENUITEM_SEL_BG_PAIR, COLOR_BLACK, COLOR_BLUE);
 	init_pair(MENUITEM_SEL_BORDER_PAIR, COLOR_WHITE, COLOR_BLUE);
+}
+
+/**
+ * @brief Agrega un componente InputListener a los eventos de entrada.
+ * 
+ * @param listener Puntero compartido a componente InputListener.
+ */
+void Application::addInputListener(std::shared_ptr<InputListener> listener) {
+	inputListeners.push_back(listener);
+}
+
+/**
+ * @brief Quita un componente InputListener de los eventos de entrada.
+ * 
+ * @param listener Puntero compartido a componente InputListener.
+ */
+void Application::removeInputListener(std::shared_ptr<InputListener> listener) {
+	inputListeners.remove(listener);
 }
 
 } // namespace TCurses
