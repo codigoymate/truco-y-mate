@@ -60,6 +60,13 @@ public:
 	 */
 	void removeInputListener(std::shared_ptr<InputListener> listener);
 
+	/**
+	 * @brief Devuelve el objeto Screen de Application.
+	 * 
+	 * @return std::shared_ptr<Screen> Screen de application.
+	 */
+	std::shared_ptr<Screen> getScreen() { return screen; }
+
 protected:
 	/**
 	 * @brief Un puntero compartido al objeto Screen utilizado por la aplicación.

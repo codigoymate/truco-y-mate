@@ -42,8 +42,6 @@ Menu::Menu(const short x, const short y, const short w, const short h) :
 	setBGPair(MENU_BG_PAIR);
 	setBorderPair(MENU_BORDER_PAIR);
 	setLayout(Component::LY_VERTICAL);
-
-	updateItems();
 }
 
 /**
@@ -81,6 +79,20 @@ void Menu::keyPressed(int key) {
 		if (itemIndex >= getChildren().size()) itemIndex = 0;
 		updateItems();
 		break;
+	
+	// Acción del menú item
+	case 10: {
+			int i = 0;
+			if (!getChildren().empty()) {
+				for (auto &c : getChildren()) {
+					if (i == itemIndex)
+						if (std::dynamic_pointer_cast<MenuItem>(c)) {
+							std::dynamic_pointer_cast<MenuItem>(c)->doAction();
+						}
+					i ++;
+				}
+			}
+		} break;
 
 	}
 }

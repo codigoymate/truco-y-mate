@@ -163,13 +163,13 @@ public:
 	 * @brief Agrega un componente hijo.
 	 * @param child Un puntero compartido al componente hijo a agregar.
 	 */
-	void addChild(std::shared_ptr<Component> child);
+	virtual void addChild(std::shared_ptr<Component> child);
 
 	/**
 	 * @brief Elminina un componente hijo por referencia.
 	 * @param child Componente hijo.
 	 */
-	void removeChild(std::shared_ptr<Component> child);
+	virtual void removeChild(std::shared_ptr<Component> child);
 
 	/**
 	 * @brief Obtiene el ancho mínimo del componente.

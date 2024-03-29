@@ -28,6 +28,12 @@ public:
 	 *        Esta función se encarga de inicializar los componentes necesarios para ejecutar el juego.
 	 */
 	void init() override;
+
+private:
+	std::shared_ptr<TCurses::Menu> menu;
+	void redAction();
+	void greenAction();
+	void blueAction();
 };
 
 } // namespace Truco

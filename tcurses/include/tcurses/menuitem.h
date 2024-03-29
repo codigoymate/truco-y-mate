@@ -11,6 +11,7 @@
 #pragma once
 
 #include <tcurses/label.h>
+#include <functional>
 
 namespace TCurses {
 
@@ -67,6 +68,60 @@ public:
 		const short w, const short h);
 
 	/**
+	 * @brief Constructor que establece el método de acción de MenuItem.
+	 */
+	MenuItem(std::function<void()> action);
+
+	/**
+	 * @brief Constructor de MenuItem que establece la posición inicial y el método de acción.
+	 * @param x La coordenada x de la posición inicial.
+	 * @param y La coordenada y de la posición inicial.
+	 * @param action Método de acción.
+	 */
+	MenuItem(const short x, const short y, std::function<void()> action);
+
+	/**
+	 * @brief Constructor de MenuItem que establece la posición y el tamaño inicial junto
+	 * con el método de acción.
+	 * @param x La coordenada x de la posición inicial.
+	 * @param y La coordenada y de la posición inicial.
+	 * @param w El ancho inicial del componente.
+	 * @param h La altura inicial del componente.
+	 * @param action Método de acción.
+	 */
+	MenuItem(const short x, const short y, const short w, const short h, std::function<void()> action);
+
+	/**
+	 * @brief Constructor de MenuItem que establece el texto inicial.
+	 * @param text El texto inicial del MenuItem::MenuItem.
+	 * @param action Método de acción.
+	 */
+	MenuItem(const std::string text, std::function<void()> action);
+
+	/**
+	 * @brief Constructor de MenuItem que establece el texto inicial y la posición junto
+	 * con el método de acción.
+	 * @param text El texto inicial del MenuItem.
+	 * @param x La coordenada x de la posición inicial.
+	 * @param y La coordenada y de la posición inicial.
+	 * @param action Método de acción.
+	 */
+	MenuItem(const std::string text, const short x, const short y, std::function<void()> action);
+
+	/**
+	 * @brief Constructor de MenuItem que establece el texto inicial, la posición y el tamaño 
+	 * junto con el método de acción.
+	 * @param text El texto inicial del MenuItem.
+	 * @param x La coordenada x de la posición inicial.
+	 * @param y La coordenada y de la posición inicial.
+	 * @param w El ancho inicial del componente.
+	 * @param h La altura inicial del componente.
+	 * @param action Método de acción.
+	 */
+	MenuItem(const std::string text, const short x, const short y,
+		const short w, const short h, std::function<void()> action);
+
+	/**
 	 * @brief Devuelve el color de texto cuando el item está seleccionado.
 	 * @return const short color de texto.
 	 */
@@ -119,11 +174,25 @@ public:
 	 */
 	void draw() override;
 
+	/**
+	 * @brief Establece el método al que debe llamar cuando se presiona enter.
+	 * 
+	 * @param action Método al que debe llamar.
+	 */
+	void setAction(std::function<void()> action) { this->action = action; }
+
+	/**
+	 * @brief Ejecuta el método de acción.
+	 * 
+	 */
+	void doAction() { action(); }
+
 private:
 	short selTextPair; ///< Color de texto cuando el item está seleccionado.
 	short selBGPair;   ///< Color de fondo cuando el item está seleccionado.
 	short selBorderPair; ///< Color de borde cuando el item está seleccionado.
 	bool selected{}; ///< Estado de selección del elemento de menú.
+	std::function<void()> action;
 };
 
 } // namespace TCurses

@@ -13,6 +13,7 @@
  */
 
 #include <truco.h>
+#include <ncurses.h>
 
 namespace Truco {
 
@@ -21,16 +22,25 @@ namespace Truco {
  *        Esta función se encarga de inicializar los componentes necesarios para ejecutar el juego.
  */
 void TrucoApp::init() {
-	auto menu = std::make_shared<TCurses::Menu>(10, 5, 10, 5);
+	menu = std::make_shared<TCurses::Menu>(10, 5, 10, 5);
+	menu->setBorder(std::make_shared<TCurses::LinedBorder>(1));
+	menu->addChild(std::make_shared<TCurses::MenuItem>("Rojo", std::bind(&TrucoApp::redAction, this)));
+	menu->addChild(std::make_shared<TCurses::MenuItem>("Verde", std::bind(&TrucoApp::greenAction, this)));
+	menu->addChild(std::make_shared<TCurses::MenuItem>("Azul", std::bind(&TrucoApp::blueAction, this)));
+
 	screen->addChild(menu);
+}
 
-	auto mi = std::make_shared<TCurses::MenuItem>("Rojo");
-	mi->setSelected(true);
+void TrucoApp::redAction() {
+	init_pair(TCurses::MENU_BORDER_PAIR, COLOR_RED, COLOR_RED);
+}
 
-	menu->addChild(mi);
-	menu->addChild(std::make_shared<TCurses::MenuItem>("Verde"));
-	menu->addChild(std::make_shared<TCurses::MenuItem>("Naranja"));
-	menu->addChild(std::make_shared<TCurses::MenuItem>("Azul"));
+void TrucoApp::greenAction() {
+	init_pair(TCurses::MENU_BORDER_PAIR, COLOR_GREEN, COLOR_GREEN);
+}
+
+void TrucoApp::blueAction() {
+	init_pair(TCurses::MENU_BORDER_PAIR, COLOR_BLUE, COLOR_BLUE);
 }
 
 }

@@ -78,6 +78,69 @@ MenuItem::MenuItem(const std::string text, const short x, const short y,
 }
 
 /**
+ * @brief Constructor que establece el método de acción de MenuItem.
+ */
+MenuItem::MenuItem(std::function<void()> action) : MenuItem() {
+	this->action = action;
+}
+
+/**
+ * @brief Constructor de MenuItem que establece la posición inicial y el método de acción.
+ * @param x La coordenada x de la posición inicial.
+ * @param y La coordenada y de la posición inicial.
+ * @param action Método de acción.
+ */
+MenuItem::MenuItem(const short x, const short y, std::function<void()> action) :
+			MenuItem(x, y) { this->action = action; }
+
+/**
+ * @brief Constructor de MenuItem que establece la posición y el tamaño inicial junto
+ * con el método de acción.
+ * @param x La coordenada x de la posición inicial.
+ * @param y La coordenada y de la posición inicial.
+ * @param w El ancho inicial del componente.
+ * @param h La altura inicial del componente.
+ * @param action Método de acción.
+ */
+MenuItem::MenuItem(const short x, const short y, const short w, const short h,
+		std::function<void()> action) : MenuItem(x, y, w, h) { this->action = action; }
+
+/**
+ * @brief Constructor de MenuItem que establece el texto inicial.
+ * @param text El texto inicial del MenuItem::MenuItem.
+ * @param action Método de acción.
+ */
+MenuItem::MenuItem(const std::string text, std::function<void()> action) :
+			MenuItem(text) { this->action = action; }
+
+/**
+ * @brief Constructor de MenuItem que establece el texto inicial y la posición junto
+ * con el método de acción.
+ * @param text El texto inicial del MenuItem.
+ * @param x La coordenada x de la posición inicial.
+ * @param y La coordenada y de la posición inicial.
+ * @param action Método de acción.
+ */
+MenuItem::MenuItem(const std::string text, const short x, const short y,
+		std::function<void()> action) : MenuItem(text, x, y) {
+			this->action = action;
+		}
+
+/**
+ * @brief Constructor de MenuItem que establece el texto inicial, la posición y el tamaño 
+ * junto con el método de acción.
+ * @param text El texto inicial del MenuItem.
+ * @param x La coordenada x de la posición inicial.
+ * @param y La coordenada y de la posición inicial.
+ * @param w El ancho inicial del componente.
+ * @param h La altura inicial del componente.
+ * @param action Método de acción.
+ */
+MenuItem::MenuItem(const std::string text, const short x, const short y,
+	const short w, const short h, std::function<void()> action) :
+	MenuItem(text, x, y, w, h) { this->action = action; }
+
+/**
  * @brief Dibuja el MenuItem.
  * 
  */

@@ -57,6 +57,26 @@ public:
 	 */
 	void updateItems();
 
+	/**
+	 * @brief Override de addChild: actualiza los items después de agregar un item.
+	 * 
+	 * @param child componente a agregar.
+	 */
+	void addChild(std::shared_ptr<Component> child) override {
+		Component::addChild(child);
+		updateItems();
+	}
+
+	/**
+	 * @brief Override de removeChild: actualiza los items después de quitar un item.
+	 * 
+	 * @param child componente a quitar.
+	 */
+	void removeChild(std::shared_ptr<Component> child) override {
+		Component::removeChild(child);
+		updateItems();
+	}
+
 private:
 	int itemIndex{}; /**< El item seleccionado.*/
 
