@@ -43,7 +43,8 @@ void Application::run() {
 	init();
 
 	int ch = 0;
-	while (ch != 27) { // Salir del bucle al presionar la tecla ESC (código ASCII 27)
+	running = true;
+	while (running) {
 
 		screen->drawAll(); // Dibuja la pantalla
 		ch = getch();

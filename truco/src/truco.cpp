@@ -27,6 +27,7 @@ void TrucoApp::init() {
 	menu->addChild(std::make_shared<TCurses::MenuItem>("Rojo", std::bind(&TrucoApp::redAction, this)));
 	menu->addChild(std::make_shared<TCurses::MenuItem>("Verde", std::bind(&TrucoApp::greenAction, this)));
 	menu->addChild(std::make_shared<TCurses::MenuItem>("Azul", std::bind(&TrucoApp::blueAction, this)));
+	menu->addChild(std::make_shared<TCurses::MenuItem>("Salir", std::bind(&TrucoApp::quitAction, this)));
 
 	screen->addChild(menu);
 }
@@ -41,6 +42,10 @@ void TrucoApp::greenAction() {
 
 void TrucoApp::blueAction() {
 	init_pair(TCurses::MENU_BORDER_PAIR, COLOR_BLUE, COLOR_BLUE);
+}
+
+void TrucoApp::quitAction() {
+	this->quit();
 }
 
 }

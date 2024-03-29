@@ -67,6 +67,12 @@ public:
 	 */
 	std::shared_ptr<Screen> getScreen() { return screen; }
 
+	/**
+	 * @brief Finaliza la aplicación.
+	 * 
+	 */
+	void quit() { running = false; }
+
 protected:
 	/**
 	 * @brief Un puntero compartido al objeto Screen utilizado por la aplicación.
@@ -85,6 +91,8 @@ private:
 	 *        Esta función configura la paleta de colores para la interfaz de la aplicación.
 	 */
 	void initColors();
+
+	bool running; /**< Permanece en true mientras la aplicación esté corriendo.*/
 };
 
 } // namespace TCurses

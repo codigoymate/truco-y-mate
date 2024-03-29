@@ -34,6 +34,7 @@ private:
 	void redAction();
 	void greenAction();
 	void blueAction();
+	void quitAction();
 };
 
 } // namespace Truco
