@@ -15,17 +15,17 @@
 
 #include <tcurses/tcurses.h>
 
-namespace Truco {
+namespace truco {
 
 /**
- * @brief La clase TrucoApp representa la aplicación del juego Truco.
+ * @brief La clase Truco representa la aplicación del juego Truco.
  *        Hereda de la clase Application de la biblioteca TCurses.
  */
-class TrucoApp: public TCurses::Application {
+class Truco: public TCurses::Application {
 public:
 	/**
 	 * @brief Inicializa la aplicación Truco.
-	 *        Esta función se encarga de inicializar los componentes necesarios para ejecutar el juego.
+	 *	Carga los elementos del juego.
 	 */
 	void init() override;
 

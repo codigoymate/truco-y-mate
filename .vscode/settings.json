@@ -53,7 +53,9 @@
         "semaphore": "cpp",
         "sstream": "cpp",
         "stop_token": "cpp",
-        "thread": "cpp"
+        "thread": "cpp",
+        "optional": "cpp",
+        "fstream": "cpp"
     },
     "cmake.configureOnOpen": false
 }
