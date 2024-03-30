@@ -20,7 +20,7 @@ namespace TCurses {
 /**
  * @brief Constructor predeterminado de Menu.
  */
-Menu::Menu() : Component(0, 0) {}
+Menu::Menu() : Menu(0, 0) {}
 
 /**
  * @brief Constructor de Menu que establece la posición inicial.
@@ -28,7 +28,7 @@ Menu::Menu() : Component(0, 0) {}
  * @param y La coordenada y de la posición inicial.
  */
 Menu::Menu(const short x, const short y) :
-				Component(x, y, 25, 10) {}
+				Menu(x, y, 25, 10) {}
 
 /**
  * @brief Constructor de Menu que establece la posición y el tamaño inicial.

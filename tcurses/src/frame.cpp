@@ -20,7 +20,7 @@ namespace TCurses {
 /**
  * @brief Constructor predeterminado de Frame.
  */
-Frame::Frame() : Component(0, 0) {}
+Frame::Frame() : Frame(0, 0) {}
 
 /**
  * @brief Constructor de Frame que establece la posición inicial.
