@@ -60,6 +60,13 @@ public:
 	Component(const short x, const short y, const short w, const short h);
 
 	/**
+	 * @brief Ejecuta éste método al ser agregado a éste a un padre.
+	 * Al igual que init de Application se utiliza para iniciar los componentes hijos.
+	 * 
+	 */
+	virtual void init() {}
+
+	/**
 	 * @brief Obtiene la coordenada x del componente.
 	 * @return La coordenada x del componente.
 	 */

@@ -93,6 +93,8 @@ void Component::addChild(std::shared_ptr<Component> child) {
 	if (std::dynamic_pointer_cast<InputListener>(child)) {
 		application->addInputListener(std::dynamic_pointer_cast<InputListener>(child));
 	}
+
+	child->init();
 }
 
 /**
