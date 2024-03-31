@@ -10,6 +10,7 @@
 #pragma once
 
 #include <array>
+#include <iostream>
 
 namespace truco {
 
@@ -57,6 +58,18 @@ public:
 	 * @brief Devuelve el Peso de la carta.
 	 */
 	const int getWeight() const { return this->weight; }
+
+	/**
+	 * @brief Sobrecarga del operador <<.
+	 * 
+	 * @param os canal de salida.
+	 * @param card carta a mostrar.
+	 * @return std::ostream& devuelve canal de salida con la carta.
+	 */
+	friend std::ostream &operator<<(std::ostream &os, const Card &card);
+
+	const std::string str() const;
+
 private:
 	int id; /**< Identificador de la carta. */
 	int value; /**< Valor de la carta 1 .. 12 */
@@ -77,8 +90,30 @@ public:
 	 */
 	Deck();
 
+	/**
+	 * @brief Sobrecarga del operador [] para obtener la carta por índice.
+	 * 
+	 * @param index índice de la carta.
+	 * @return const Card& La carta del índice.
+	 */
+	const Card &operator[](const int index) const { return cards[index]; }
+
+	/**
+	 * @brief Mezcla el mazo.
+	 * 
+	 */
+	void merge();
+
 private:
 	std::array<Card, 40> cards;
+
+	/**
+	 * @brief Intercambia dos cartas según sus posiciones.
+	 * 
+	 * @param c1 posición de la carta 1.
+	 * @param c2 posición de la carta 2.
+	 */
+	void swap(int c1, int c2);
 };
 
 } // namespace truco

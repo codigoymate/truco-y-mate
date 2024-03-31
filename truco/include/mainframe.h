@@ -13,6 +13,8 @@ public:
 private:
 	std::shared_ptr<TCurses::Menu> mainMenu;
 	void quitAction();
+
+	void showCards();
 };
 
 }

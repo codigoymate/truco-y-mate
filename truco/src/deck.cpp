@@ -8,8 +8,47 @@
  * 
  */
 #include <deck.h>
+#include <random.h>
+#include <sstream>
 
 namespace truco {
+
+/**
+ * @brief Sobrecarga del operador <<.
+ * 
+ * @param os canal de salida.
+ * @param card carta a mostrar.
+ * @return std::ostream& devuelve canal de salida con la carta.
+ */
+std::ostream &operator<<(std::ostream &os, const Card &card) {
+	switch (card.value) {
+	case 1: os << "ancho de "; break;
+	case 10: os << "sota de "; break;
+	case 11: os << "caballo de "; break;
+	case 12: os << "rey de "; break;
+	default:
+		os << card.value << " de ";
+	}
+	switch (card.type) {
+	case Card::ORO: os << "oro"; break;
+	case Card::COPAS: os << "copas"; break;
+	case Card::ESPADAS: os << "espadas"; break;
+	case Card::BASTOS: os << "bastos"; break;
+	}
+
+	return os;
+}
+
+/**
+ * @brief Devuelve la definición de la carta.
+ * 
+ * @return const std::string string con la definición de la carta.
+ */
+const std::string Card::str() const {
+	std::stringstream ss;
+	ss << *this;
+	return ss.str();
+}
 
 /**
  * @brief Constructor de Deck.
@@ -68,6 +107,28 @@ Deck::Deck() {
 	cards[23] = Card(23,  4, Card::ESPADAS, 0);
 	cards[33] = Card(33,  4, Card::BASTOS, 0);
 	
+}
+
+/**
+ * @brief Mezcla el mazo.
+ * 
+ */
+void Deck::merge() {
+	for (unsigned i = 0; i < cards.size(); i ++) {
+		this->swap(i, Random::randInt(0, 39));
+	}
+}
+
+/**
+ * @brief Intercambia dos cartas según sus posiciones.
+ * 
+ * @param c1 posición de la carta 1.
+ * @param c2 posición de la carta 2.
+ */
+void Deck::swap(int c1, int c2) {
+	auto tmp = cards[c1];
+	cards[c1] = cards[c2];
+	cards[c2] = tmp;
 }
 
 } // namespace truco
