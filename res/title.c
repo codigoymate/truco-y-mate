@@ -1,27 +1,31 @@
-/**
- * @file mainframe.cpp
- * @author Javier Candales (codigo.mate.9@gmail.com)
- * @brief Frame dónde se aloja el título y el menú principal.
- * @date 2024-03-31
- * 
- * @copyright Copyright (c) 2024
- * 
- */
-#include <mainframe.h>
+#include <ncurses.h>
 
-namespace truco {
+void draw(WINDOW *wnd);
 
-MainFrame::MainFrame() : TCurses::Frame() {}
+int main(void) {
+	int bg, fg, p = 1;
 
-/**
- * @brief Al iniciar el frame.
- * 
- */
-void MainFrame::init() {
-	this->setLayout(TCurses::Component::LY_VERTICAL);
+    initscr();
+    start_color();
 
-	// Título
-	auto title = std::make_shared<TCurses::Art>(std::vector<unsigned int>({
+    /* Init color pairs */
+    for (bg = 0; bg < 8; bg ++) {
+        for (fg = 0; fg < 8; fg ++) {
+            init_pair(p, fg, bg); p ++;
+        }
+    }
+
+    draw(stdscr);
+    refresh();
+    getch();
+    endwin();
+
+    return 0;
+}
+
+void draw(WINDOW *wnd) {
+	int w = 45, h = 11, x, y, i = 0;
+	chtype m[] = {
 0x0000, 0x0000, 0x0000, 0x0000, 0x0000, 0x0000, 0x0000, 0x0000, 0x0000, 0x0000, 0x0000, 0x0000, 0x0000, 0x0000, 0x0000, 0x0000, 
 0x0000, 0x0000, 0x0000, 0x0000, 0x0000, 0x0000, 0x0000, 0x0000, 0x0000, 0x0000, 0x0000, 0x0000, 0x0000, 0x0000, 0x0000, 0x0000, 
 0x0000, 0x0000, 0x0000, 0x0000, 0x0000, 0x0000, 0x0000, 0x0000, 0x0000, 0x0000, 0x0000, 0x0000, 0x0000, 0x0000, 0x0000, 0x0000, 
@@ -52,29 +56,11 @@ void MainFrame::init() {
 0x0000, 0x0000, 0x0000, 0x0000, 0x0000, 0x0000, 0x0000, 0x0000, 0x0000, 0x0000, 0x0000, 0x0000, 0x0000, 0x0000, 0x0000, 0x0000, 
 0x0000, 0x0000, 0x0000, 0x0000, 0x0000, 0x0000, 0x0000, 0x0000, 0x0000, 0x0000, 0x0000, 0x0000, 0x0000, 0x0000, 0x0000, 0x0000, 
 0x0000, 0x0000, 0x0000, 0x0000, 0x0000, 0x0000, 0x0000, 0x0000, 0x0000, 0x0000, 0x0000, 0x0000, 0x0000, 0x0000, 0x0000, 0x0000, 
-0x0000, 0x0000, 0x0000, 0x0000, 0x0000, 0x0000, 0x0000, 0x0000, 0x0000, 0x0000, 0x0000, 0x0000, 0x0000, 0x0000, 0x0000	}), 45, 11);
-	title->setHAlign(TCurses::Component::HA_CENTER);
-	this->addChild(title);
+0x0000, 0x0000, 0x0000, 0x0000, 0x0000, 0x0000, 0x0000, 0x0000, 0x0000, 0x0000, 0x0000, 0x0000, 0x0000, 0x0000, 0x0000	};
 
-	mainMenu = std::make_shared<TCurses::Menu>();
-	mainMenu->setMaxW(20); mainMenu->setMaxH(5);
-	mainMenu->setBorder(std::make_shared<TCurses::LinedBorder>(1));
-	mainMenu->setHAlign(TCurses::Component::HA_CENTER);
-	this->addChild(mainMenu);
-
-	mainMenu->addChild(std::make_shared<TCurses::MenuItem>("Un Jugador"));
-	mainMenu->addChild(std::make_shared<TCurses::MenuItem>("Dos Jugadores"));
-	mainMenu->addChild(std::make_shared<TCurses::MenuItem>("Tres Jugadores"));
-	mainMenu->addChild(std::make_shared<TCurses::MenuItem>("Opciones"));
-	mainMenu->addChild(std::make_shared<TCurses::MenuItem>("Salir", std::bind(&MainFrame::quitAction, this)));
+	for (y = 0; y < h; y ++)
+		for (x = 0; x < w; x ++) {
+			if (m[i]) mvwaddch(wnd, y, x, m[i]);
+			i ++;
+		}
 }
-
-/**
- * @brief Al seleccionar "Salir" en el menú principal.
- * 
- */
-void MainFrame::quitAction() {
-	application->quit();
-}
-
-} // namespace truco
