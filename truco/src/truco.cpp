@@ -13,8 +13,10 @@
  */
 
 #include <truco.h>
-
 #include <mainframe.h>
+#include <truco_colors.h>
+
+#include <ncurses.h>
 
 namespace truco {
 
@@ -23,6 +25,14 @@ namespace truco {
  *	Carga los elementos del juego.
  */
 void Truco::init() {
+
+	// Colores
+	init_pair(CARD_PAIR, COLOR_BLACK, COLOR_WHITE);
+	init_pair(CARD_ORO_PAIR, COLOR_YELLOW, COLOR_WHITE);
+    init_pair(CARD_COPAS_PAIR, COLOR_GREEN, COLOR_WHITE);
+    init_pair(CARD_ESPADAS_PAIR, COLOR_CYAN, COLOR_WHITE);
+    init_pair(CARD_BASTOS_PAIR, COLOR_GREEN, COLOR_WHITE);
+
 	screen->setLayout(TCurses::Component::LY_VERTICAL);
 	screen->addChild(std::make_shared<MainFrame>());
 }

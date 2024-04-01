@@ -96,7 +96,7 @@ public:
 	 * @param index índice de la carta.
 	 * @return const Card& La carta del índice.
 	 */
-	const Card &operator[](const int index) const { return cards[index]; }
+	Card &operator[](const int index) { return cards[index]; }
 
 	/**
 	 * @brief Mezcla el mazo.
@@ -105,7 +105,7 @@ public:
 	void merge();
 
 private:
-	std::array<Card, 40> cards;
+	std::array<Card, 41> cards;
 
 	/**
 	 * @brief Intercambia dos cartas según sus posiciones.

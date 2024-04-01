@@ -9,8 +9,10 @@
  */
 #include <mainframe.h>
 
-// Test
 #include <deck.h>
+#include <truco.h>
+
+#include <card_component.h>
 
 namespace truco {
 
@@ -70,6 +72,14 @@ void MainFrame::init() {
 	mainMenu->addChild(std::make_shared<TCurses::MenuItem>("Tres contra tres"));
 	mainMenu->addChild(std::make_shared<TCurses::MenuItem>("Opciones"));
 	mainMenu->addChild(std::make_shared<TCurses::MenuItem>("Salir", std::bind(&MainFrame::quitAction, this)));
+
+	auto &deck = static_cast<Truco *>(application)->getDeck();
+	deck.merge();
+
+	auto frame = std::make_shared<TCurses::Frame>();
+	frame->setLayout(TCurses::Component::LY_HORIZONTAL);
+	for (unsigned i = 0; i < 20; i ++) frame->addChild(std::make_shared<CardComponent>(&deck[i]));
+	this->addChild(frame);
 }
 
 /**

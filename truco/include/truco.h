@@ -15,6 +15,8 @@
 
 #include <tcurses/tcurses.h>
 
+#include <deck.h>
+
 namespace truco {
 
 /**
@@ -29,12 +31,10 @@ public:
 	 */
 	void init() override;
 
+	Deck &getDeck() { return deck; }
+
 private:
-	std::shared_ptr<TCurses::Menu> menu;
-	void redAction();
-	void greenAction();
-	void blueAction();
-	void quitAction();
+	Deck deck;
 };
 
 } // namespace Truco

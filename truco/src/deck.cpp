@@ -106,6 +106,9 @@ Deck::Deck() {
 	cards[13] = Card(13,  4, Card::COPAS, 0);
 	cards[23] = Card(23,  4, Card::ESPADAS, 0);
 	cards[33] = Card(33,  4, Card::BASTOS, 0);
+
+	// Lomo
+	cards[40] = Card(40, 0, Card::ORO, 0);
 	
 }
 
@@ -114,7 +117,7 @@ Deck::Deck() {
  * 
  */
 void Deck::merge() {
-	for (unsigned i = 0; i < cards.size(); i ++) {
+	for (unsigned i = 0; i < 40; i ++) {
 		this->swap(i, Random::randInt(0, 39));
 	}
 }
