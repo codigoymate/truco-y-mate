@@ -65,9 +65,9 @@ void MainFrame::init() {
 	mainMenu->setHAlign(TCurses::Component::HA_CENTER);
 	this->addChild(mainMenu);
 
-	mainMenu->addChild(std::make_shared<TCurses::MenuItem>("Un Jugador", std::bind(&MainFrame::showCards, this)));
-	mainMenu->addChild(std::make_shared<TCurses::MenuItem>("Dos Jugadores"));
-	mainMenu->addChild(std::make_shared<TCurses::MenuItem>("Tres Jugadores"));
+	mainMenu->addChild(std::make_shared<TCurses::MenuItem>("Uno contra uno"));
+	mainMenu->addChild(std::make_shared<TCurses::MenuItem>("Dos contra dos"));
+	mainMenu->addChild(std::make_shared<TCurses::MenuItem>("Tres contra tres"));
 	mainMenu->addChild(std::make_shared<TCurses::MenuItem>("Opciones"));
 	mainMenu->addChild(std::make_shared<TCurses::MenuItem>("Salir", std::bind(&MainFrame::quitAction, this)));
 }
@@ -78,54 +78,6 @@ void MainFrame::init() {
  */
 void MainFrame::quitAction() {
 	application->quit();
-}
-
-void MainFrame::showCards() {
-
-	Deck deck;
-
-	deck.merge();
-
-	auto frame = std::make_shared<TCurses::Frame>();
-	frame->setLayout(TCurses::Component::LY_HORIZONTAL);
-
-	auto f1 = std::make_shared<TCurses::Frame>();
-	f1->setLayout(TCurses::Component::LY_VERTICAL);
-	f1->setMaxH(10);
-	frame->addChild(f1);
-
-	for (unsigned i = 0; i < 10; i ++) {
-		f1->addChild(std::make_shared<TCurses::Label>(deck[i].str()));
-	}
-
-	auto f2 = std::make_shared<TCurses::Frame>();
-	f2->setLayout(TCurses::Component::LY_VERTICAL);
-	f2->setMaxH(10);
-	frame->addChild(f2);
-
-	for (unsigned i = 10; i < 20; i ++) {
-		f2->addChild(std::make_shared<TCurses::Label>(deck[i].str()));
-	}
-
-	auto f3 = std::make_shared<TCurses::Frame>();
-	f3->setLayout(TCurses::Component::LY_VERTICAL);
-	f3->setMaxH(10);
-	frame->addChild(f3);
-
-	for (unsigned i = 20; i < 30; i ++) {
-		f3->addChild(std::make_shared<TCurses::Label>(deck[i].str()));
-	}
-
-	auto f4 = std::make_shared<TCurses::Frame>();
-	f4->setLayout(TCurses::Component::LY_VERTICAL);
-	f4->setMaxH(10);
-	frame->addChild(f4);
-
-	for (unsigned i = 30; i < 40; i ++) {
-		f4->addChild(std::make_shared<TCurses::Label>(deck[i].str()));
-	}
-
-	this->addChild(frame);
 }
 
 } // namespace truco
