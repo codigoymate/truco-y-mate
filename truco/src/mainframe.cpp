@@ -12,7 +12,7 @@
 #include <deck.h>
 #include <truco.h>
 
-#include <card_component.h>
+#include <big_card_component.h>
 
 namespace truco {
 
@@ -78,7 +78,7 @@ void MainFrame::init() {
 
 	auto frame = std::make_shared<TCurses::Frame>();
 	frame->setLayout(TCurses::Component::LY_HORIZONTAL);
-	for (unsigned i = 0; i < 20; i ++) frame->addChild(std::make_shared<CardComponent>(&deck[i]));
+	for (unsigned i = 0; i < 10; i ++) frame->addChild(std::make_shared<BigCardComponent>(&deck[i]));
 	this->addChild(frame);
 }
 

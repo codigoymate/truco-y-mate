@@ -1,7 +1,7 @@
 /**
  * @file card_component.cpp
  * @author Javier Candales (codigo.mate.9@gmail.com)
- * @brief 
+ * @brief Implementación de CardComponent
  * @date 2024-04-01
  * 
  * @copyright Copyright (c) 2024
