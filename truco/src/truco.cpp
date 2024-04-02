@@ -32,6 +32,7 @@ void Truco::init() {
     init_pair(CARD_COPAS_PAIR, COLOR_GREEN, COLOR_WHITE);
     init_pair(CARD_ESPADAS_PAIR, COLOR_CYAN, COLOR_WHITE);
     init_pair(CARD_BASTOS_PAIR, COLOR_GREEN, COLOR_WHITE);
+	init_pair(CARD_BACK_PAIR, COLOR_MAGENTA, COLOR_BLUE);
 
 	screen->setLayout(TCurses::Component::LY_VERTICAL);
 	screen->addChild(std::make_shared<MainFrame>());

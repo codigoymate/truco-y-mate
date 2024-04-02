@@ -78,7 +78,9 @@ void MainFrame::init() {
 
 	auto frame = std::make_shared<TCurses::Frame>();
 	frame->setLayout(TCurses::Component::LY_HORIZONTAL);
-	for (unsigned i = 0; i < 10; i ++) frame->addChild(std::make_shared<BigCardComponent>(&deck[i]));
+	frame->addChild(std::make_shared<BigCardComponent>(&deck[40]));
+	frame->addChild(std::make_shared<BigCardComponent>(&deck[39]));
+	frame->addChild(std::make_shared<BigCardComponent>(&deck[38]));
 	this->addChild(frame);
 }
 

@@ -15,3 +15,4 @@ constexpr short CARD_ORO_PAIR =			121;
 constexpr short CARD_COPAS_PAIR =		122;
 constexpr short CARD_ESPADAS_PAIR =		123;
 constexpr short CARD_BASTOS_PAIR =		124;
+constexpr short CARD_BACK_PAIR = 		125;

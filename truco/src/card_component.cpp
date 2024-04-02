@@ -67,13 +67,24 @@ void CardComponent::init() {
  */
 void CardComponent::draw() {
 
-	if (!card) return;
+	if (!card) return; // No dibuja la carta si es null.
+
+	// Dibuja el lomo en el caso de se value == 0
+	if (!card->getValue()) {
+		attron(COLOR_PAIR(CARD_BACK_PAIR) | A_BOLD);
+		for (unsigned j = 0; j < getH(); j ++) {
+			for (unsigned i = 0; i < getW(); i ++) {
+				mvaddch(j + getAbsY(), i + getAbsX(), 'X');
+			}
+		}
+		attroff(COLOR_PAIR(CARD_BACK_PAIR) | A_BOLD);
+		return;
+	}
 
 	attron(COLOR_PAIR(CARD_PAIR));
 	TCurses::drawSolidRect(getAbsX(), getAbsY(), getW(), getH());
 	getBorder()->draw();
-	//if (card->getValue())
-		mvprintw(getAbsY() + 1, getAbsX() + 1, "%i", card->getValue());
+	mvprintw(getAbsY() + 1, getAbsX() + 1, "%i", card->getValue());
 	attroff(COLOR_PAIR(CARD_PAIR));
 
 	switch (card->getType()) {
