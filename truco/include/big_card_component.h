@@ -8,8 +8,7 @@
  * 
  */
 #pragma once
-#include <tcurses/component.h>
-#include <tcurses/art.h>
+#include <tcurses/tcurses.h>
 
 namespace truco {
 
@@ -68,7 +67,9 @@ public:
 
 private:
 	Card *card; /**< Puntero a la carta.*/
-	std::shared_ptr<TCurses::Art> art;
+	std::shared_ptr<TCurses::Art> art; /** Art del palo*/
+	std::shared_ptr<TCurses::Label> value; /** Label del valor.*/
+	std::shared_ptr<TCurses::Label> type; /** Label del palo.*/
 };
 
 } // namespace truco
