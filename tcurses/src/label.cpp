@@ -77,9 +77,11 @@ Label::Label(const std::string text, const short x, const short y,
 void Label::draw() {
 
 	// Dibuja el rectángulo de fondo
-	attron(COLOR_PAIR(getBGPair()));
-	drawSolidRect(getAbsX(), getAbsY(), getW(), getH());
-	attroff(COLOR_PAIR(getBGPair()));
+	if (!isBGTransparent()) {
+		attron(COLOR_PAIR(getBGPair()));
+		drawSolidRect(getAbsX(), getAbsY(), getW(), getH());
+		attroff(COLOR_PAIR(getBGPair()));
+	}
 
 	// Dibuja el borde
 	attron(COLOR_PAIR(getBorderPair()));
@@ -87,10 +89,10 @@ void Label::draw() {
 	attroff(COLOR_PAIR(getBorderPair()));
 
 	// Dibuja el texto
-	attron(COLOR_PAIR(textPair));
+	attron(COLOR_PAIR(textPair) | getAttributes());
 	drawTextArea(text, getAbsX(), getAbsY(), getAbsX() + getW(), getAbsY() + getH(),
 		hTextAlign, vTextAlign);
-	attroff(COLOR_PAIR(textPair));
+	attroff(COLOR_PAIR(textPair) | getAttributes());
 
 }
 

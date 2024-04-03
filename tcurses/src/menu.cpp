@@ -50,9 +50,11 @@ Menu::Menu(const short x, const short y, const short w, const short h) :
  */
 void Menu::draw() {
 	// Dibuja el rectángulo de fondo
-	attron(COLOR_PAIR(getBGPair()));
-	drawSolidRect(getAbsX(), getAbsY(), getW(), getH());
-	attroff(COLOR_PAIR(getBGPair()));
+	if (!isBGTransparent()) {
+		attron(COLOR_PAIR(getBGPair()));
+		drawSolidRect(getAbsX(), getAbsY(), getW(), getH());
+		attroff(COLOR_PAIR(getBGPair()));
+	}
 
 	// Dibuja el borde
 	attron(COLOR_PAIR(getBorderPair()));

@@ -146,9 +146,11 @@ MenuItem::MenuItem(const std::string text, const short x, const short y,
  */
 void MenuItem::draw() {
 	// Dibuja el rectángulo de fondo
-	attron(COLOR_PAIR(selected ? getSelBGPair() : getBGPair()));
-	drawSolidRect(getAbsX(), getAbsY(), getW(), getH());
-	attroff(COLOR_PAIR(selected ? getSelBGPair() : getBGPair()));
+	if (!isBGTransparent()) {
+		attron(COLOR_PAIR(selected ? getSelBGPair() : getBGPair()));
+		drawSolidRect(getAbsX(), getAbsY(), getW(), getH());
+		attroff(COLOR_PAIR(selected ? getSelBGPair() : getBGPair()));
+	}
 
 	// Dibuja el borde
 	attron(COLOR_PAIR(selected ? getSelBorderPair() : getBorderPair()));
@@ -156,10 +158,11 @@ void MenuItem::draw() {
 	attroff(COLOR_PAIR(selected ? getSelBorderPair() : getBorderPair()));
 
 	// Dibuja el texto
-	attron(COLOR_PAIR(selected ? getSelTextPair() : getTextPair()));
+	unsigned pair = selected ? getSelTextPair() : getTextPair();
+	attron(COLOR_PAIR(pair) | getAttributes());
 	drawTextArea(text, getAbsX(), getAbsY(), getAbsX() + getW(), getAbsY() + getH(),
 		hTextAlign, vTextAlign);
-	attroff(COLOR_PAIR(selected ? getSelTextPair() : getTextPair()));
+	attroff(COLOR_PAIR(pair) | getAttributes());
 }
 
 }

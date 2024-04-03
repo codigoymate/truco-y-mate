@@ -309,6 +309,30 @@ public:
 	 */
 	void setBorder(std::shared_ptr<Border> border);
 
+	/**
+	 * @brief Devuelve verdadero si está activado el fondo transparente. 
+	 */
+	const bool isBGTransparent() const { return bgTransparent; }
+
+	/**
+	 * @brief Establece el fondo transparente.
+	 * 
+	 * @param bgt verdadero para el fondo transparente. 
+	 */
+	void setBGTransparent(const bool bgt) { this->bgTransparent = bgt; }
+
+	/**
+	 * @brief Devuelve los atributos de caracter.
+	 */
+	const unsigned getAttributes() const { return attributes; }
+
+	/**
+	 * @brief Establece los atributos de caracter.
+	 * 
+	 * @param attr atributos de caracter.
+	 */
+	void setAttributes(const unsigned attr) { attributes = attr; } 
+
 protected:
 
 	Application *application; /**<Referencia a Application.*/
@@ -343,7 +367,9 @@ private:
 	// Colores y estilo:
 	short bgPair{}; /**< Color de fondo del Componente genérico */
 	short borderPair{}; /**< Color del borde del Componente genérico */
+	unsigned attributes{}; /**< Atributos de caracter.*/
 	std::shared_ptr<Border> border; /**< Borde del componente*/
+	bool bgTransparent{}; /**< Fondo transparente.*/
 
 	/**
 	 * @brief Realiza los ajustes box layout.
