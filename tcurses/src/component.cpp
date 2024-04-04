@@ -103,12 +103,22 @@ void Component::addChild(std::shared_ptr<Component> child) {
  */
 void Component::removeChild(std::shared_ptr<Component> child) {
 	children.remove_if([&](std::shared_ptr<Component> c) {
-		// Quita de los eventos de entrada
-		if (std::dynamic_pointer_cast<InputListener>(child)) {
-			application->removeInputListener(std::dynamic_pointer_cast<InputListener>(child));
-		}
 		return child == c;
 	});
+	// Quita de los eventos de entrada
+	if (std::dynamic_pointer_cast<InputListener>(child)) {
+		application->removeInputListener(std::dynamic_pointer_cast<InputListener>(child));
+	}
+	// Quita a los hijos de forma recursiva
+	this->removeChildren();
+}
+
+/**
+ * @brief Elimina la totalidad de los hijos.
+ * 
+ */
+void Component::removeChildren() {
+	while (!children.empty()) removeChild(children.front());
 }
 
 /**

@@ -179,6 +179,12 @@ public:
 	virtual void removeChild(std::shared_ptr<Component> child);
 
 	/**
+	 * @brief Elimina la totalidad de los hijos.
+	 * 
+	 */
+	void removeChildren();
+
+	/**
 	 * @brief Obtiene el ancho mínimo del componente.
 	 * @return El ancho mínimo del componente.
 	 */
