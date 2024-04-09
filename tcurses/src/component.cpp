@@ -110,7 +110,7 @@ void Component::removeChild(std::shared_ptr<Component> child) {
 		application->removeInputListener(std::dynamic_pointer_cast<InputListener>(child));
 	}
 	// Quita a los hijos de forma recursiva
-	this->removeChildren();
+	child->removeChildren();
 }
 
 /**
