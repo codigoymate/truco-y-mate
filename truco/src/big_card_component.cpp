@@ -51,20 +51,40 @@ BigCardComponent::BigCardComponent(Card *card, const short x, const short y) :
 	setMaxW(10); setMinW(10);
 	setMaxH(6); setMinH(6);
 
+	// Art
+	art = std::make_shared<TCurses::Art>();
+	art->setBGTransparent(true);
+	this->addChild(art);
+
+	// Label valor
+	value = std::make_shared<TCurses::Label>(1, 1, 2, 1);
+	this->addChild(value);
+	value->setBGTransparent(true);
+	value->setTextPair(CARD_PAIR);
+
+	// Label palo
+	type = std::make_shared<TCurses::Label>(1, 2, 1, 1);
+	this->addChild(type);
+	type->setBGTransparent(true);
+
+	this->setCard(card);
+}
+
+/**
+ * @brief Establece la carta a mostrar.
+ * 
+ * @param card Puntero a la carta a mostrar.
+ */
+void BigCardComponent::setCard(Card *card) {
+	value->setText("");
+	type->setText("");
+	art->setData({}, 0, 0);
+
+	if (!card) return ;
+
 	if (card->getValue()) {
-		art = std::make_shared<TCurses::Art>();
-		this->addChild(art);
 
-		// Label valor
-		value = std::make_shared<TCurses::Label>(std::to_string(card->getValue()), 1, 1, 2, 1);
-		this->addChild(value);
-		value->setBGTransparent(true);
-		value->setTextPair(CARD_PAIR);
-
-		// Label palo
-		type = std::make_shared<TCurses::Label>(1, 2, 1, 1);
-		this->addChild(type);
-		type->setBGTransparent(true);
+		value->setText(std::to_string(card->getValue()));
 
 		switch (card->getType()) {
 		case Card::ORO:
@@ -85,6 +105,7 @@ BigCardComponent::BigCardComponent(Card *card, const short x, const short y) :
 0x103920, 0x103920, 0x602678, 0x602678, 0x103920, 0x103920, 0x103920, 0x503978, 0x503978, 0x103920, 0x103920, 0x602671, 0x602676, 0x602676, 0x602671, 0x103920, 
 0x103920, 0x503978, 0x50396D, 0x503971, 0x503971, 0x503971, 0x503971, 0x503971, 0x503971, 0x503971, 0x503971, 0x50396A}, 10, 6);
 			type->setTextPair(CARD_COPAS_PAIR);
+			type->setAttributes(0);
 			type->setText("C");
 			break;
 
@@ -95,6 +116,7 @@ BigCardComponent::BigCardComponent(Card *card, const short x, const short y) :
 0x103920, 0x103920, 0x20372F, 0x20372F, 0x103920, 0x103920, 0x103920, 0x503978, 0x503978, 0x103920, 0x103920, 0x20372F, 0x20372F, 0x103920, 0x103920, 0x103920, 
 0x103920, 0x503978, 0x50396D, 0x503971, 0x503971, 0x503971, 0x503971, 0x503971, 0x503971, 0x503971, 0x503971, 0x50396A}, 10, 6);
 			type->setTextPair(CARD_ESPADAS_PAIR);
+			type->setAttributes(0);
 			type->setText("E");
 			break;
 
@@ -105,6 +127,7 @@ BigCardComponent::BigCardComponent(Card *card, const short x, const short y) :
 0x103920, 0x103B20, 0x101120, 0x503B6B, 0x103920, 0x103920, 0x103920, 0x503978, 0x503978, 0x103920, 0x103920, 0x103920, 0x400361, 0x103920, 0x103920, 0x103920, 
 0x103920, 0x503978, 0x50396D, 0x503971, 0x503971, 0x503971, 0x503971, 0x503971, 0x503971, 0x503971, 0x503971, 0x50396A}, 10, 6);
 			type->setTextPair(CARD_BASTOS_PAIR);
+			type->setAttributes(0);
 			type->setText("B");
 			break;
 		}
@@ -116,7 +139,6 @@ BigCardComponent::BigCardComponent(Card *card, const short x, const short y) :
  * 
  */
 void BigCardComponent::init() {
-	
 }
 
 /**

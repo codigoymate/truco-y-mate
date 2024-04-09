@@ -11,6 +11,8 @@
 #include <truco_colors.h>
 
 #include <game_menu.h>
+#include <big_card_component.h>
+#include <truco.h>
 
 #include <ncurses.h>
 
@@ -45,6 +47,13 @@ void GameFrame::init() {
 	// Frame de la mesa
 	auto tableFrame = std::make_shared<TCurses::Frame>();
 	mainFrame->addChild(tableFrame);
+
+	for (unsigned i = 0; i < 3; i ++) {
+		auto &card = static_cast<Truco *>(application)->getDeck()[i];
+		hand[i] = std::make_shared<BigCardComponent>(&card);
+		hand[i]->setVAlign(Component::VA_BOTTOM);
+		mainFrame->addChild(hand[i]);
+	}
 
 	// Menu del juego
 	mainFrame->addChild(std::make_shared<GameMenu>());

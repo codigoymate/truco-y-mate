@@ -12,7 +12,11 @@
 
 #include <tcurses/tcurses.h>
 
+#include <array>
+
 namespace truco {
+
+class BigCardComponent;
 
 /**
  * @brief Frame del juego. Una partida ya está iniciada con éste frame.
@@ -33,6 +37,8 @@ public:
 private:
 	std::shared_ptr<TCurses::Frame> mainFrame;
 	std::shared_ptr<TCurses::Label> status;
+
+	std::array<std::shared_ptr<BigCardComponent>, 3> hand;
 };
 
 } // namespace truco
