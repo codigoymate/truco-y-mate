@@ -53,7 +53,9 @@ void Application::run() {
 			screen->setSize(getmaxx(stdscr), getmaxy(stdscr));
 			screen->drawAll();
 		} else {
-			for (auto &i : inputListeners) {
+			// Crea una copia de los input listeners para que no haya problemas con el foreach
+			auto il = std::list<std::shared_ptr<InputListener>>(inputListeners);
+			for (auto &i : il) {
 				i->keyPressed(ch);
 			}
 		}
