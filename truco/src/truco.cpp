@@ -5,7 +5,7 @@
  * @date 2024-03-19
  * 
  * Contiene la implementación de la función `init` de la clase TrucoApp,
- * que se encarga de inicializar la aplicación del juego Truco.
+ * que se encarga de inicializar la aplicación.
  * Contiene el bucle principal.
  * 
  * @copyright Copyright (c) 2024
@@ -13,7 +13,8 @@
  */
 
 #include <truco.h>
-#include <mainframe.h>
+//#include <game_frame.h>
+#include <start_frame.h>
 #include <truco_colors.h>
 
 #include <ncurses.h>
@@ -34,8 +35,10 @@ void Truco::init() {
     init_pair(CARD_BASTOS_PAIR, COLOR_GREEN, COLOR_WHITE);
 	init_pair(CARD_BACK_PAIR, COLOR_MAGENTA, COLOR_BLUE);
 
+	init_pair(TITLE_PAIR, COLOR_WHITE, COLOR_CYAN);
+
 	screen->setLayout(TCurses::Component::LY_VERTICAL);
-	screen->addChild(std::make_shared<MainFrame>());
+	screen->addChild(std::make_shared<StartFrame>());
 }
 
 }

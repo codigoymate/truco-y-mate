@@ -7,22 +7,20 @@
  * @copyright Copyright (c) 2024
  * 
  */
-#include <mainframe.h>
+#include <start_frame.h>
+#include <game_frame.h>
 
-#include <deck.h>
 #include <truco.h>
-
-#include <big_card_component.h>
 
 namespace truco {
 
-MainFrame::MainFrame() : TCurses::Frame() {}
+StartFrame::StartFrame() : TCurses::Frame() {}
 
 /**
  * @brief Al iniciar el frame.
  * 
  */
-void MainFrame::init() {
+void StartFrame::init() {
 	this->setLayout(TCurses::Component::LY_VERTICAL);
 
 	// Título
@@ -67,28 +65,29 @@ void MainFrame::init() {
 	mainMenu->setHAlign(TCurses::Component::HA_CENTER);
 	this->addChild(mainMenu);
 
-	mainMenu->addChild(std::make_shared<TCurses::MenuItem>("Uno contra uno"));
+	mainMenu->addChild(std::make_shared<TCurses::MenuItem>("Uno contra uno", std::bind(&StartFrame::twoPlayersGame, this)));
 	mainMenu->addChild(std::make_shared<TCurses::MenuItem>("Dos contra dos"));
 	mainMenu->addChild(std::make_shared<TCurses::MenuItem>("Tres contra tres"));
 	mainMenu->addChild(std::make_shared<TCurses::MenuItem>("Opciones"));
-	mainMenu->addChild(std::make_shared<TCurses::MenuItem>("Salir", std::bind(&MainFrame::quitAction, this)));
+	mainMenu->addChild(std::make_shared<TCurses::MenuItem>("Salir", std::bind(&StartFrame::quitAction, this)));
 
-	auto &deck = static_cast<Truco *>(application)->getDeck();
-	deck.merge();
-
-	auto frame = std::make_shared<TCurses::Frame>();
-	frame->setLayout(TCurses::Component::LY_HORIZONTAL);
-	for (unsigned i = 40; i > 32; i --)
-		frame->addChild(std::make_shared<BigCardComponent>(&deck[i]));
-	this->addChild(frame);
 }
 
 /**
  * @brief Al seleccionar "Salir" en el menú principal.
  * 
  */
-void MainFrame::quitAction() {
+void StartFrame::quitAction() {
 	application->quit();
+}
+
+/**
+ * @brief Al seleccionar "Uno contra uno."
+ * 
+ */
+void StartFrame::twoPlayersGame() {
+	application->getScreen()->removeChildren();
+	application->getScreen()->addChild(std::make_shared<GameFrame>());
 }
 
 } // namespace truco

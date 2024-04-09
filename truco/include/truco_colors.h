@@ -16,3 +16,4 @@ constexpr short CARD_COPAS_PAIR =		122;
 constexpr short CARD_ESPADAS_PAIR =		123;
 constexpr short CARD_BASTOS_PAIR =		124;
 constexpr short CARD_BACK_PAIR = 		125;
+constexpr short TITLE_PAIR = 			126;

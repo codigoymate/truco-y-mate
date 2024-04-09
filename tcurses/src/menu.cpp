@@ -104,7 +104,8 @@ void Menu::keyPressed(int key) {
  * 
  */
 void Menu::updateItems() {
-	unsigned i = 0;
+	if (!getChildren().size()) itemIndex = 0;
+	signed i = 0;
 	for (auto &c : getChildren()) {
 		if (std::static_pointer_cast<MenuItem>(c)) {
 			std::static_pointer_cast<MenuItem>(c)->setSelected(
