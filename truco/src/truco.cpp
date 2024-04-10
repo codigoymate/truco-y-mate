@@ -13,9 +13,9 @@
  */
 
 #include <truco.h>
-//#include <game_frame.h>
 #include <start_frame.h>
 #include <truco_colors.h>
+#include <player.h>
 
 #include <ncurses.h>
 

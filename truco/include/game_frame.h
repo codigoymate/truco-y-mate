@@ -35,10 +35,23 @@ public:
 	void init() override;
 
 private:
-	std::shared_ptr<TCurses::Frame> mainFrame;
-	std::shared_ptr<TCurses::Label> status;
+	std::shared_ptr<TCurses::Frame> mainFrame; /**< Frame principal (Contiene la mesa, las tres cartas y el menu)*/
+	std::shared_ptr<TCurses::Menu> menu; /**< El menú de control del juego.*/
+	std::shared_ptr<TCurses::Label> status; /**< La barra de estado.*/
 
-	std::array<std::shared_ptr<BigCardComponent>, 3> hand;
+	std::array<std::shared_ptr<BigCardComponent>, 3> hand; /**< Las tres cartas de la mano.*/
+
+	/**
+	 * @brief Actualiza los componentes con la lógica de la partida.
+	 * 
+	 */
+	void update();
+
+	/**
+	 * @brief Al elegir salir en el menú.
+	 * 
+	 */
+	void quitItemAction();
 };
 
 } // namespace truco

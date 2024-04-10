@@ -8,9 +8,10 @@
  * 
  */
 #include <game_frame.h>
+#include <start_frame.h>
+
 #include <truco_colors.h>
 
-#include <game_menu.h>
 #include <big_card_component.h>
 #include <truco.h>
 
@@ -56,7 +57,13 @@ void GameFrame::init() {
 	}
 
 	// Menu del juego
-	mainFrame->addChild(std::make_shared<GameMenu>());
+	menu = std::make_shared<TCurses::Menu>();
+	menu->setMinH(1); menu->setMaxH(1);
+	menu->setMinW(15); menu->setMaxW(15);
+	menu->setVAlign(TCurses::Component::VA_BOTTOM);
+	mainFrame->addChild(menu);
+
+	menu->addChild(std::make_shared<TCurses::MenuItem>("Salir", std::bind(&GameFrame::quitItemAction, this)));
 
 	// ********************************************
 
@@ -67,6 +74,23 @@ void GameFrame::init() {
 	status->setBGPair(TITLE_PAIR);
 	status->setAttributes(A_BOLD);
 	addChild(status);
+}
+
+/**
+ * @brief Actualiza los componentes con la lógica de la partida.
+ * 
+ */
+void GameFrame::update() {
+	
+}
+
+/**
+ * @brief Al elegir salir en el menú.
+ * 
+ */
+void GameFrame::quitItemAction() {
+	application->getScreen()->removeChildren();
+	application->getScreen()->addChild(std::make_shared<StartFrame>());
 }
 
 }

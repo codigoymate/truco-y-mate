@@ -13,11 +13,15 @@
 
 #pragma once
 
+#include <vector>
+
 #include <tcurses/tcurses.h>
 
 #include <deck.h>
 
 namespace truco {
+
+class Player;
 
 /**
  * @brief La clase Truco representa la aplicación del juego Truco.
@@ -31,10 +35,15 @@ public:
 	 */
 	void init() override;
 
+	/**
+	 * @brief Devuelve la referencia al mazo.
+	 */
 	Deck &getDeck() { return deck; }
 
 private:
-	Deck deck;
+	Deck deck; /**< El mazo de cartas del juego.*/
+	std::vector<std::shared_ptr<Player>> players; /**< La lista de jugadores.*/
+
 };
 
 } // namespace Truco
