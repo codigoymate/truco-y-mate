@@ -11,12 +11,14 @@
 #pragma once
 
 #include <tcurses/tcurses.h>
-
 #include <array>
+
+#include <turn_manager.h>
 
 namespace truco {
 
 class BigCardComponent;
+class Player;
 
 /**
  * @brief Frame del juego. Una partida ya está iniciada con éste frame.
@@ -26,8 +28,10 @@ class GameFrame: public TCurses::Frame {
 public:
 	/**
 	 * @brief Constructor de GameFrame.
+	 * 
+	 * @param playerCount Cantidad de jugadores para configurar el partido.
 	 */
-	GameFrame();
+	GameFrame(const unsigned playerCount);
 
 	/**
 	 * @brief Al iniciar el frame.
@@ -35,6 +39,10 @@ public:
 	void init() override;
 
 private:
+
+	std::vector<std::shared_ptr<Player>> players; /**< La lista de jugadores.*/
+	TurnManager turnManager;
+
 	std::shared_ptr<TCurses::Frame> mainFrame; /**< Frame principal (Contiene la mesa, las tres cartas y el menu)*/
 	std::shared_ptr<TCurses::Menu> menu; /**< El menú de control del juego.*/
 	std::shared_ptr<TCurses::Label> status; /**< La barra de estado.*/

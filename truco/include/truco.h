@@ -21,8 +21,6 @@
 
 namespace truco {
 
-class Player;
-
 /**
  * @brief La clase Truco representa la aplicación del juego Truco.
  *        Hereda de la clase Application de la biblioteca TCurses.
@@ -42,7 +40,6 @@ public:
 
 private:
 	Deck deck; /**< El mazo de cartas del juego.*/
-	std::vector<std::shared_ptr<Player>> players; /**< La lista de jugadores.*/
 
 };
 

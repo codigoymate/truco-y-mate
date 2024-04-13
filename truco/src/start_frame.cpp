@@ -87,7 +87,7 @@ void StartFrame::quitAction() {
  */
 void StartFrame::twoPlayersGame() {
 	application->getScreen()->removeChildren();
-	application->getScreen()->addChild(std::make_shared<GameFrame>());
+	application->getScreen()->addChild(std::make_shared<GameFrame>(2));
 }
 
 } // namespace truco

@@ -14,6 +14,7 @@
 
 #include <big_card_component.h>
 #include <truco.h>
+#include <player.h>
 
 #include <ncurses.h>
 
@@ -21,8 +22,15 @@ namespace truco {
 
 /**
  * @brief Constructor de GameFrame.
+ * 
+ * @param playerCount Cantidad de jugadores para configurar el partido.
  */
-GameFrame::GameFrame() : TCurses::Frame() {}
+GameFrame::GameFrame(const unsigned playerCount) : TCurses::Frame() {
+	turnManager = TurnManager(this);
+
+	// Crea los jugadores
+	for (unsigned i = 0; i < playerCount; i ++) players.push_back(std::make_shared<Player>());
+}
 
 /**
  * @brief Al inicia el Frame.
@@ -49,9 +57,9 @@ void GameFrame::init() {
 	auto tableFrame = std::make_shared<TCurses::Frame>();
 	mainFrame->addChild(tableFrame);
 
+	// Cartas de la mano del jugador 1
 	for (unsigned i = 0; i < 3; i ++) {
-		auto &card = static_cast<Truco *>(application)->getDeck()[i];
-		hand[i] = std::make_shared<BigCardComponent>(&card);
+		hand[i] = std::make_shared<BigCardComponent>();
 		hand[i]->setVAlign(Component::VA_BOTTOM);
 		mainFrame->addChild(hand[i]);
 	}
@@ -74,6 +82,8 @@ void GameFrame::init() {
 	status->setBGPair(TITLE_PAIR);
 	status->setAttributes(A_BOLD);
 	addChild(status);
+
+	this->update();
 }
 
 /**
@@ -81,7 +91,10 @@ void GameFrame::init() {
  * 
  */
 void GameFrame::update() {
-	
+	// Las cartas de la mano del jugador 1
+	for (unsigned i = 0; i < 3; i ++) {
+		hand[i]->setCard(players[0]->getHand(i));
+	}
 }
 
 /**
