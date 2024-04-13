@@ -10,9 +10,13 @@
 #pragma once
 
 #include <array>
+#include <vector>
 #include <iostream>
+#include <memory>
 
 namespace truco {
+
+class Player;
 
 /**
  * @brief Representa una carta española.
@@ -103,6 +107,13 @@ public:
 	 * 
 	 */
 	void merge();
+
+	/**
+	 * @brief Reparte 3 cartas a cada jugador.
+	 * 
+	 * @param players  La lista de jugadores.
+	 */
+	void deliver(std::vector<std::shared_ptr<Player>> players);
 
 private:
 	std::array<Card, 41> cards;

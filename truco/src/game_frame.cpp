@@ -83,6 +83,12 @@ void GameFrame::init() {
 	status->setAttributes(A_BOLD);
 	addChild(status);
 
+	// TODO: Provisorio: mezcla y reparte
+	auto &deck = static_cast<Truco *>(application)->getDeck();
+
+	deck.merge();
+	deck.deliver(players);
+
 	this->update();
 }
 

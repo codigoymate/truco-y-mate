@@ -11,6 +11,8 @@
 #include <random.h>
 #include <sstream>
 
+#include <player.h>
+
 namespace truco {
 
 /**
@@ -132,6 +134,24 @@ void Deck::swap(int c1, int c2) {
 	auto tmp = cards[c1];
 	cards[c1] = cards[c2];
 	cards[c2] = tmp;
+}
+
+/**
+ * @brief Reparte 3 cartas a cada jugador.
+ * 
+ * @param players La lista de jugadores.
+ */
+
+void Deck::deliver(std::vector<std::shared_ptr<Player>> players) {
+	unsigned index = 0;
+
+	for (auto &p : players) {
+		for (unsigned c = 0; c < 3; c ++) {
+			p->setHand(c, &cards[index]);
+			p->setPlayed(c, nullptr);
+			index ++;
+		}
+	}
 }
 
 } // namespace truco
