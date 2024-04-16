@@ -9,13 +9,19 @@
  */
 
 #include <player.h>
+#include <utils.h>
+#include <random.h>
 
 namespace truco {
 
 /**
  * @brief Construye un nuevo objeto Player.
  */
-Player::Player() : Player("Sin Nombre") {}
+Player::Player() {
+	she = Random::randInt(0, 1);
+	name = she ? randomizeFemaleName() :
+			randomizeMaleName();
+}
 
 /**
  * @brief Construye un nuevo objeto Player con el nombre dado.

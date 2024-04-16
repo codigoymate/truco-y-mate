@@ -71,8 +71,18 @@ public:
 	 */
 	void setPlayed(const unsigned i, Card *card) { played[i] = card; }
 
+	/**
+	 * @brief Devuelve el género del jugador.
+	 * 
+	 * @return true cuando es femenino.
+	 * @return false cuando es masculino.
+	 */
+	const bool isShe() const { return she; }
+	void setShe(const bool she) { this->she = she; }
+
 private:
 	std::string name; //*< El nombre del jugador. */
+	bool she{}; //*< Verdadero cuando el jugador es mujer */
 	std::array<Card *, 3> hand; //*< Un array que representa la mano del jugador. */
 	std::array<Card *, 3> played; //*< Un array que representa las cartas jugadas por el jugador. */
 };

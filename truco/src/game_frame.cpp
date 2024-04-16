@@ -19,6 +19,8 @@
 
 #include <ncurses.h>
 
+#include <cstdlib>
+
 namespace truco {
 
 /**
@@ -31,7 +33,10 @@ GameFrame::GameFrame(const unsigned playerCount) : TCurses::Frame() {
 
 	// Crea los jugadores
 	for (unsigned i = 0; i < playerCount; i ++) {
-		players.push_back(std::make_shared<Player>());
+		if (!i) {
+			players.push_back(std::make_shared<Player>(std::getenv("USER")));
+		} else players.push_back(std::make_shared<Player>());
+		
 		playerFrames.push_back(std::make_shared<PlayerFrame>(players[i]->getName()));
 	}
 }
