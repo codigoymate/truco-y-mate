@@ -15,6 +15,7 @@
 #include <big_card_component.h>
 #include <truco.h>
 #include <player.h>
+#include <player_frame.h>
 
 #include <ncurses.h>
 
@@ -29,7 +30,10 @@ GameFrame::GameFrame(const unsigned playerCount) : TCurses::Frame() {
 	turnManager = TurnManager(this);
 
 	// Crea los jugadores
-	for (unsigned i = 0; i < playerCount; i ++) players.push_back(std::make_shared<Player>());
+	for (unsigned i = 0; i < playerCount; i ++) {
+		players.push_back(std::make_shared<Player>());
+		playerFrames.push_back(std::make_shared<PlayerFrame>(players[i]->getName()));
+	}
 }
 
 /**
@@ -54,8 +58,7 @@ void GameFrame::init() {
 	addChild(mainFrame);
 
 	// Frame de la mesa
-	auto tableFrame = std::make_shared<TCurses::Frame>();
-	mainFrame->addChild(tableFrame);
+	mainFrame->addChild(this->layoutTable());
 
 	// Cartas de la mano del jugador 1
 	for (unsigned i = 0; i < 3; i ++) {
@@ -101,6 +104,13 @@ void GameFrame::update() {
 	for (unsigned i = 0; i < 3; i ++) {
 		hand[i]->setCard(players[0]->getHand(i));
 	}
+
+	// Las carta jugadas
+	for (unsigned p = 0; p < players.size(); p ++) {
+		for (unsigned c = 0; c < 3; c ++) {
+			playerFrames[p]->setCard(c, players[p]->getPlayed(c));
+		}
+	}
 }
 
 /**
@@ -110,6 +120,29 @@ void GameFrame::update() {
 void GameFrame::quitItemAction() {
 	application->getScreen()->removeChildren();
 	application->getScreen()->addChild(std::make_shared<StartFrame>());
+}
+
+/**
+ * @brief Distribuye los jugadores en la mensa.
+ * 
+ * @return std::shared_ptr<Frame> Frame de la mesa con los jugadores distribuidos.
+ */
+std::shared_ptr<TCurses::Frame> GameFrame::layoutTable() {
+	auto tableFrame = std::make_shared<TCurses::Frame>();
+
+	switch (players.size()) {
+	case 2:
+		tableFrame->setLayout(TCurses::Component::LY_VERTICAL);
+		playerFrames[1]->setHAlign(TCurses::Component::HA_CENTER);
+		tableFrame->addChild(playerFrames[1]);
+
+		tableFrame->addChild(std::make_shared<TCurses::Frame>());
+
+		playerFrames[0]->setHAlign(TCurses::Component::HA_CENTER);
+		tableFrame->addChild(playerFrames[0]);
+	}
+
+	return tableFrame;
 }
 
 }

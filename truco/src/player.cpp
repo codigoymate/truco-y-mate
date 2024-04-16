@@ -15,7 +15,7 @@ namespace truco {
 /**
  * @brief Construye un nuevo objeto Player.
  */
-Player::Player() : Player("") {}
+Player::Player() : Player("Sin Nombre") {}
 
 /**
  * @brief Construye un nuevo objeto Player con el nombre dado.

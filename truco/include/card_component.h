@@ -54,6 +54,13 @@ public:
 	CardComponent(Card *card, const short x, const short y);
 
 	/**
+	 * @brief Establece la carta a mostrar.
+	 * 
+	 * @param card Puntero a la carta a mostrar.
+	 */
+	void setCard(Card *card);
+
+	/**
 	 * @brief Inicializa el CardComponent.
 	 * 
 	 */

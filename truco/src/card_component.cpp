@@ -54,6 +54,15 @@ CardComponent::CardComponent(Card *card, const short x, const short y) :
 }
 
 /**
+ * @brief Establece la carta a mostrar.
+ * 
+ * @param card Puntero a la carta a mostrar.
+ */
+void CardComponent::setCard(Card *card) {
+	this->card = card;
+}
+
+/**
  * @brief Inicializa el CardComponent.
  * 
  */

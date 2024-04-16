@@ -35,6 +35,11 @@ public:
 	Player(const std::string name);
 
 	/**
+	 * @brief Devuelve el nombre del jugador.
+	 */
+	const std::string getName() const { return name; }
+
+	/**
 	 * @brief Obtiene la carta en el índice especificado de la mano del jugador.
 	 * 
 	 * @param i El índice de la carta.
