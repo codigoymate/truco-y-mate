@@ -134,10 +134,10 @@ void GameFrame::quitItemAction() {
  */
 std::shared_ptr<TCurses::Frame> GameFrame::layoutTable() {
 	auto tableFrame = std::make_shared<TCurses::Frame>();
+	tableFrame->setLayout(TCurses::Component::LY_VERTICAL);
 
 	switch (players.size()) {
 	case 2:
-		tableFrame->setLayout(TCurses::Component::LY_VERTICAL);
 		playerFrames[1]->setHAlign(TCurses::Component::HA_CENTER);
 		tableFrame->addChild(playerFrames[1]);
 
@@ -145,6 +145,59 @@ std::shared_ptr<TCurses::Frame> GameFrame::layoutTable() {
 
 		playerFrames[0]->setHAlign(TCurses::Component::HA_CENTER);
 		tableFrame->addChild(playerFrames[0]);
+		break;
+	
+	case 4: {
+		playerFrames[2]->setHAlign(TCurses::Component::HA_CENTER);
+		tableFrame->addChild(playerFrames[2]);
+
+		auto frame = std::make_shared<TCurses::Frame>();
+		tableFrame->addChild(frame);
+		frame->setLayout(TCurses::Component::LY_HORIZONTAL);
+
+		playerFrames[1]->setVAlign(TCurses::Component::VA_CENTER);
+		frame->addChild(playerFrames[1]);
+
+		frame->addChild(std::make_shared<TCurses::Frame>());
+
+		playerFrames[3]->setVAlign(TCurses::Component::VA_CENTER);
+		frame->addChild(playerFrames[3]);
+
+		playerFrames[0]->setHAlign(TCurses::Component::HA_CENTER);
+		tableFrame->addChild(playerFrames[0]);
+		} break;
+
+	case 6: {
+		playerFrames[3]->setHAlign(TCurses::Component::HA_CENTER);
+		tableFrame->addChild(playerFrames[3]);
+
+		auto frame = std::make_shared<TCurses::Frame>();
+		tableFrame->addChild(frame);
+		frame->setLayout(TCurses::Component::LY_HORIZONTAL);
+
+		playerFrames[2]->setVAlign(TCurses::Component::VA_CENTER);
+		frame->addChild(playerFrames[2]);
+
+		frame->addChild(std::make_shared<TCurses::Frame>());
+
+		playerFrames[4]->setVAlign(TCurses::Component::VA_CENTER);
+		frame->addChild(playerFrames[4]);
+
+		frame = std::make_shared<TCurses::Frame>();
+		tableFrame->addChild(frame);
+		frame->setLayout(TCurses::Component::LY_HORIZONTAL);
+
+		playerFrames[1]->setVAlign(TCurses::Component::VA_CENTER);
+		frame->addChild(playerFrames[1]);
+
+		frame->addChild(std::make_shared<TCurses::Frame>());
+
+		playerFrames[5]->setVAlign(TCurses::Component::VA_CENTER);
+		frame->addChild(playerFrames[5]);
+
+		playerFrames[0]->setHAlign(TCurses::Component::HA_CENTER);
+		tableFrame->addChild(playerFrames[0]);
+		} break;
 	}
 
 	return tableFrame;

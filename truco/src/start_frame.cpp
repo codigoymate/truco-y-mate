@@ -66,8 +66,8 @@ void StartFrame::init() {
 	this->addChild(mainMenu);
 
 	mainMenu->addChild(std::make_shared<TCurses::MenuItem>("Uno contra uno", std::bind(&StartFrame::twoPlayersGame, this)));
-	mainMenu->addChild(std::make_shared<TCurses::MenuItem>("Dos contra dos"));
-	mainMenu->addChild(std::make_shared<TCurses::MenuItem>("Tres contra tres"));
+	mainMenu->addChild(std::make_shared<TCurses::MenuItem>("Dos contra dos", std::bind(&StartFrame::fourPlayerGame, this)));
+	mainMenu->addChild(std::make_shared<TCurses::MenuItem>("Tres contra tres", std::bind(&StartFrame::sixPlayerGame, this)));
 	mainMenu->addChild(std::make_shared<TCurses::MenuItem>("Opciones"));
 	mainMenu->addChild(std::make_shared<TCurses::MenuItem>("Salir", std::bind(&StartFrame::quitAction, this)));
 
@@ -88,6 +88,24 @@ void StartFrame::quitAction() {
 void StartFrame::twoPlayersGame() {
 	application->getScreen()->removeChildren();
 	application->getScreen()->addChild(std::make_shared<GameFrame>(2));
+}
+
+/**
+ * @brief Al seleccionar "Dos contra dos."
+ * 
+ */
+void StartFrame::fourPlayerGame() {
+	application->getScreen()->removeChildren();
+	application->getScreen()->addChild(std::make_shared<GameFrame>(4));
+}
+
+/**
+ * @brief Al seleccionar "Tres contra tres."
+ * 
+ */
+void StartFrame::sixPlayerGame() {
+	application->getScreen()->removeChildren();
+	application->getScreen()->addChild(std::make_shared<GameFrame>(6));
 }
 
 } // namespace truco

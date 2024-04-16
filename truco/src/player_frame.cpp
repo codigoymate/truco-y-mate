@@ -33,6 +33,9 @@ PlayerFrame::PlayerFrame(const std::string playerName) : Frame() {
 		cards[i] = std::make_shared<CardComponent>();
 		frame->addChild(cards[i]);
 	}
+
+	setMaxW(18); setMinW(18);
+	setMaxH(5); setMinH(5);
 }
 
 /**

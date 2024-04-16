@@ -30,7 +30,9 @@ public:
 
 private:
 	std::shared_ptr<TCurses::Menu> mainMenu; /**< Compunente menú principal.*/
-	void twoPlayersGame(); /**< LLamado por la opción "Uno contra uno". */
+	void twoPlayersGame(); /**< Llamado por la opción "Uno contra uno". */
+	void fourPlayerGame(); /**< Llamado por la opción "Dos contra dos". */
+	void sixPlayerGame(); /**< Llamado por la opción "Tres contra tres".*/
 	void quitAction(); /**< Método llamado por la opción "Salir". */
 };
 
