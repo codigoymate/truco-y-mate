@@ -16,6 +16,7 @@
 #include <truco.h>
 #include <player.h>
 #include <player_frame.h>
+#include <random.h>
 
 #include <ncurses.h>
 
@@ -29,8 +30,6 @@ namespace truco {
  * @param playerCount Cantidad de jugadores para configurar el partido.
  */
 GameFrame::GameFrame(const unsigned playerCount) : TCurses::Frame() {
-	turnManager = TurnManager(this);
-
 	// Crea los jugadores
 	for (unsigned i = 0; i < playerCount; i ++) {
 		if (!i) {
@@ -39,6 +38,10 @@ GameFrame::GameFrame(const unsigned playerCount) : TCurses::Frame() {
 		
 		playerFrames.push_back(std::make_shared<PlayerFrame>(players[i]->getName()));
 	}
+
+	// Elige el jugador mano
+	startPlayer = Random::randInt(0, players.size() - 1);
+
 }
 
 /**
@@ -201,6 +204,63 @@ std::shared_ptr<TCurses::Frame> GameFrame::layoutTable() {
 	}
 
 	return tableFrame;
+}
+
+/**
+ * @brief Verifica si no se jugó una carta en la mano indicada.
+ * 
+ * @param n el número de mano.
+ * @return true si no se jugó alguna carta.
+ */
+bool GameFrame::isHandClear(const unsigned n) {
+	for (auto p : players) {
+		if (p->getPlayed(n)) return false;
+	}
+
+	return true;
+}
+
+/**
+ * @brief Verifica si se jugaron todas las cartas en la mano indicada.
+ * 
+ * @param n el número de mano.
+ * @return true si se jugaron todas las cartas
+ */
+bool GameFrame::isHandFull(const unsigned n) {
+	for (auto p : players) {
+		if (!p->getPlayed(n)) return false;
+	}
+
+	return true;
+}
+
+/**
+ * @brief Inicia la siguiente ronda.
+ * 
+ */
+void GameFrame::nextRound() {
+	round ++;
+	handIndex = 0;
+
+	// Incrementa el jugador mano
+	this->startPlayer ++;
+	if (this->startPlayer >= players.size()) this->startPlayer = 0;
+
+	// Mezcla y reparte
+	auto &deck = static_cast<Truco *>(application)->getDeck();
+	deck.merge();
+	deck.deliver(players);
+
+}
+
+/**
+ * @brief Determina el próximo turno.
+ * 
+ */
+void GameFrame::nextPlayer() {
+	if (handIndex == 0 && this->isHandClear(0)) {
+		currentPlayerIndex = startPlayer;
+	}
 }
 
 }

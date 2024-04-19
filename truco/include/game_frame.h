@@ -13,8 +13,6 @@
 #include <tcurses/tcurses.h>
 #include <array>
 
-#include <turn_manager.h>
-
 namespace truco {
 
 class BigCardComponent;
@@ -39,10 +37,25 @@ public:
 	 */
 	void init() override;
 
+	/**
+	 * @brief Devuelve una referencia a la lista de jugadores.
+	 */
+	std::vector<std::shared_ptr<Player>> &getPlayers() { return players; }
+
+	/**
+	 * @brief Inicia la siguiente ronda.
+	 * 
+	 */
+	void nextRound();
+
 private:
 
 	std::vector<std::shared_ptr<Player>> players; /**< La lista de jugadores.*/
-	TurnManager turnManager;
+
+	signed currentPlayerIndex;	/**< Indice del turno actual. */
+	signed startPlayer; /**< Indice del jugador mano. */
+	unsigned round{}; /**< Conteo de rondas. */
+	unsigned handIndex{}; /**< Mano actual. */
 
 	std::shared_ptr<TCurses::Frame> mainFrame; /**< Frame principal (Contiene la mesa, las tres cartas y el menu)*/
 	std::shared_ptr<TCurses::Menu> menu; /**< El menú de control del juego.*/
@@ -69,6 +82,28 @@ private:
 	 * @return std::shared_ptr<Frame> Frame de la mesa con los jugadores distribuidos.
 	 */
 	std::shared_ptr<TCurses::Frame> layoutTable();
+
+	/**
+	 * @brief Verifica si no se jugó una carta en la mano indicada.
+	 * 
+	 * @param n el número de mano.
+	 * @return true si no se jugó alguna carta.
+	 */
+	bool isHandClear(const unsigned n);
+
+	/**
+	 * @brief Verifica si se jugaron todas las cartas en la mano indicada.
+	 * 
+	 * @param n el número de mano.
+	 * @return true si se jugaron todas las cartas
+	 */
+	bool isHandFull(const unsigned n);
+
+	/**
+	 * @brief Determina el próximo turno.
+	 * 
+	 */
+	void nextPlayer();
 };
 
 } // namespace truco
