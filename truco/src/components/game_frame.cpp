@@ -15,6 +15,7 @@
 #include <components/big_card_component.h>
 #include <truco.h>
 #include <entities/player.h>
+#include <entities/behavior.h>
 #include <components/player_frame.h>
 #include <utils/random.h>
 
@@ -33,8 +34,8 @@ GameFrame::GameFrame(const unsigned playerCount) : TCurses::Frame() {
 	// Crea los jugadores
 	for (unsigned i = 0; i < playerCount; i ++) {
 		if (!i) {
-			players.push_back(std::make_shared<Player>(std::getenv("USER")));
-		} else players.push_back(std::make_shared<Player>());
+			players.push_back(std::make_shared<Player>(std::make_shared<Human>(this), std::getenv("USER")));
+		} else players.push_back(std::make_shared<Player>(std::make_shared<Human>(this)));
 		
 		playerFrames.push_back(std::make_shared<PlayerFrame>(players[i]->getName()));
 	}

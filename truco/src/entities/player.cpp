@@ -9,15 +9,18 @@
  */
 
 #include <entities/player.h>
+#include <entities/behavior.h>
 #include <utils/utils.h>
 #include <utils/random.h>
 
 namespace truco {
 
 /**
- * @brief Construye un nuevo objeto Player.
+ * @brief Contructor de Player.
+ * 
+ * @param behavior Comportamiento del jugador.
  */
-Player::Player() {
+Player::Player(std::shared_ptr<Behavior> behavior) : Player(behavior, "") {
 	she = Random::randInt(0, 1);
 	name = she ? randomizeFemaleName() :
 			randomizeMaleName();
@@ -26,9 +29,11 @@ Player::Player() {
 /**
  * @brief Construye un nuevo objeto Player con el nombre dado.
  * 
- * @param name El nombre del jugador.
+ * @param behavior Comportamiento del jugador.
+ * @param name Nombre del jugador.
  */
-Player::Player(const std::string name) : name{name} {
+Player::Player(std::shared_ptr<Behavior> behavior, const std::string name) :
+			name{name}, behavior{behavior} {
 	for (unsigned i = 0; i < 3; i ++) {
 		hand[i] = played[i] = nullptr;
 	}

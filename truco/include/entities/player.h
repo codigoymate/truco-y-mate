@@ -13,26 +13,33 @@
 #include <string>
 #include <array>
 
+#include <memory>
+
 namespace truco {
 
 class Card;
+class Behavior;
 
 /**
  * @brief La clase Player representa un jugador en el Truco.
  */
 class Player {
 public:
+	
 	/**
-	 * @brief oonstructor de player por defecto.
+	 * @brief Contructor de Player.
+	 * 
+	 * @param behavior Comportamiento del jugador.
 	 */
-	Player();
+	Player(std::shared_ptr<Behavior> behavior);
 
 	/**
 	 * @brief Construye un nuevo objeto Player con el nombre dado.
 	 * 
-	 * @param name El nombre del jugador.
+	 * @param behavior Comportamiento del jugador.
+	 * @param name Nombre del jugador.
 	 */
-	Player(const std::string name);
+	Player(std::shared_ptr<Behavior> behavior, const std::string name);
 
 	/**
 	 * @brief Devuelve el nombre del jugador.
@@ -82,6 +89,7 @@ public:
 
 private:
 	std::string name; //*< El nombre del jugador. */
+	std::shared_ptr<Behavior> behavior; //*< Comportamiento del jugador. */
 	bool she{}; //*< Verdadero cuando el jugador es mujer */
 	std::array<Card *, 3> hand; //*< Un array que representa la mano del jugador. */
 	std::array<Card *, 3> played; //*< Un array que representa las cartas jugadas por el jugador. */
