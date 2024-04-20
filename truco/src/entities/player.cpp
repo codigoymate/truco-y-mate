@@ -8,9 +8,9 @@
  * 
  */
 
-#include <player.h>
-#include <utils.h>
-#include <random.h>
+#include <entities/player.h>
+#include <utils/utils.h>
+#include <utils/random.h>
 
 namespace truco {
 

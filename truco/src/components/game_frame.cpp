@@ -7,16 +7,16 @@
  * @copyright Copyright (c) 2024
  * 
  */
-#include <game_frame.h>
-#include <start_frame.h>
+#include <components/game_frame.h>
+#include <components/start_frame.h>
 
 #include <truco_colors.h>
 
-#include <big_card_component.h>
+#include <components/big_card_component.h>
 #include <truco.h>
-#include <player.h>
-#include <player_frame.h>
-#include <random.h>
+#include <entities/player.h>
+#include <components/player_frame.h>
+#include <utils/random.h>
 
 #include <ncurses.h>
 

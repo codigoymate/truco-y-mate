@@ -17,7 +17,7 @@
 
 #include <tcurses/tcurses.h>
 
-#include <deck.h>
+#include <entities/deck.h>
 
 namespace truco {
 

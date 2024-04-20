@@ -7,11 +7,11 @@
  * @copyright Copyright (c) 2024
  * 
  */
-#include <deck.h>
-#include <random.h>
+#include <entities/deck.h>
+#include <utils/random.h>
 #include <sstream>
 
-#include <player.h>
+#include <entities/player.h>
 
 namespace truco {
 

@@ -7,8 +7,8 @@
  * @copyright Copyright (c) 2024
  * 
  */
-#include <utils.h>
-#include <random.h>
+#include <utils/utils.h>
+#include <utils/random.h>
 #include <vector>
 
 namespace truco {

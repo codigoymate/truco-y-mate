@@ -10,7 +10,7 @@ set(INC_DIR ${PROJECT_SOURCE_DIR}/include)
 find_package(PkgConfig REQUIRED)
 pkg_check_modules(NCURSES REQUIRED ncurses)
 
-file(GLOB SOURCES ${SRC_DIR}/*.cpp)
+file(GLOB_RECURSE SOURCES ${SRC_DIR}/*.cpp)
 
 add_executable(${EXECUTABLE} ${SOURCES})
 

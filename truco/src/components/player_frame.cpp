@@ -7,10 +7,10 @@
  * @copyright Copyright (c) 2024
  * 
  */
-#include <player_frame.h>
+#include <components/player_frame.h>
 
 #include <tcurses/label.h>
-#include <card_component.h>
+#include <components/card_component.h>
 
 namespace truco {
 

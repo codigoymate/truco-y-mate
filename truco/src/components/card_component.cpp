@@ -7,8 +7,8 @@
  * @copyright Copyright (c) 2024
  * 
  */
-#include <card_component.h>
-#include <deck.h>
+#include <components/card_component.h>
+#include <entities/deck.h>
 #include <truco_colors.h>
 
 #include <tcurses/utilities.h>

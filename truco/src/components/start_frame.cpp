@@ -7,8 +7,8 @@
  * @copyright Copyright (c) 2024
  * 
  */
-#include <start_frame.h>
-#include <game_frame.h>
+#include <components/start_frame.h>
+#include <components/game_frame.h>
 
 #include <truco.h>
 
