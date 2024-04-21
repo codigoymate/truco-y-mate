@@ -48,6 +48,13 @@ public:
 	 */
 	void nextRound();
 
+	/**
+	 * @brief Devuelve el jugador actual.
+	 */
+	std::shared_ptr<Player> currentPlayer() {
+		return players[currentPlayerIndex];
+	}
+
 private:
 
 	std::vector<std::shared_ptr<Player>> players; /**< La lista de jugadores.*/

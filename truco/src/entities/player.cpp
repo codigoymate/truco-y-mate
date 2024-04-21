@@ -39,4 +39,12 @@ Player::Player(std::shared_ptr<Behavior> behavior, const std::string name) :
 	}
 }
 
+/**
+ * @brief Realiza la jugada. Depende el comportamiento.
+ * 
+ */
+void Player::play() {
+	behavior->play();
+}
+
 } // namespace truco

@@ -87,6 +87,12 @@ public:
 	const bool isShe() const { return she; }
 	void setShe(const bool she) { this->she = she; }
 
+	/**
+	 * @brief Realiza la jugada. Depende el comportamiento.
+	 * 
+	 */
+	void play();
+
 private:
 	std::string name; //*< El nombre del jugador. */
 	std::shared_ptr<Behavior> behavior; //*< Comportamiento del jugador. */

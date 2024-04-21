@@ -252,6 +252,10 @@ void GameFrame::nextRound() {
 	deck.merge();
 	deck.deliver(players);
 
+	// Juega el siguiente jugador.
+	nextPlayer();
+	currentPlayer()->play();
+
 }
 
 /**
