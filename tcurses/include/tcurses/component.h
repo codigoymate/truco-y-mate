@@ -339,6 +339,13 @@ public:
 	 */
 	void setAttributes(const unsigned attr) { attributes = attr; } 
 
+	/**
+	 * @brief Devuelve la referencia de la applicación.
+	 * 
+	 * @return Application* puntero a Application.
+	 */
+	Application *getApplication() { return application; }
+
 protected:
 
 	Application *application; /**<Referencia a Application.*/

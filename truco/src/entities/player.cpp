@@ -40,6 +40,20 @@ Player::Player(std::shared_ptr<Behavior> behavior, const std::string name) :
 }
 
 /**
+ * @brief El jugador juega una carta.
+ * 
+ * @param n El número de carta que tiene en la mano.
+ */
+void Player::playCard(const unsigned n) {
+	for (unsigned i = 0; i < 3; i ++) {
+		if (played[i]) continue;
+		played[i] = hand[n];
+		hand[n] = nullptr;
+		break;
+	}
+}
+
+/**
  * @brief Realiza la jugada. Depende el comportamiento.
  * 
  */

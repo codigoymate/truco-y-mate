@@ -11,6 +11,10 @@
 #include <entities/behavior.h>
 
 #include <components/game_frame.h>
+#include <entities/player.h>
+
+#include <thread>
+#include <chrono>
 
 namespace truco {
 
@@ -34,6 +38,36 @@ Human::Human(GameFrame *gameFrame) : Behavior(gameFrame) {}
  */
 void Human::play() {
 
+}
+
+/**
+ * @brief Constructor del comportamiento IA.
+ * 
+ * @param gameFrame Frame principal.
+ */
+IA::IA(GameFrame *gameFrame) : Behavior(gameFrame) {}
+
+/**
+ * @brief Realiza la acción de jugar.
+ * 
+ */
+void IA::play() {
+	auto player = gameFrame->currentPlayer();
+
+	// Provisorio: juega una carta de izquierda a derecha.
+	for (unsigned i = 0; i < 3; i ++) {
+		if (!player->getHand(i)) continue;
+		player->playCard(i);
+		break;
+	}
+
+	// Componentes del GameFrame
+	gameFrame->update();
+
+	// Redibuja la pantalla
+	gameFrame->getApplication()->getScreen()->drawAll();
+
+	std::this_thread::sleep_for(std::chrono::seconds(1));
 }
 
 } // namespace truco

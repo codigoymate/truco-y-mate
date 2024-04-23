@@ -43,6 +43,12 @@ public:
 	std::vector<std::shared_ptr<Player>> &getPlayers() { return players; }
 
 	/**
+	 * @brief Actualiza los componentes con la lógica de la partida.
+	 * 
+	 */
+	void update();
+
+	/**
 	 * @brief Inicia la siguiente ronda.
 	 * 
 	 */
@@ -66,16 +72,13 @@ private:
 
 	std::shared_ptr<TCurses::Frame> mainFrame; /**< Frame principal (Contiene la mesa, las tres cartas y el menu)*/
 	std::shared_ptr<TCurses::Menu> menu; /**< El menú de control del juego.*/
+	std::shared_ptr<TCurses::MenuItem> trucoMenuItem; /**< Opción Truco.*/
+	std::shared_ptr<TCurses::MenuItem> envidoMenuItem; /**< Opción Envido.*/
+	std::shared_ptr<TCurses::MenuItem> quitMenuItem; /**< Opción Salir.*/
 	std::shared_ptr<TCurses::Label> status; /**< La barra de estado.*/
 
 	std::array<std::shared_ptr<BigCardComponent>, 3> hand; /**< Las tres cartas de la mano.*/
 	std::vector<std::shared_ptr<PlayerFrame>> playerFrames; /**< Frame de los jugadores en la mesa.*/
-
-	/**
-	 * @brief Actualiza los componentes con la lógica de la partida.
-	 * 
-	 */
-	void update();
 
 	/**
 	 * @brief Al elegir salir en el menú.
@@ -111,6 +114,10 @@ private:
 	 * 
 	 */
 	void nextPlayer();
+
+	void nextPlayerHandClear();
+	void nextPlayerHandFull();
+
 };
 
 } // namespace truco

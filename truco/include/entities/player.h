@@ -85,7 +85,20 @@ public:
 	 * @return false cuando es masculino.
 	 */
 	const bool isShe() const { return she; }
+
+	/**
+	 * @brief Establece el género del jugador.
+	 * 
+	 * @param she Verdadero cuando es femenino.
+	 */
 	void setShe(const bool she) { this->she = she; }
+
+	/**
+	 * @brief El jugador juega una carta.
+	 * 
+	 * @param n El número de carta que tiene en la mano.
+	 */
+	void playCard(const unsigned n);
 
 	/**
 	 * @brief Realiza la jugada. Depende el comportamiento.

@@ -34,8 +34,8 @@ GameFrame::GameFrame(const unsigned playerCount) : TCurses::Frame() {
 	// Crea los jugadores
 	for (unsigned i = 0; i < playerCount; i ++) {
 		if (!i) {
-			players.push_back(std::make_shared<Player>(std::make_shared<Human>(this), std::getenv("USER")));
-		} else players.push_back(std::make_shared<Player>(std::make_shared<Human>(this)));
+			players.push_back(std::make_shared<Player>(std::make_shared<IA>(this), std::getenv("USER")));
+		} else players.push_back(std::make_shared<Player>(std::make_shared<IA>(this)));
 		
 		playerFrames.push_back(std::make_shared<PlayerFrame>(players[i]->getName()));
 	}
@@ -78,12 +78,14 @@ void GameFrame::init() {
 
 	// Menu del juego
 	menu = std::make_shared<TCurses::Menu>();
-	menu->setMinH(1); menu->setMaxH(1);
+	//menu->setMinH(1); menu->setMaxH(1);
 	menu->setMinW(15); menu->setMaxW(15);
 	menu->setVAlign(TCurses::Component::VA_BOTTOM);
 	mainFrame->addChild(menu);
 
-	menu->addChild(std::make_shared<TCurses::MenuItem>("Salir", std::bind(&GameFrame::quitItemAction, this)));
+	trucoMenuItem = std::make_shared<TCurses::MenuItem>("Truco");
+	envidoMenuItem = std::make_shared<TCurses::MenuItem>("Envido");
+	quitMenuItem = std::make_shared<TCurses::MenuItem>("Salir", std::bind(&GameFrame::quitItemAction, this));
 
 	// ********************************************
 
@@ -95,13 +97,7 @@ void GameFrame::init() {
 	status->setAttributes(A_BOLD);
 	addChild(status);
 
-	// TODO: Provisorio: mezcla y reparte
-	auto &deck = static_cast<Truco *>(application)->getDeck();
-
-	deck.merge();
-	deck.deliver(players);
-
-	this->update();
+	nextRound();
 }
 
 /**
@@ -109,12 +105,23 @@ void GameFrame::init() {
  * 
  */
 void GameFrame::update() {
+
+	// TODO: Confugra el menu
+	menu->removeChildren();
+
+	menu->addChild(trucoMenuItem);
+	menu->addChild(envidoMenuItem);
+	menu->addChild(quitMenuItem);
+	menu->setMinH(menu->getChildren().size());
+	menu->setMaxH(menu->getChildren().size());
+	///////
+
 	// Las cartas de la mano del jugador 1
 	for (unsigned i = 0; i < 3; i ++) {
 		hand[i]->setCard(players[0]->getHand(i));
 	}
 
-	// Las carta jugadas
+	// Las carta jugadas de todos los jugadores.
 	for (unsigned p = 0; p < players.size(); p ++) {
 		for (unsigned c = 0; c < 3; c ++) {
 			playerFrames[p]->setCard(c, players[p]->getPlayed(c));
@@ -263,9 +270,26 @@ void GameFrame::nextRound() {
  * 
  */
 void GameFrame::nextPlayer() {
-	if (handIndex == 0 && this->isHandClear(0)) {
+	if (this->isHandClear(handIndex)) nextPlayerHandClear();
+	else if (this->isHandFull(handIndex)) nextPlayerHandFull();
+	else {
+	
+		// Se jugaron cartas, pero no completaron la mano ...
+		currentPlayerIndex ++;
+		if (currentPlayerIndex >= players.size()) currentPlayerIndex = 0;
+	}
+}
+
+void GameFrame::nextPlayerHandClear() {
+	// Si es la primera mano
+	if (handIndex == 0) {
+		// Turno del jugador mano
 		currentPlayerIndex = startPlayer;
 	}
+}
+
+void GameFrame::nextPlayerHandFull() {
+	
 }
 
 }

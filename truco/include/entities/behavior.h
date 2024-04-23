@@ -57,4 +57,24 @@ public:
 	void play() override;
 };
 
+/**
+ * @brief Define el comportamiento máquina para un jugador.
+ * 
+ */
+class IA: public Behavior {
+public:
+	/**
+	 * @brief Constructor del comportamiento IA.
+	 * 
+	 * @param gameFrame Frame principal.
+	 */
+	IA(GameFrame *gameFrame);
+
+	/**
+	 * @brief Realiza la acción de jugar.
+	 * 
+	 */
+	void play() override;
+};
+
 } // namespace truco
