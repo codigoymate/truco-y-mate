@@ -31,7 +31,7 @@ public:
 	 * 
 	 * @param behavior Comportamiento del jugador.
 	 */
-	Player(std::shared_ptr<Behavior> behavior);
+	Player(const unsigned id, std::shared_ptr<Behavior> behavior);
 
 	/**
 	 * @brief Construye un nuevo objeto Player con el nombre dado.
@@ -39,7 +39,12 @@ public:
 	 * @param behavior Comportamiento del jugador.
 	 * @param name Nombre del jugador.
 	 */
-	Player(std::shared_ptr<Behavior> behavior, const std::string name);
+	Player(const unsigned id, std::shared_ptr<Behavior> behavior, const std::string name);
+
+	/**
+	 * @brief Devuelve el id del jugador.
+	 */
+	const unsigned getID() const { return id; }
 
 	/**
 	 * @brief Devuelve el nombre del jugador.
@@ -107,6 +112,7 @@ public:
 	void play();
 
 private:
+	unsigned id{};
 	std::string name; //*< El nombre del jugador. */
 	std::shared_ptr<Behavior> behavior; //*< Comportamiento del jugador. */
 	bool she{}; //*< Verdadero cuando el jugador es mujer */

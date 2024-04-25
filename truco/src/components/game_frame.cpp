@@ -35,8 +35,8 @@ GameFrame::GameFrame(const unsigned playerCount) : TCurses::Frame() {
 	// Crea los jugadores
 	for (unsigned i = 0; i < playerCount; i ++) {
 		if (!i) {
-			players.push_back(std::make_shared<Player>(std::make_shared<IA>(this), std::getenv("USER")));
-		} else players.push_back(std::make_shared<Player>(std::make_shared<IA>(this)));
+			players.push_back(std::make_shared<Player>(i, std::make_shared<IA>(this), std::getenv("USER")));
+		} else players.push_back(std::make_shared<Player>(i, std::make_shared<IA>(this)));
 		
 		playerFrames.push_back(std::make_shared<PlayerFrame>(players[i]->getName()));
 	}

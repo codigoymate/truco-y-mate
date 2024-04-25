@@ -20,7 +20,7 @@ namespace truco {
  * 
  * @param behavior Comportamiento del jugador.
  */
-Player::Player(std::shared_ptr<Behavior> behavior) : Player(behavior, "") {
+Player::Player(const unsigned id, std::shared_ptr<Behavior> behavior) : Player(id, behavior, "") {
 	she = Random::randInt(0, 1);
 	name = she ? randomizeFemaleName() :
 			randomizeMaleName();
@@ -32,8 +32,8 @@ Player::Player(std::shared_ptr<Behavior> behavior) : Player(behavior, "") {
  * @param behavior Comportamiento del jugador.
  * @param name Nombre del jugador.
  */
-Player::Player(std::shared_ptr<Behavior> behavior, const std::string name) :
-			name{name}, behavior{behavior} {
+Player::Player(const unsigned id, std::shared_ptr<Behavior> behavior, const std::string name) :
+			id{id}, name{name}, behavior{behavior} {
 	for (unsigned i = 0; i < 3; i ++) {
 		hand[i] = played[i] = nullptr;
 	}
