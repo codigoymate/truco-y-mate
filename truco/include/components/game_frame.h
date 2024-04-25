@@ -18,6 +18,7 @@ namespace truco {
 class BigCardComponent;
 class Player;
 class PlayerFrame;
+class StepManager;
 
 /**
  * @brief Frame del juego. Una partida ya está iniciada con éste frame.
@@ -49,33 +50,29 @@ public:
 	void update();
 
 	/**
-	 * @brief Inicia la siguiente ronda.
-	 * 
+	 * @brief Devuelve el administrador de turnos.
 	 */
-	void nextRound();
+	std::shared_ptr<StepManager> getStepManager() { return stepManager; }
 
 	/**
-	 * @brief Devuelve el jugador actual.
+	 * @brief Devuelve el label del próximo jugador ubicado en la barra de estado.
 	 */
-	std::shared_ptr<Player> currentPlayer() {
-		return players[currentPlayerIndex];
-	}
+	std::shared_ptr<TCurses::Label> getCurrentPlayerLabel() const { return currentPlayerLabel; }
 
 private:
 
 	std::vector<std::shared_ptr<Player>> players; /**< La lista de jugadores.*/
 
-	signed currentPlayerIndex;	/**< Indice del turno actual. */
-	signed startPlayer; /**< Indice del jugador mano. */
-	unsigned round{}; /**< Conteo de rondas. */
-	unsigned handIndex{}; /**< Mano actual. */
+	std::shared_ptr<StepManager> stepManager; /**< Administrador de turnos.*/
 
 	std::shared_ptr<TCurses::Frame> mainFrame; /**< Frame principal (Contiene la mesa, las tres cartas y el menu)*/
 	std::shared_ptr<TCurses::Menu> menu; /**< El menú de control del juego.*/
 	std::shared_ptr<TCurses::MenuItem> trucoMenuItem; /**< Opción Truco.*/
 	std::shared_ptr<TCurses::MenuItem> envidoMenuItem; /**< Opción Envido.*/
 	std::shared_ptr<TCurses::MenuItem> quitMenuItem; /**< Opción Salir.*/
-	std::shared_ptr<TCurses::Label> status; /**< La barra de estado.*/
+
+	// Barra de estado
+	std::shared_ptr<TCurses::Label> currentPlayerLabel; /**< Label que indica el jugador actual.*/
 
 	std::array<std::shared_ptr<BigCardComponent>, 3> hand; /**< Las tres cartas de la mano.*/
 	std::vector<std::shared_ptr<PlayerFrame>> playerFrames; /**< Frame de los jugadores en la mesa.*/
@@ -92,31 +89,6 @@ private:
 	 * @return std::shared_ptr<Frame> Frame de la mesa con los jugadores distribuidos.
 	 */
 	std::shared_ptr<TCurses::Frame> layoutTable();
-
-	/**
-	 * @brief Verifica si no se jugó una carta en la mano indicada.
-	 * 
-	 * @param n el número de mano.
-	 * @return true si no se jugó alguna carta.
-	 */
-	bool isHandClear(const unsigned n);
-
-	/**
-	 * @brief Verifica si se jugaron todas las cartas en la mano indicada.
-	 * 
-	 * @param n el número de mano.
-	 * @return true si se jugaron todas las cartas
-	 */
-	bool isHandFull(const unsigned n);
-
-	/**
-	 * @brief Determina el próximo turno.
-	 * 
-	 */
-	void nextPlayer();
-
-	void nextPlayerHandClear();
-	void nextPlayerHandFull();
 
 };
 

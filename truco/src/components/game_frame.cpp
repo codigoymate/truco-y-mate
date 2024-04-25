@@ -16,6 +16,7 @@
 #include <truco.h>
 #include <entities/player.h>
 #include <entities/behavior.h>
+#include <entities/step_manager.h>
 #include <components/player_frame.h>
 #include <utils/random.h>
 
@@ -40,8 +41,8 @@ GameFrame::GameFrame(const unsigned playerCount) : TCurses::Frame() {
 		playerFrames.push_back(std::make_shared<PlayerFrame>(players[i]->getName()));
 	}
 
-	// Elige el jugador mano
-	startPlayer = Random::randInt(0, players.size() - 1);
+	// Crea el administrador de turnos.
+	stepManager = std::make_shared<StepManager>(this);
 
 }
 
@@ -90,14 +91,19 @@ void GameFrame::init() {
 	// ********************************************
 
 	// Status
-	status = std::make_shared<TCurses::Label>();
+	auto status = std::make_shared<TCurses::Label>();
+	status->setLayout(TCurses::Component::LY_HORIZONTAL);
 	status->setMaxH(1);
-	status->setTextPair(TITLE_PAIR);
-	status->setBGPair(TITLE_PAIR);
-	status->setAttributes(A_BOLD);
 	addChild(status);
 
-	nextRound();
+	// Status - Label jugador actual
+	currentPlayerLabel = std::make_shared<TCurses::Label>();
+	currentPlayerLabel->setTextPair(TITLE_PAIR);
+	currentPlayerLabel->setBGPair(TITLE_PAIR);
+	currentPlayerLabel->setAttributes(A_BOLD);
+	status->addChild(currentPlayerLabel);
+
+	stepManager->nextRound();
 }
 
 /**
@@ -212,84 +218,6 @@ std::shared_ptr<TCurses::Frame> GameFrame::layoutTable() {
 	}
 
 	return tableFrame;
-}
-
-/**
- * @brief Verifica si no se jugó una carta en la mano indicada.
- * 
- * @param n el número de mano.
- * @return true si no se jugó alguna carta.
- */
-bool GameFrame::isHandClear(const unsigned n) {
-	for (auto p : players) {
-		if (p->getPlayed(n)) return false;
-	}
-
-	return true;
-}
-
-/**
- * @brief Verifica si se jugaron todas las cartas en la mano indicada.
- * 
- * @param n el número de mano.
- * @return true si se jugaron todas las cartas
- */
-bool GameFrame::isHandFull(const unsigned n) {
-	for (auto p : players) {
-		if (!p->getPlayed(n)) return false;
-	}
-
-	return true;
-}
-
-/**
- * @brief Inicia la siguiente ronda.
- * 
- */
-void GameFrame::nextRound() {
-	round ++;
-	handIndex = 0;
-
-	// Incrementa el jugador mano
-	this->startPlayer ++;
-	if (this->startPlayer >= players.size()) this->startPlayer = 0;
-
-	// Mezcla y reparte
-	auto &deck = static_cast<Truco *>(application)->getDeck();
-	deck.merge();
-	deck.deliver(players);
-
-	// Juega el siguiente jugador.
-	nextPlayer();
-	currentPlayer()->play();
-
-}
-
-/**
- * @brief Determina el próximo turno.
- * 
- */
-void GameFrame::nextPlayer() {
-	if (this->isHandClear(handIndex)) nextPlayerHandClear();
-	else if (this->isHandFull(handIndex)) nextPlayerHandFull();
-	else {
-	
-		// Se jugaron cartas, pero no completaron la mano ...
-		currentPlayerIndex ++;
-		if (currentPlayerIndex >= players.size()) currentPlayerIndex = 0;
-	}
-}
-
-void GameFrame::nextPlayerHandClear() {
-	// Si es la primera mano
-	if (handIndex == 0) {
-		// Turno del jugador mano
-		currentPlayerIndex = startPlayer;
-	}
-}
-
-void GameFrame::nextPlayerHandFull() {
-	
 }
 
 }

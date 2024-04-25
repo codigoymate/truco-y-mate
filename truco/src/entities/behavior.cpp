@@ -12,6 +12,7 @@
 
 #include <components/game_frame.h>
 #include <entities/player.h>
+#include <entities/step_manager.h>
 
 #include <thread>
 #include <chrono>
@@ -52,7 +53,10 @@ IA::IA(GameFrame *gameFrame) : Behavior(gameFrame) {}
  * 
  */
 void IA::play() {
-	auto player = gameFrame->currentPlayer();
+
+	std::this_thread::sleep_for(std::chrono::seconds(2));
+
+	auto player = gameFrame->getStepManager()->currentPlayer();
 
 	// Provisorio: juega una carta de izquierda a derecha.
 	for (unsigned i = 0; i < 3; i ++) {
@@ -65,9 +69,9 @@ void IA::play() {
 	gameFrame->update();
 
 	// Redibuja la pantalla
-	gameFrame->getApplication()->getScreen()->drawAll();
+	//gameFrame->getApplication()->getScreen()->drawAll();
 
-	std::this_thread::sleep_for(std::chrono::seconds(1));
+	gameFrame->getStepManager()->step();
 }
 
 } // namespace truco
