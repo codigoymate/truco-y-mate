@@ -132,7 +132,50 @@ void StepManager::nextPlayerHandClear() {
  * 
  */
 void StepManager::nextPlayerHandFull() {
-	
+	// Busca el ganador de la mano
+	auto winner = getHandWinner(handIndex);
+	if (winner == -1) {
+		// Parda, continua el siguiente jugador.
+		currentPlayerIndex ++;
+		if (currentPlayerIndex >= gameFrame->getPlayers().size()) currentPlayerIndex = 0;
+	} else {
+		// Continua el ganador
+		currentPlayerIndex = winner;
+	}
+	// Próxima mano
+	handIndex ++;
+}
+
+/**
+ * @brief Busca el ganador de la mano n.
+ * Si se empata la mano (parda), devuelve -1.
+ * 
+ * @param n Número de mano.
+ * @return const signed Índice del jugador ganador o -1 si hay empate.
+ */
+const signed StepManager::getHandWinner(const unsigned n) const {
+	std::vector<std::shared_ptr<Player>> players;
+
+	// Copia la lista de jugadores
+	for (auto p : gameFrame->getPlayers()) {
+		players.push_back(p);
+	}
+
+	// Ordena los jugadores según las cartas jugadas en la mano
+	for (signed i = 0; i < players.size() - 1; i ++) {
+		if (players[i]->getPlayed(n)->getWeight() < players[i + 1]->getPlayed(n)->getWeight()) {
+			auto p = players[i];
+			players[i] = players[i + 1];
+			players[i + 1] = p; i = -1;
+		}
+	}
+
+	// Si hay empate
+	if (players[0]->getPlayed(n)->getWeight() == players[1]->getPlayed(n)->getWeight()) {
+		return -1;
+	}
+
+	return players[0]->getID();
 }
 
 }

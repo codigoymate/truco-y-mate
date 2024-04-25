@@ -89,6 +89,15 @@ private:
 	 * 
 	 */
 	void nextPlayerHandFull();
+
+	/**
+	 * @brief Busca el ganador de la mano n.
+	 * Si se empata la mano (parda), devuelve -1.
+	 * 
+	 * @param n Número de mano.
+	 * @return const signed Índice del jugador ganador o -1 si hay empate.
+	 */
+	const signed getHandWinner(const unsigned n) const;
 };
 
 } // namespace truco
