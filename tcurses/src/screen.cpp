@@ -31,6 +31,7 @@ Screen::Screen(Application *application) : Component() {
 	initscr();
     noecho();
     curs_set(0);
+	nodelay(stdscr, TRUE);
     
     start_color();
 
@@ -49,6 +50,14 @@ Screen::Screen(Application *application) : Component() {
  */
 Screen::~Screen() {
 	endwin();
+}
+
+/**
+ * @brief Actualiza todos los componentes de la pantalla.
+ * 
+ */
+void Screen::updateAll() {
+	internalUpdate();
 }
 
 /**

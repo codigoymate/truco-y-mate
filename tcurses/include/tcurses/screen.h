@@ -43,6 +43,12 @@ public:
 	void draw() override {}
 
 	/**
+	 * @brief Actualiza todos los componentes de la pantalla.
+	 * 
+	 */
+	void updateAll();
+
+	/**
 	 * @brief Dibuja todos los componentes de la pantalla.
 	 * 
 	 */

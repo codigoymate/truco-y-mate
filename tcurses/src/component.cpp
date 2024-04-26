@@ -122,6 +122,17 @@ void Component::removeChildren() {
 }
 
 /**
+ * @brief Ejecuta update() y luego los de los hijos.
+ * 
+ */
+void Component::internalUpdate() {
+	update();
+	for (auto &c : children) {
+		c->internalUpdate();
+	}
+}
+
+/**
  * @brief Ejecuta draw() y luego dibuja los hijos.
  * 
  */

@@ -351,10 +351,22 @@ protected:
 	Application *application; /**<Referencia a Application.*/
 
 	/**
+	 * @brief Virtual para actualizar la lógica del componente.
+	 * 
+	 */
+	virtual void update() {}
+
+	/**
 	 * @brief Virtual para dibujar el componente
 	 * 
 	 */
 	virtual void draw() = 0;
+
+	/**
+	 * @brief Ejecuta update() y luego los de los hijos.
+	 * 
+	 */
+	void internalUpdate();
 
 	/**
 	 * @brief Ejecuta draw() y luego dibuja los hijos.

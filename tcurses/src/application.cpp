@@ -15,6 +15,9 @@
 #include <tcurses/application.h>
 
 #include <clocale>
+#include <thread>
+#include <chrono>
+
 #include <ncurses.h>
 
 #include <tcurses/screen.h>
@@ -46,17 +49,24 @@ void Application::run() {
 	running = true;
 	while (running) {
 
+		screen->updateAll();
+
 		screen->drawAll(); // Dibuja la pantalla
+		std::this_thread::sleep_for(std::chrono::milliseconds(100));
+
 		ch = getch();
 
-		if (ch == KEY_RESIZE) {
-			screen->setSize(getmaxx(stdscr), getmaxy(stdscr));
-			screen->drawAll();
-		} else {
-			// Crea una copia de los input listeners para que no haya problemas con el foreach
-			auto il = std::list<std::shared_ptr<InputListener>>(inputListeners);
-			for (auto &i : il) {
-				i->keyPressed(ch);
+		if (ch != ERR) { // Se presionó una tecla
+
+			if (ch == KEY_RESIZE) {
+				screen->setSize(getmaxx(stdscr), getmaxy(stdscr));
+				screen->drawAll();
+			} else {
+				// Crea una copia de los input listeners para que no haya problemas con el foreach
+				auto il = std::list<std::shared_ptr<InputListener>>(inputListeners);
+				for (auto &i : il) {
+					i->keyPressed(ch);
+				}
 			}
 		}
 	}
