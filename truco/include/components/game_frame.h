@@ -39,6 +39,12 @@ public:
 	void init() override;
 
 	/**
+	 * @brief Actualiza la lógica del GameFrame.
+	 * 
+	 */
+	void update() override;
+
+	/**
 	 * @brief Devuelve una referencia a la lista de jugadores.
 	 */
 	std::vector<std::shared_ptr<Player>> &getPlayers() { return players; }
@@ -47,7 +53,7 @@ public:
 	 * @brief Actualiza los componentes con la lógica de la partida.
 	 * 
 	 */
-	void update();
+	void updateComponents();
 
 	/**
 	 * @brief Devuelve el administrador de turnos.

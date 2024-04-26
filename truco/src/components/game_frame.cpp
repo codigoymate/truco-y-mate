@@ -107,16 +107,24 @@ void GameFrame::init() {
 }
 
 /**
- * @brief Actualiza los componentes con la lógica de la partida.
+ * @brief Actualiza la lógica del GameFrame.
  * 
  */
 void GameFrame::update() {
+	stepManager->currentPlayer()->play();
+}
+
+/**
+ * @brief Actualiza los componentes con la lógica de la partida.
+ * 
+ */
+void GameFrame::updateComponents() {
 
 	// TODO: Confugra el menu
 	menu->removeChildren();
 
-	menu->addChild(trucoMenuItem);
-	menu->addChild(envidoMenuItem);
+	/*menu->addChild(trucoMenuItem);
+	menu->addChild(envidoMenuItem);*/
 	menu->addChild(quitMenuItem);
 	menu->setMinH(menu->getChildren().size());
 	menu->setMaxH(menu->getChildren().size());

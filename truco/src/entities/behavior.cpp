@@ -54,7 +54,12 @@ IA::IA(GameFrame *gameFrame) : Behavior(gameFrame) {}
  */
 void IA::play() {
 
-	std::this_thread::sleep_for(std::chrono::seconds(2));
+	delayCount ++;
+
+	// Al pasar un segundo y medio. Realiza la jugada.
+	if (delayCount < 15) return;
+
+	delayCount = 0;
 
 	auto player = gameFrame->getStepManager()->currentPlayer();
 
@@ -66,12 +71,8 @@ void IA::play() {
 	}
 
 	// Componentes del GameFrame
-	gameFrame->update();
-
-	// Redibuja la pantalla
-	//gameFrame->getApplication()->getScreen()->drawAll();
-
 	gameFrame->getStepManager()->step();
+	gameFrame->updateComponents();
 }
 
 } // namespace truco

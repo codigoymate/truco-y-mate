@@ -69,10 +69,6 @@ bool StepManager::isHandFull(const unsigned n) {
  */
 void StepManager::step() {
 	this->nextPlayer();
-
-	gameFrame->getApplication()->getScreen()->drawAll();
-	
-	this->currentPlayer()->play();
 }
 
 /**

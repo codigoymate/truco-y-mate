@@ -75,6 +75,8 @@ public:
 	 * 
 	 */
 	void play() override;
+private:
+	unsigned delayCount{};
 };
 
 } // namespace truco
