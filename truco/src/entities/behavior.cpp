@@ -38,7 +38,11 @@ Human::Human(GameFrame *gameFrame) : Behavior(gameFrame) {}
  * 
  */
 void Human::play() {
-
+	if (!playing) {
+		gameFrame->updateMenu();
+		gameFrame->updateComponents();
+		playing = true;
+	}
 }
 
 /**

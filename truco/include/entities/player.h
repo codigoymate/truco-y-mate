@@ -99,6 +99,11 @@ public:
 	void setShe(const bool she) { this->she = she; }
 
 	/**
+	 * @brief Devuelve el comportamiento del jugador.
+	 */
+	std::shared_ptr<Behavior> getBehavior() { return behavior; }
+
+	/**
 	 * @brief El jugador juega una carta.
 	 * 
 	 * @param n El número de carta que tiene en la mano.

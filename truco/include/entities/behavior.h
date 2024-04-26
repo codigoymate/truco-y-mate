@@ -33,6 +33,8 @@ public:
 	 */
 	virtual void play() = 0;
 
+	bool playing{};
+
 protected:
 	GameFrame *gameFrame;
 };

@@ -35,7 +35,7 @@ GameFrame::GameFrame(const unsigned playerCount) : TCurses::Frame() {
 	// Crea los jugadores
 	for (unsigned i = 0; i < playerCount; i ++) {
 		if (!i) {
-			players.push_back(std::make_shared<Player>(i, std::make_shared<IA>(this), std::getenv("USER")));
+			players.push_back(std::make_shared<Player>(i, std::make_shared<Human>(this), std::getenv("USER")));
 		} else players.push_back(std::make_shared<Player>(i, std::make_shared<IA>(this)));
 		
 		playerFrames.push_back(std::make_shared<PlayerFrame>(players[i]->getName()));
@@ -79,11 +79,16 @@ void GameFrame::init() {
 
 	// Menu del juego
 	menu = std::make_shared<TCurses::Menu>();
-	//menu->setMinH(1); menu->setMaxH(1);
 	menu->setMinW(15); menu->setMaxW(15);
 	menu->setVAlign(TCurses::Component::VA_BOTTOM);
 	mainFrame->addChild(menu);
 
+	playCardItem[0] = std::make_shared<TCurses::MenuItem>("Carta 1",
+					std::bind(&GameFrame::playCard1Action, this));
+	playCardItem[1] = std::make_shared<TCurses::MenuItem>("Carta 2",
+					std::bind(&GameFrame::playCard2Action, this));
+	playCardItem[2] = std::make_shared<TCurses::MenuItem>("Carta 3",
+					std::bind(&GameFrame::playCard3Action, this));
 	trucoMenuItem = std::make_shared<TCurses::MenuItem>("Truco");
 	envidoMenuItem = std::make_shared<TCurses::MenuItem>("Envido");
 	quitMenuItem = std::make_shared<TCurses::MenuItem>("Salir", std::bind(&GameFrame::quitItemAction, this));
@@ -115,13 +120,19 @@ void GameFrame::update() {
 }
 
 /**
- * @brief Actualiza los componentes con la lógica de la partida.
+ * @brief Actualiza el menú.
  * 
  */
-void GameFrame::updateComponents() {
-
+void GameFrame::updateMenu() {
 	// TODO: Confugra el menu
 	menu->removeChildren();
+
+	if (stepManager->currentPlayer()->getID() == 0) {
+		// Cartas
+		for (unsigned i = 0; i < 3; i ++)
+			if (stepManager->currentPlayer()->getHand(i))
+				menu->addChild(playCardItem[i]);
+	}
 
 	/*menu->addChild(trucoMenuItem);
 	menu->addChild(envidoMenuItem);*/
@@ -129,6 +140,13 @@ void GameFrame::updateComponents() {
 	menu->setMinH(menu->getChildren().size());
 	menu->setMaxH(menu->getChildren().size());
 	///////
+}
+
+/**
+ * @brief Actualiza los componentes.
+ * 
+ */
+void GameFrame::updateComponents() {
 
 	// Las cartas de la mano del jugador 1
 	for (unsigned i = 0; i < 3; i ++) {
@@ -140,6 +158,48 @@ void GameFrame::updateComponents() {
 		for (unsigned c = 0; c < 3; c ++) {
 			playerFrames[p]->setCard(c, players[p]->getPlayed(c));
 		}
+	}
+}
+
+/**
+ * @brief Al elegir Carta 1 en el menú.
+ * 
+ */
+void GameFrame::playCard1Action() {
+	humanPlayCard(0);
+}
+
+/**
+ * @brief Al elegir Carta 2 en el menú.
+ * 
+ */
+void GameFrame::playCard2Action() {
+	humanPlayCard(1);
+}
+
+/**
+ * @brief Al elegir Carta 3 en el menú.
+ * 
+ */
+void GameFrame::playCard3Action() {
+	humanPlayCard(2);
+}
+
+/**
+ * @brief Llamado por el menú para jugar una carta.
+ * 
+ * @param c La carta a jugar.
+ */
+void GameFrame::humanPlayCard(const unsigned c) {
+	if (stepManager->currentPlayer()->getHand(c)) {
+		stepManager->currentPlayer()->playCard(c);
+
+		// Baja la bandera para cuando le toque la próxima vez.
+		std::static_pointer_cast<Human>(stepManager->currentPlayer()->getBehavior())->playing = false;
+
+		stepManager->step();
+		updateComponents();
+		updateMenu();
 	}
 }
 
