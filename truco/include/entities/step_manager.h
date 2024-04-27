@@ -50,6 +50,13 @@ public:
 	void nextRound();
 
 	/**
+	 * @brief Finaliza una ronda indicando el ganador.
+	 * 
+	 * @param winnner El ganador de la ronda.
+	 */
+	void endRound(unsigned winnner);
+
+	/**
 	 * @brief Devuelve el jugador actual.
 	 */
 	std::shared_ptr<Player> currentPlayer();
@@ -98,6 +105,13 @@ private:
 	 * @return const signed Índice del jugador ganador o -1 si hay empate.
 	 */
 	const signed getHandWinner(const unsigned n) const;
+
+	/**
+	 * @brief Incrementa el índice de jugador. Cuando se alcanza el máximo, 
+	 * arranca de 0.
+	 * 
+	 */
+	void incrementPlayerIndex();
 };
 
 } // namespace truco

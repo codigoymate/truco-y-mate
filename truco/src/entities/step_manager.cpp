@@ -100,10 +100,8 @@ void StepManager::nextPlayer() {
 	if (this->isHandClear(handIndex)) nextPlayerHandClear();
 	else if (this->isHandFull(handIndex)) nextPlayerHandFull();
 	else {
-	
 		// Se jugaron cartas, pero no completaron la mano ...
-		currentPlayerIndex ++;
-		if (currentPlayerIndex >= gameFrame->getPlayers().size()) currentPlayerIndex = 0;
+		incrementPlayerIndex();
 	}
 
 	gameFrame->getCurrentPlayerLabel()->setText(
@@ -130,14 +128,57 @@ void StepManager::nextPlayerHandClear() {
 void StepManager::nextPlayerHandFull() {
 	// Busca el ganador de la mano
 	auto winner = getHandWinner(handIndex);
-	if (winner == -1) {
-		// Parda, continua el siguiente jugador.
-		currentPlayerIndex ++;
-		if (currentPlayerIndex >= gameFrame->getPlayers().size()) currentPlayerIndex = 0;
+	if (winner == -1) { // En el caso de que sea parda
+		switch (handIndex) {
+		case 0: // Primera mano
+			incrementPlayerIndex();
+			break;
+		case 1: {// Segunda mano
+			auto winner0 = getHandWinner(0);
+			// Si se empardó la primera ...
+			if (winner0 == -1) incrementPlayerIndex();
+			else {
+				// Gana el ganador de la segunda.
+				endRound(winner); return;
+			}
+			}
+			break;
+		case 2: // Tercera mano
+			// Se enpardó las tres manos ...
+			// Gana el jugador mano.
+			endRound(startPlayer); return;
+			break;
+		}
+		
 	} else {
-		// Continua el ganador
-		currentPlayerIndex = winner;
+		switch (handIndex) {
+		case 0: // Primera mano
+			// Continua el ganador
+			currentPlayerIndex = winner;
+			break;
+		case 1: {// Segunda mano
+			auto winner0 = getHandWinner(0);
+			if (winner0 == -1) { // Si se empardó primera ...
+				// Gana el ganador de la segunda.
+				endRound(winner); return;
+			} else {
+				// Si alguien ganó primera ...
+				// Si un solo equipo obtuvo primera y segunda ..
+				if (winner % 2 == winner0 % 2) {
+					// Gana el ganador de segunda y primera
+					endRound(winner); return;
+				} else {
+					// Continua el ganador
+					currentPlayerIndex = winner;
+				}
+			}
+			}
+		case 2: // Tercera mano
+			endRound(winner); return;
+		}
+
 	}
+
 	// Próxima mano
 	handIndex ++;
 }
@@ -172,6 +213,25 @@ const signed StepManager::getHandWinner(const unsigned n) const {
 	}
 
 	return players[0]->getID();
+}
+
+/**
+ * @brief Incrementa el índice de jugador. Cuando se alcanza el máximo, 
+ * arranca de 0.
+ * 
+ */
+void StepManager::incrementPlayerIndex() {
+	currentPlayerIndex ++;
+	if (currentPlayerIndex >= gameFrame->getPlayers().size()) currentPlayerIndex = 0;
+}
+
+/**
+ * @brief Finaliza una ronda indicando el ganador.
+ * 
+ * @param winnner El ganador de la ronda.
+ */
+void StepManager::endRound(unsigned winnner) {
+	nextRound();
 }
 
 }
