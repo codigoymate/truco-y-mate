@@ -18,6 +18,7 @@
 #include <entities/behavior.h>
 #include <entities/step_manager.h>
 #include <components/player_frame.h>
+#include <components/score_frame.h>
 #include <utils/random.h>
 
 #include <ncurses.h>
@@ -77,11 +78,23 @@ void GameFrame::init() {
 		mainFrame->addChild(hand[i]);
 	}
 
+	// Frame del puntaje y el menu
+	auto frame = std::make_shared<Frame>();
+	frame->setLayout(TCurses::Component::LY_VERTICAL);
+	frame->setMinW(20); frame->setMaxW(20);
+	mainFrame->addChild(frame);
+
+	// Puntaje
+	scoreFrame = std::make_shared<ScoreFrame>(this);
+	frame->addChild(scoreFrame);
+
+	// Agrega un expansor
+	frame->addChild(std::make_shared<TCurses::Frame>());
+
 	// Menu del juego
 	menu = std::make_shared<TCurses::Menu>();
-	menu->setMinW(15); menu->setMaxW(15);
-	menu->setVAlign(TCurses::Component::VA_BOTTOM);
-	mainFrame->addChild(menu);
+	//menu->setMinW(15); menu->setMaxW(15);
+	frame->addChild(menu);
 
 	playCardItem[0] = std::make_shared<TCurses::MenuItem>("Carta 1",
 					std::bind(&GameFrame::playCard1Action, this));

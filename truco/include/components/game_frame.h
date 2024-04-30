@@ -19,6 +19,7 @@ class BigCardComponent;
 class Player;
 class PlayerFrame;
 class StepManager;
+class ScoreFrame;
 
 /**
  * @brief Frame del juego. Una partida ya está iniciada con éste frame.
@@ -78,6 +79,11 @@ private:
 	std::shared_ptr<StepManager> stepManager; /**< Administrador de turnos.*/
 
 	std::shared_ptr<TCurses::Frame> mainFrame; /**< Frame principal (Contiene la mesa, las tres cartas y el menu)*/
+
+	// Frame de puntos
+	std::shared_ptr<ScoreFrame> scoreFrame; /**< Componente de puntos*/
+
+	// Menú
 	std::shared_ptr<TCurses::Menu> menu; /**< El menú de control del juego.*/
 	std::shared_ptr<TCurses::MenuItem> playCardItem[3]; /**< Opciones jugar cartas.*/
 	std::shared_ptr<TCurses::MenuItem> trucoMenuItem; /**< Opción Truco.*/
