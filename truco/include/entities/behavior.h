@@ -35,6 +35,8 @@ public:
 
 	bool playing{};
 
+	GameFrame *getGameFrame() const { return gameFrame; }
+
 protected:
 	GameFrame *gameFrame;
 };

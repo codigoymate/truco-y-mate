@@ -10,8 +10,10 @@
 
 #include <entities/player.h>
 #include <entities/behavior.h>
+#include <entities/deck.h>
 #include <utils/utils.h>
 #include <utils/random.h>
+#include <components/game_frame.h>
 
 namespace truco {
 
@@ -49,6 +51,7 @@ void Player::playCard(const unsigned n) {
 		if (played[i]) continue;
 		played[i] = hand[n];
 		hand[n] = nullptr;
+		behavior->getGameFrame()->setInfoText(name + " juega " + played[i]->str());
 		break;
 	}
 }

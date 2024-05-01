@@ -24,12 +24,12 @@ namespace truco {
  */
 std::ostream &operator<<(std::ostream &os, const Card &card) {
 	switch (card.value) {
-	case 1: os << "ancho de "; break;
-	case 10: os << "sota de "; break;
-	case 11: os << "caballo de "; break;
-	case 12: os << "rey de "; break;
+	case 1: os << "el ancho de "; break;
+	case 10: os << "la sota de "; break;
+	case 11: os << "el caballo de "; break;
+	case 12: os << "el rey de "; break;
 	default:
-		os << card.value << " de ";
+		os << "el " << card.value << " de ";
 	}
 	switch (card.type) {
 	case Card::ORO: os << "oro"; break;

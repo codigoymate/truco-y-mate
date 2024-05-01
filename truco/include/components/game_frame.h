@@ -72,13 +72,22 @@ public:
 	 */
 	std::shared_ptr<TCurses::Label> getCurrentPlayerLabel() const { return currentPlayerLabel; }
 
+	/**
+	 * @brief Establece el texto del label de información.
+	 * 
+	 * @param text Texto de información.
+	 */
+	void setInfoText(const std::string text);
+
 private:
 
 	std::vector<std::shared_ptr<Player>> players; /**< La lista de jugadores.*/
 
 	std::shared_ptr<StepManager> stepManager; /**< Administrador de turnos.*/
 
-	std::shared_ptr<TCurses::Frame> mainFrame; /**< Frame principal (Contiene la mesa, las tres cartas y el menu)*/
+	std::shared_ptr<TCurses::Frame> mainFrame; /**< Frame principal
+					(Contiene la mesa, el cuadro de informacion, las tres cartas y el menu)*/
+	std::shared_ptr<TCurses::Label> infoLabel; /**< Label de información.*/
 
 	// Frame de puntos
 	std::shared_ptr<ScoreFrame> scoreFrame; /**< Componente de puntos*/

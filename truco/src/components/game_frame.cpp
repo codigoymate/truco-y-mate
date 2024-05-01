@@ -71,15 +71,33 @@ void GameFrame::init() {
 	// Frame de la mesa
 	mainFrame->addChild(this->layoutTable());
 
+	// Frame de Información y cartas de la mano
+	auto frame = std::make_shared<Frame>();
+	frame->setLayout(TCurses::Component::LY_VERTICAL);
+	frame->setMaxW(30);
+	mainFrame->addChild(frame);
+
+	// Agrega un expansor
+	frame->addChild(std::make_shared<TCurses::Frame>());
+
+	// Label de información
+	infoLabel = std::make_shared<TCurses::Label>();
+	infoLabel->setMaxH(3);
+	infoLabel->setTextAlign(TCurses::Component::HA_CENTER, TCurses::Component::VA_CENTER);
+	frame->addChild(infoLabel);
+
 	// Cartas de la mano del jugador 1
+	auto frame2 = std::make_shared<TCurses::Frame>();
+	frame2->setLayout(TCurses::Component::LY_HORIZONTAL);
+	frame->addChild(frame2);
 	for (unsigned i = 0; i < 3; i ++) {
 		hand[i] = std::make_shared<BigCardComponent>();
 		hand[i]->setVAlign(Component::VA_BOTTOM);
-		mainFrame->addChild(hand[i]);
+		frame2->addChild(hand[i]);
 	}
 
 	// Frame del puntaje y el menu
-	auto frame = std::make_shared<Frame>();
+	frame = std::make_shared<Frame>();
 	frame->setLayout(TCurses::Component::LY_VERTICAL);
 	frame->setMinW(20); frame->setMaxW(20);
 	mainFrame->addChild(frame);
@@ -299,6 +317,15 @@ std::shared_ptr<TCurses::Frame> GameFrame::layoutTable() {
 	}
 
 	return tableFrame;
+}
+
+/**
+ * @brief Establece el texto del label de información.
+ * 
+ * @param text Texto de información.
+ */
+void GameFrame::setInfoText(const std::string text) {
+	this->infoLabel->setText(text);
 }
 
 }
