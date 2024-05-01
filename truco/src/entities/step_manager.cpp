@@ -13,6 +13,7 @@
 #include <utils/random.h>
 
 #include <components/game_frame.h>
+#include <components/score_frame.h>
 #include <entities/player.h>
 #include <truco.h>
 
@@ -232,12 +233,17 @@ void StepManager::incrementPlayerIndex() {
  */
 void StepManager::endRound(unsigned winnner) {
 
+	// Muestra mensaje de ganador
 	std::string wins;
 	if (gameFrame->getPlayers().size() == 2) wins = " gana ";
 	else wins = (winnner % 2 ? " ganan " : " ganamos ");
 
 	gameFrame->setInfoText(gameFrame->getTeamName(winnner % 2) +
 	wins + "la ronda.");
+
+	// Asigna los puntos
+	gameFrame->getScoreFrame()->setScore(winnner % 2, 1);
+
 	nextRound();
 }
 

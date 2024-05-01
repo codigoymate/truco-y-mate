@@ -56,7 +56,7 @@ void ScoreFrame::init() {
  */
 void ScoreFrame::setScore(const unsigned team, const unsigned score) {
 	this->score[team] += score;
-	this->scoreLabel[team]->setText(std::to_string(score));
+	this->scoreLabel[team]->setText(std::to_string(this->score[team]));
 }
 
 /**

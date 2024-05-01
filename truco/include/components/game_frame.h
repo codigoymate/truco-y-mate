@@ -77,6 +77,13 @@ public:
 	std::shared_ptr<StepManager> getStepManager() { return stepManager; }
 
 	/**
+	 * @brief Devuelve el componente de puntuación
+	 * 
+	 * @return std::shared_ptr<ScoreFrame> componente de puntuación.
+	 */
+	std::shared_ptr<ScoreFrame> getScoreFrame() { return scoreFrame; }
+
+	/**
 	 * @brief Devuelve el label del próximo jugador ubicado en la barra de estado.
 	 */
 	std::shared_ptr<TCurses::Label> getCurrentPlayerLabel() const { return currentPlayerLabel; }
