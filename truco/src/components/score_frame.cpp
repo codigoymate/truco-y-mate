@@ -32,29 +32,12 @@ void ScoreFrame::init() {
 	auto frame2 = std::make_shared<TCurses::Frame>();
 	frame2->setLayout(TCurses::Component::LY_HORIZONTAL);
 	addChild(frame2);
-
-	std::string name0, name1;
-	if (gameFrame->getPlayers().size() == 2) {
-		name0 = "Yo";
-		name1 = gameFrame->getPlayers()[1]->isShe() ? "Ella" : "El";
-	} else {
-		// Determina genero de los jugadores
-		name0 = "Nosotras";
-		name1 = "Ellas";
-		for (unsigned i = 0; i < gameFrame->getPlayers().size(); i ++) {
-			if (i % 2) {
-				if (!gameFrame->getPlayers()[i]->isShe()) name1 = "Ellos";
-			} else {
-				if (!gameFrame->getPlayers()[i]->isShe()) name0 = "Nosotros";
-			}
-		}
-	}
 	
-	auto label = std::make_shared<TCurses::Label>(name0);
+	auto label = std::make_shared<TCurses::Label>(gameFrame->getTeamName(0));
 	label->setHTextAlign(TCurses::Component::HA_CENTER);
 	frame1->addChild(label);
 
-	label = std::make_shared<TCurses::Label>(name1);
+	label = std::make_shared<TCurses::Label>(gameFrame->getTeamName(1));
 	label->setHTextAlign(TCurses::Component::HA_CENTER);
 	frame1->addChild(label);
 

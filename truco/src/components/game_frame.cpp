@@ -143,6 +143,34 @@ void GameFrame::init() {
 }
 
 /**
+ * @brief Devuelve el nombre del equipo dependiendo de la cantidad de jugadores
+ * y los géneros.
+ * Si son dos jugadores, devuelve el nombre del jugador objetivo.
+ * Si son mas de dos, devuelve (Nosotros, Ellos, Nosotras, Ellas) dependiendo
+ * de los géneros.
+ * 
+ * @param team Equipo objetivo.
+ * @return const std::string nombre del equipo.
+ */
+const std::string GameFrame::getTeamName(const unsigned team) const {
+	if (players.size() == 2) {
+		return players[team]->getName();
+	}
+
+	// Determina genero de los jugadores
+	std::string name0 = "Nosotras", name1 = "Ellas";
+	for (unsigned i = 0; i < players.size(); i ++) {
+		if (i % 2) {
+			if (!players[i]->isShe()) name1 = "Ellos";
+		} else {
+			if (!players[i]->isShe()) name0 = "Nosotros";
+		}
+	}
+
+	return team ? name1 : name0;
+}
+
+/**
  * @brief Actualiza la lógica del GameFrame.
  * 
  */

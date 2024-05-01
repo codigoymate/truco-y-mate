@@ -51,6 +51,15 @@ public:
 	std::vector<std::shared_ptr<Player>> &getPlayers() { return players; }
 
 	/**
+	 * @brief Devuelve el nombre del equipo dependiendo de la cantidad de jugadores
+	 * y los géneros.
+	 * 
+	 * @param team Equipo objetivo.
+	 * @return const std::string nombre del equipo.
+	 */
+	const std::string getTeamName(const unsigned team) const;
+
+	/**
 	 * @brief Actualiza los componentes.
 	 * 
 	 */

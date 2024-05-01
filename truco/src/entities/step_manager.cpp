@@ -231,6 +231,13 @@ void StepManager::incrementPlayerIndex() {
  * @param winnner El ganador de la ronda.
  */
 void StepManager::endRound(unsigned winnner) {
+
+	std::string wins;
+	if (gameFrame->getPlayers().size() == 2) wins = " gana ";
+	else wins = (winnner % 2 ? " ganan " : " ganamos ");
+
+	gameFrame->setInfoText(gameFrame->getTeamName(winnner % 2) +
+	wins + "la ronda.");
 	nextRound();
 }
 
