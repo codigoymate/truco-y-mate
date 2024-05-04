@@ -23,6 +23,7 @@
 #include <tcurses/screen.h>
 #include <tcurses/colors.h>
 #include <tcurses/input_event.h>
+#include <tcurses/emergent.h>
 
 namespace TCurses {
 
@@ -34,6 +35,9 @@ Application::Application() {
 	setlocale(LC_ALL, "");
 
 	screen = std::make_shared<Screen>(this);
+
+	// Agrega el primer input listener
+	inputListeners.push(std::list<std::shared_ptr<InputListener>>());
 
 	initColors();
 }
@@ -50,8 +54,15 @@ void Application::run() {
 	while (running) {
 
 		screen->updateAll();
-
+		for (auto &e : emergents) e->updateAll();
+		
+		clear();
 		screen->drawAll(); // Dibuja la pantalla
+		for (auto &e : emergents) e->drawAll();
+		refresh();
+
+		
+
 		std::this_thread::sleep_for(std::chrono::milliseconds(100));
 
 		ch = getch();
@@ -60,10 +71,13 @@ void Application::run() {
 
 			if (ch == KEY_RESIZE) {
 				screen->setSize(getmaxx(stdscr), getmaxy(stdscr));
-				screen->drawAll();
+				clear();
+				screen->drawAll(); // Dibuja la pantalla
+				for (auto &e : emergents) e->drawAll();
+				refresh();
 			} else {
 				// Crea una copia de los input listeners para que no haya problemas con el foreach
-				auto il = std::list<std::shared_ptr<InputListener>>(inputListeners);
+				auto il = std::list<std::shared_ptr<InputListener>>(inputListeners.top());
 				for (auto &i : il) {
 					i->keyPressed(ch);
 				}
@@ -106,6 +120,9 @@ void Application::initColors() {
 
 	init_pair(ART_BG_PAIR, COLOR_BLACK, COLOR_BLACK);
 	init_pair(ART_BORDER_PAIR, COLOR_WHITE, COLOR_WHITE);
+
+	init_pair(EMERGENT_BG_PAIR, COLOR_BLACK, COLOR_BLUE);
+	init_pair(EMERGENT_BORDER_PAIR, COLOR_WHITE, COLOR_BLUE);
 }
 
 /**
@@ -114,7 +131,7 @@ void Application::initColors() {
  * @param listener Puntero compartido a componente InputListener.
  */
 void Application::addInputListener(std::shared_ptr<InputListener> listener) {
-	inputListeners.push_back(listener);
+	inputListeners.top().push_back(listener);
 }
 
 /**
@@ -123,7 +140,31 @@ void Application::addInputListener(std::shared_ptr<InputListener> listener) {
  * @param listener Puntero compartido a componente InputListener.
  */
 void Application::removeInputListener(std::shared_ptr<InputListener> listener) {
-	inputListeners.remove(listener);
+	inputListeners.top().remove(listener);
+}
+
+/**
+ * @brief Registra y muestra un Emergent.
+ * 
+ * @param e Emergent a mostrar.
+ */
+void Application::showEmergent(std::shared_ptr<Emergent> e) {
+	emergents.push_back(e);
+	e->setApplication(this);
+
+	// Agrega una lista de input listeners a la cola
+	inputListeners.push(std::list<std::shared_ptr<InputListener>>());
+
+	e->init();
+}
+
+/**
+ * @brief Elimina el último Emergent de Application.
+ * 
+ */
+void Application::disposeEmergent() {
+	inputListeners.pop();
+	emergents.pop_back();
 }
 
 } // namespace TCurses

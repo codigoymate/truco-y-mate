@@ -65,9 +65,7 @@ void Screen::updateAll() {
  * 
  */
 void Screen::drawAll() {
-	clear();
 	internalDraw();
-	refresh();
 }
 
 } // namespace TCurses

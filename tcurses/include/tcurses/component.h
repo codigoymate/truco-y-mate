@@ -346,6 +346,13 @@ public:
 	 */
 	Application *getApplication() { return application; }
 
+	/**
+	 * @brief Establece la referencia a application.
+	 * 
+	 * @param application Referencia a Application.
+	 */
+	void setApplication(Application *application) { this->application = application; }
+
 protected:
 
 	Application *application; /**<Referencia a Application.*/

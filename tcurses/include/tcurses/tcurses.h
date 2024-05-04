@@ -20,3 +20,4 @@
 #include <tcurses/menu.h>
 #include <tcurses/menuitem.h>
 #include <tcurses/art.h>
+#include <tcurses/emergent.h>

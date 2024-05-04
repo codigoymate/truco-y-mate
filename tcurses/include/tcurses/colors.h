@@ -26,5 +26,7 @@ namespace TCurses {
 	constexpr short MENUITEM_SEL_BORDER_PAIR =		77;
 	constexpr short ART_BG_PAIR = 					78;
 	constexpr short ART_BORDER_PAIR = 				79;
+	constexpr short EMERGENT_BG_PAIR =				80;
+	constexpr short EMERGENT_BORDER_PAIR =			81;
 
 }

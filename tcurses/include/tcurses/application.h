@@ -13,11 +13,13 @@
 
 #include <memory>
 #include <list>
+#include <stack>
 
 namespace TCurses {
 
 class Screen;
 class InputListener;
+class Emergent;
 
 /**
  * @brief La clase Application representa la lógica principal de la aplicación.
@@ -73,6 +75,19 @@ public:
 	 */
 	void quit() { running = false; }
 
+	/**
+	 * @brief Registra y muestra un Emergent.
+	 * 
+	 * @param e Emergent a mostrar.
+	 */
+	void showEmergent(std::shared_ptr<Emergent> e);
+
+	/**
+	 * @brief Elimina el último Emergent de Application.
+	 * 
+	 */
+	void disposeEmergent();
+
 protected:
 	/**
 	 * @brief Un puntero compartido al objeto Screen utilizado por la aplicación.
@@ -84,7 +99,9 @@ private:
 	 * @brief Lista de componente que escuchan la entrada.
 	 * 
 	 */
-	std::list<std::shared_ptr<InputListener>> inputListeners;
+	std::stack<std::list<std::shared_ptr<InputListener>>> inputListeners;
+
+	std::list<std::shared_ptr<Emergent>> emergents;
 
 	/**
 	 * @brief Inicializa los colores utilizados por la aplicación.
