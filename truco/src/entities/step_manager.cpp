@@ -15,6 +15,9 @@
 #include <components/game_frame.h>
 #include <components/score_frame.h>
 #include <entities/player.h>
+
+#include <dialogs/end_round_dialog.h>
+
 #include <truco.h>
 
 namespace truco {
@@ -77,6 +80,9 @@ void StepManager::step() {
  * 
  */
 void StepManager::nextRound() {
+
+	halt = false;
+
 	round ++;
 	handIndex = 0;
 
@@ -244,7 +250,11 @@ void StepManager::endRound(unsigned winnner) {
 	// Asigna los puntos
 	gameFrame->getScoreFrame()->setScore(winnner % 2, 1);
 
-	nextRound();
+	// Detiene el StepManager
+	halt = true;
+
+	gameFrame->getApplication()->showEmergent(std::make_shared<EndRoundDialog>(gameFrame));
+
 }
 
 }

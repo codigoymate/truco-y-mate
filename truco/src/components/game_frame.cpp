@@ -175,6 +175,7 @@ const std::string GameFrame::getTeamName(const unsigned team) const {
  * 
  */
 void GameFrame::update() {
+	if (stepManager->isHalt()) return;
 	stepManager->currentPlayer()->play();
 }
 

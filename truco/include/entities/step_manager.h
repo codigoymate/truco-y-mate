@@ -61,6 +61,11 @@ public:
 	 */
 	std::shared_ptr<Player> currentPlayer();
 
+	/**
+	 * @brief Devuelve verdadero si el StepManager está detenido.
+	 */
+	const bool isHalt() const { return halt; }
+
 private:
 	GameFrame *gameFrame; /**< Referencia a GameFrame.*/
 
@@ -68,6 +73,8 @@ private:
 	signed startPlayer; /**< Indice del jugador mano. */
 	unsigned round{}; /**< Conteo de rondas. */
 	unsigned handIndex{}; /**< Mano actual. */
+
+	bool halt{}; /**< Verdadero para que el StepManager se detenga.*/
 
 	/**
 	 * @brief Verifica si no se jugó una carta en la mano indicada.
