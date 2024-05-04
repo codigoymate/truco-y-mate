@@ -161,7 +161,7 @@ void MenuItem::draw() {
 	unsigned pair = selected ? getSelTextPair() : getTextPair();
 	attron(COLOR_PAIR(pair) | getAttributes());
 	drawTextArea(text, getAbsX(), getAbsY(), getAbsX() + getW(), getAbsY() + getH(),
-		hTextAlign, vTextAlign);
+		hTextAlign, vTextAlign, getWrap());
 	attroff(COLOR_PAIR(pair) | getAttributes());
 }
 

@@ -23,6 +23,9 @@ namespace TCurses {
  */
 class Label : public Component {
 public:
+
+	enum Wrap { NO_WRAP, WRAP_CHAR, WRAP_WORD };
+
 	/**
 	 * @brief Constructor predeterminado de Label.
 	 * 
@@ -136,6 +139,18 @@ public:
 	 * @param color nuevo color de texto.
 	 */
 	void setTextPair(const short pair) { textPair = pair; }
+
+	/**
+	 * @brief Devuelve el wrap del texto.
+	 */
+	const Wrap getWrap() const { return wrap; }
+
+	/**
+	 * @brief Establece el wrap del texto.
+	 * 
+	 * @param wrap wrap del texto.
+	 */
+	void setWrap(const Wrap wrap) { this->wrap = wrap; }
 protected:
 
 	/**
@@ -143,6 +158,8 @@ protected:
 	 * 
 	 */
 	std::string text{};
+
+	Wrap wrap{}; /**Wrapping del texto. */
 
 	/**
 	 * @brief Alineación de texto.

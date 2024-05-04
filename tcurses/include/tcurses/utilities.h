@@ -15,6 +15,7 @@
 
 #include <string>
 #include <tcurses/component.h>
+#include <tcurses/label.h>
 
 namespace TCurses {
 
@@ -30,7 +31,8 @@ namespace TCurses {
  */
 void drawTextArea(const std::string text,
                   const short x1, const short y1, const short x2, const short y2,
-                  const Component::HAlign hAlign, const Component::VAlign vAlign);
+                  const Component::HAlign hAlign, const Component::VAlign vAlign,
+				  const Label::Wrap wrap);
 
 /**
  * @brief Dibuja un rectángulo sólido con espacios.

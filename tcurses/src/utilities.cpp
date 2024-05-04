@@ -17,14 +17,39 @@ namespace TCurses {
  */
 void drawTextArea(const std::string text,
                   const short x1, const short y1, const short x2, const short y2,
-                  const Component::HAlign hAlign, const Component::VAlign vAlign) {
+                  const Component::HAlign hAlign, const Component::VAlign vAlign,
+				  const Label::Wrap wrap) {
 	short w = x2 - x1, h = y2 - y1;
 
 	// Guarda las lineas en un vector
+	
 	std::vector<std::string> lines;
 	std::string str = "";
 	for (int i = 0; i < text.size(); i ++) {
 		int ch = text[i];
+
+		switch (wrap) {
+		case Label::WRAP_CHAR:
+			if (str.size() >= w) {
+				lines.push_back(str);
+				str = std::string("");
+			}
+			break;
+
+		case Label::WRAP_WORD:
+			if (str.size() >= w) {
+				// Busca el principio de la palabra actal
+				auto pos = str.rfind(' ');
+				if (pos != std::string::npos) { // si se encontró el espacio
+					// agrega la línea sin la palabra a la lista.
+					lines.push_back(str.substr(0, pos));
+					// Ahora, str continua desde la palabra actual
+					str = std::string(str.substr(pos));
+				}
+			}
+			break;
+		}
+
 		if (ch == '\n') {
 			lines.push_back(str);
 			str = std::string("");

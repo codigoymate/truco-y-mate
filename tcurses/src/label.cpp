@@ -91,7 +91,7 @@ void Label::draw() {
 	// Dibuja el texto
 	attron(COLOR_PAIR(textPair) | getAttributes());
 	drawTextArea(text, getAbsX(), getAbsY(), getAbsX() + getW(), getAbsY() + getH(),
-		hTextAlign, vTextAlign);
+		hTextAlign, vTextAlign, wrap);
 	attroff(COLOR_PAIR(textPair) | getAttributes());
 
 }

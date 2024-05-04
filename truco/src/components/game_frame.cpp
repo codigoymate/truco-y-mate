@@ -83,6 +83,7 @@ void GameFrame::init() {
 	// Label de información
 	infoLabel = std::make_shared<TCurses::Label>();
 	infoLabel->setMaxH(3);
+	infoLabel->setWrap(TCurses::Label::WRAP_WORD);
 	infoLabel->setTextAlign(TCurses::Component::HA_CENTER, TCurses::Component::VA_CENTER);
 	frame->addChild(infoLabel);
 
