@@ -179,7 +179,7 @@ void StepManager::nextPlayerHandFull() {
 					currentPlayerIndex = winner;
 				}
 			}
-			}
+			} break;
 		case 2: // Tercera mano
 			endRound(winner); return;
 		}
