@@ -253,7 +253,8 @@ void StepManager::endRound(unsigned winnner) {
 	// Detiene el StepManager
 	halt = true;
 
-	gameFrame->getApplication()->showEmergent(std::make_shared<EndRoundDialog>(gameFrame));
+	// Muestra el diálogo de final de ronda.
+	gameFrame->getApplication()->showEmergent(std::make_shared<EndRoundDialog>(gameFrame, winnner % 2));
 
 }
 
