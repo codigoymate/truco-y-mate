@@ -52,20 +52,20 @@ GameFrame::GameFrame(const unsigned playerCount) : TCurses::Frame() {
  * 
  */
 void GameFrame::init() {
-	this->setLayout(TCurses::Component::LY_VERTICAL);
+	this->setLayout(TCurses::LY_VERTICAL);
 
 	// Título
 	auto title = std::make_shared<TCurses::Label>("Truco Argentino");
 	title->setMaxH(1);
 	title->setTextPair(TITLE_PAIR);
 	title->setBGPair(TITLE_PAIR);
-	title->setHTextAlign(TCurses::Component::HA_CENTER);
+	title->setHTextAlign(TCurses::HA_CENTER);
 	title->setAttributes(A_BOLD);
 	addChild(title);
 
 	// Frame del centro ***************************
 	mainFrame = std::make_shared<TCurses::Frame>();
-	mainFrame->setLayout(TCurses::Component::LY_HORIZONTAL);
+	mainFrame->setLayout(TCurses::LY_HORIZONTAL);
 	addChild(mainFrame);
 
 	// Frame de la mesa
@@ -73,7 +73,7 @@ void GameFrame::init() {
 
 	// Frame de Información y cartas de la mano
 	auto frame = std::make_shared<Frame>();
-	frame->setLayout(TCurses::Component::LY_VERTICAL);
+	frame->setLayout(TCurses::LY_VERTICAL);
 	frame->setMaxW(30);
 	mainFrame->addChild(frame);
 
@@ -83,23 +83,23 @@ void GameFrame::init() {
 	// Label de información
 	infoLabel = std::make_shared<TCurses::Label>();
 	infoLabel->setMaxH(3);
-	infoLabel->setWrap(TCurses::Label::WRAP_WORD);
-	infoLabel->setTextAlign(TCurses::Component::HA_CENTER, TCurses::Component::VA_CENTER);
+	infoLabel->setWrap(TCurses::WRAP_WORD);
+	infoLabel->setTextAlign(TCurses::HA_CENTER, TCurses::VA_CENTER);
 	frame->addChild(infoLabel);
 
 	// Cartas de la mano del jugador 1
 	auto frame2 = std::make_shared<TCurses::Frame>();
-	frame2->setLayout(TCurses::Component::LY_HORIZONTAL);
+	frame2->setLayout(TCurses::LY_HORIZONTAL);
 	frame->addChild(frame2);
 	for (unsigned i = 0; i < 3; i ++) {
 		hand[i] = std::make_shared<BigCardComponent>();
-		hand[i]->setVAlign(Component::VA_BOTTOM);
+		hand[i]->setVAlign(TCurses::VA_BOTTOM);
 		frame2->addChild(hand[i]);
 	}
 
 	// Frame del puntaje y el menu
 	frame = std::make_shared<Frame>();
-	frame->setLayout(TCurses::Component::LY_VERTICAL);
+	frame->setLayout(TCurses::LY_VERTICAL);
 	frame->setMinW(20); frame->setMaxW(20);
 	mainFrame->addChild(frame);
 
@@ -129,7 +129,7 @@ void GameFrame::init() {
 
 	// Status
 	auto status = std::make_shared<TCurses::Label>();
-	status->setLayout(TCurses::Component::LY_HORIZONTAL);
+	status->setLayout(TCurses::LY_HORIZONTAL);
 	status->setMaxH(1);
 	addChild(status);
 
@@ -280,68 +280,68 @@ void GameFrame::quitItemAction() {
  */
 std::shared_ptr<TCurses::Frame> GameFrame::layoutTable() {
 	auto tableFrame = std::make_shared<TCurses::Frame>();
-	tableFrame->setLayout(TCurses::Component::LY_VERTICAL);
+	tableFrame->setLayout(TCurses::LY_VERTICAL);
 
 	switch (players.size()) {
 	case 2:
-		playerFrames[1]->setHAlign(TCurses::Component::HA_CENTER);
+		playerFrames[1]->setHAlign(TCurses::HA_CENTER);
 		tableFrame->addChild(playerFrames[1]);
 
 		tableFrame->addChild(std::make_shared<TCurses::Frame>());
 
-		playerFrames[0]->setHAlign(TCurses::Component::HA_CENTER);
+		playerFrames[0]->setHAlign(TCurses::HA_CENTER);
 		tableFrame->addChild(playerFrames[0]);
 		break;
 	
 	case 4: {
-		playerFrames[2]->setHAlign(TCurses::Component::HA_CENTER);
+		playerFrames[2]->setHAlign(TCurses::HA_CENTER);
 		tableFrame->addChild(playerFrames[2]);
 
 		auto frame = std::make_shared<TCurses::Frame>();
 		tableFrame->addChild(frame);
-		frame->setLayout(TCurses::Component::LY_HORIZONTAL);
+		frame->setLayout(TCurses::LY_HORIZONTAL);
 
-		playerFrames[1]->setVAlign(TCurses::Component::VA_CENTER);
+		playerFrames[1]->setVAlign(TCurses::VA_CENTER);
 		frame->addChild(playerFrames[1]);
 
 		frame->addChild(std::make_shared<TCurses::Frame>());
 
-		playerFrames[3]->setVAlign(TCurses::Component::VA_CENTER);
+		playerFrames[3]->setVAlign(TCurses::VA_CENTER);
 		frame->addChild(playerFrames[3]);
 
-		playerFrames[0]->setHAlign(TCurses::Component::HA_CENTER);
+		playerFrames[0]->setHAlign(TCurses::HA_CENTER);
 		tableFrame->addChild(playerFrames[0]);
 		} break;
 
 	case 6: {
-		playerFrames[3]->setHAlign(TCurses::Component::HA_CENTER);
+		playerFrames[3]->setHAlign(TCurses::HA_CENTER);
 		tableFrame->addChild(playerFrames[3]);
 
 		auto frame = std::make_shared<TCurses::Frame>();
 		tableFrame->addChild(frame);
-		frame->setLayout(TCurses::Component::LY_HORIZONTAL);
+		frame->setLayout(TCurses::LY_HORIZONTAL);
 
-		playerFrames[2]->setVAlign(TCurses::Component::VA_CENTER);
+		playerFrames[2]->setVAlign(TCurses::VA_CENTER);
 		frame->addChild(playerFrames[2]);
 
 		frame->addChild(std::make_shared<TCurses::Frame>());
 
-		playerFrames[4]->setVAlign(TCurses::Component::VA_CENTER);
+		playerFrames[4]->setVAlign(TCurses::VA_CENTER);
 		frame->addChild(playerFrames[4]);
 
 		frame = std::make_shared<TCurses::Frame>();
 		tableFrame->addChild(frame);
-		frame->setLayout(TCurses::Component::LY_HORIZONTAL);
+		frame->setLayout(TCurses::LY_HORIZONTAL);
 
-		playerFrames[1]->setVAlign(TCurses::Component::VA_CENTER);
+		playerFrames[1]->setVAlign(TCurses::VA_CENTER);
 		frame->addChild(playerFrames[1]);
 
 		frame->addChild(std::make_shared<TCurses::Frame>());
 
-		playerFrames[5]->setVAlign(TCurses::Component::VA_CENTER);
+		playerFrames[5]->setVAlign(TCurses::VA_CENTER);
 		frame->addChild(playerFrames[5]);
 
-		playerFrames[0]->setHAlign(TCurses::Component::HA_CENTER);
+		playerFrames[0]->setHAlign(TCurses::HA_CENTER);
 		tableFrame->addChild(playerFrames[0]);
 		} break;
 	}

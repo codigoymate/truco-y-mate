@@ -32,13 +32,13 @@ EndRoundDialog::EndRoundDialog(GameFrame *gameFrame, const unsigned winner) : Em
  * 
  */
 void EndRoundDialog::init() {
-	this->setLayout(TCurses::Component::LY_VERTICAL);
+	this->setLayout(TCurses::LY_VERTICAL);
 
 	// Envia el menu abajo
 	//this->addChild(std::make_shared<TCurses::Frame>());
 
 	auto frame = std::make_shared<TCurses::Frame>();
-	frame->setLayout(TCurses::Component::LY_HORIZONTAL);
+	frame->setLayout(TCurses::LY_HORIZONTAL);
 	this->addChild(frame);
 
 	
@@ -54,13 +54,13 @@ void EndRoundDialog::init() {
 	labelText += "la ronda anotando X puntos.";
 
 	auto label = std::make_shared<TCurses::Label>(labelText);
-	label->setWrap(TCurses::Label::WRAP_WORD);
+	label->setWrap(TCurses::WRAP_WORD);
 	frame->addChild(label);
 
 	// Menu "Continuar"
 	auto menu = std::make_shared<TCurses::Menu>();
 	menu->setMaxW(11); menu->setMaxH(1);
-	menu->setHAlign(TCurses::Component::HA_CENTER);
+	menu->setHAlign(TCurses::HA_CENTER);
 	this->addChild(menu);
 
 	auto okItem = std::make_shared<TCurses::MenuItem>("Continuar",

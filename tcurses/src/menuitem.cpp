@@ -72,8 +72,8 @@ MenuItem::MenuItem(const std::string text, const short x, const short y,
 	setSelTextPair(MENUITEM_SEL_TEXT_PAIR);
 
 	// Configura el estilo del MenuItem.
-	setTextAlign(Component::HA_CENTER, Component::VA_CENTER);
-	setHAlign(Component::HA_CENTER);
+	setTextAlign(HA_CENTER, VA_CENTER);
+	setHAlign(HA_CENTER);
 	setMaxH(1);
 }
 

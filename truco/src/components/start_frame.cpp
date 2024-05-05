@@ -21,7 +21,7 @@ StartFrame::StartFrame() : TCurses::Frame() {}
  * 
  */
 void StartFrame::init() {
-	this->setLayout(TCurses::Component::LY_VERTICAL);
+	this->setLayout(TCurses::LY_VERTICAL);
 
 	// Título
 	auto title = std::make_shared<TCurses::Art>(std::vector<unsigned int>({
@@ -56,13 +56,13 @@ void StartFrame::init() {
 0x0000, 0x0000, 0x0000, 0x0000, 0x0000, 0x0000, 0x0000, 0x0000, 0x0000, 0x0000, 0x0000, 0x0000, 0x0000, 0x0000, 0x0000, 0x0000, 
 0x0000, 0x0000, 0x0000, 0x0000, 0x0000, 0x0000, 0x0000, 0x0000, 0x0000, 0x0000, 0x0000, 0x0000, 0x0000, 0x0000, 0x0000, 0x0000, 
 0x0000, 0x0000, 0x0000, 0x0000, 0x0000, 0x0000, 0x0000, 0x0000, 0x0000, 0x0000, 0x0000, 0x0000, 0x0000, 0x0000, 0x0000	}), 45, 11);
-	title->setHAlign(TCurses::Component::HA_CENTER);
+	title->setHAlign(TCurses::HA_CENTER);
 	this->addChild(title);
 
 	mainMenu = std::make_shared<TCurses::Menu>();
 	mainMenu->setMaxW(20); mainMenu->setMaxH(5);
 	mainMenu->setBorder(std::make_shared<TCurses::LinedBorder>(1));
-	mainMenu->setHAlign(TCurses::Component::HA_CENTER);
+	mainMenu->setHAlign(TCurses::HA_CENTER);
 	this->addChild(mainMenu);
 
 	mainMenu->addChild(std::make_shared<TCurses::MenuItem>("Uno contra uno", std::bind(&StartFrame::twoPlayersGame, this)));

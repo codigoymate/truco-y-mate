@@ -13,6 +13,9 @@
 #include <memory>
 #include <list>
 
+#include <tcurses/align.h>
+#include <tcurses/layout.h>
+
 namespace TCurses {
 
 class Application;
@@ -24,19 +27,6 @@ class Border;
  */
 class Component {
 public:
-
-	/**
-	 * @brief Enumeradores para alineación en general.
-	 * 
-	 */
-	enum VAlign {VA_TOP, VA_CENTER, VA_BOTTOM};
-	enum HAlign {HA_LEFT, HA_CENTER, HA_RIGHT};
-
-	/**
-	 * @brief Enumerador para el tipo de distribución.
-	 * 
-	 */
-	enum Layout {LY_ABSOLUTE, LY_VERTICAL, LY_HORIZONTAL};
 
 	/**
 	 * @brief Constructor predeterminado de Component.

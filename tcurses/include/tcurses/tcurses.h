@@ -10,6 +10,10 @@
 
 #pragma once
 
+#include <tcurses/align.h>
+#include <tcurses/layout.h>
+#include <tcurses/wrap.h>
+
 #include <tcurses/application.h>
 #include <tcurses/colors.h>
 #include <tcurses/screen.h>

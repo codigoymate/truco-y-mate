@@ -37,7 +37,7 @@ void Truco::init() {
 
 	init_pair(TITLE_PAIR, COLOR_WHITE, COLOR_CYAN);
 
-	screen->setLayout(TCurses::Component::LY_VERTICAL);
+	screen->setLayout(TCurses::LY_VERTICAL);
 	screen->addChild(std::make_shared<StartFrame>());
 }
 

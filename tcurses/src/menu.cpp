@@ -41,7 +41,7 @@ Menu::Menu(const short x, const short y, const short w, const short h) :
 				Component(x, y, w, h) {
 	setBGPair(MENU_BG_PAIR);
 	setBorderPair(MENU_BORDER_PAIR);
-	setLayout(Component::LY_VERTICAL);
+	setLayout(LY_VERTICAL);
 }
 
 /**

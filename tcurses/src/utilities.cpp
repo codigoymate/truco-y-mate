@@ -17,8 +17,7 @@ namespace TCurses {
  */
 void drawTextArea(const std::string text,
                   const short x1, const short y1, const short x2, const short y2,
-                  const Component::HAlign hAlign, const Component::VAlign vAlign,
-				  const Label::Wrap wrap) {
+                  const HAlign hAlign, const VAlign vAlign, const Wrap wrap) {
 	short w = x2 - x1, h = y2 - y1;
 
 	// Guarda las lineas en un vector
@@ -29,14 +28,14 @@ void drawTextArea(const std::string text,
 		int ch = text[i];
 
 		switch (wrap) {
-		case Label::WRAP_CHAR:
+		case WRAP_CHAR:
 			if (str.size() >= w) {
 				lines.push_back(str);
 				str = std::string("");
 			}
 			break;
 
-		case Label::WRAP_WORD:
+		case WRAP_WORD:
 			if (str.size() >= w) {
 				// Busca el principio de la palabra actal
 				auto pos = str.rfind(' ');
@@ -64,13 +63,13 @@ void drawTextArea(const std::string text,
 	// Procesa la alineación vertical
 	short y;
 	switch (vAlign) {
-	case Component::VA_TOP:
+	case VA_TOP:
 		y = y1;
 		break;
-	case Component::VA_CENTER:
+	case VA_CENTER:
 		y = (y1 + h / 2) - (lines.size() / 2);
 		break;
-	case Component::VA_BOTTOM:
+	case VA_BOTTOM:
 		y = y2 - lines.size();
 	}
 
@@ -86,13 +85,13 @@ void drawTextArea(const std::string text,
 
 		short x;
 		switch (hAlign) {
-		case Component::VA_TOP:
+		case VA_TOP:
 			x = x1;
 			break;
-		case Component::VA_CENTER:
+		case VA_CENTER:
 			x = (x1 + w / 2) - (lines[l].size() / 2);
 			break;
-		case Component::VA_BOTTOM:
+		case VA_BOTTOM:
 			x = x2 - lines[l].size();
 		}
 

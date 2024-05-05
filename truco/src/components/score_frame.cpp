@@ -23,27 +23,27 @@ void ScoreFrame::init() {
 	//setMinW(15); setMaxW(15);
 	setMinH(2); setMaxH(2);
 
-	setLayout(TCurses::Component::LY_VERTICAL);
+	setLayout(TCurses::LY_VERTICAL);
 
 	auto frame1 = std::make_shared<TCurses::Frame>();
-	frame1->setLayout(TCurses::Component::LY_HORIZONTAL);
+	frame1->setLayout(TCurses::LY_HORIZONTAL);
 	addChild(frame1);
 
 	auto frame2 = std::make_shared<TCurses::Frame>();
-	frame2->setLayout(TCurses::Component::LY_HORIZONTAL);
+	frame2->setLayout(TCurses::LY_HORIZONTAL);
 	addChild(frame2);
 	
 	auto label = std::make_shared<TCurses::Label>(gameFrame->getTeamName(0));
-	label->setHTextAlign(TCurses::Component::HA_CENTER);
+	label->setHTextAlign(TCurses::HA_CENTER);
 	frame1->addChild(label);
 
 	label = std::make_shared<TCurses::Label>(gameFrame->getTeamName(1));
-	label->setHTextAlign(TCurses::Component::HA_CENTER);
+	label->setHTextAlign(TCurses::HA_CENTER);
 	frame1->addChild(label);
 
 	for (unsigned i = 0; i < 2; i ++) {
 		scoreLabel[i] = std::make_shared<TCurses::Label>("0");
-		scoreLabel[i]->setHTextAlign(TCurses::Component::HA_CENTER);
+		scoreLabel[i]->setHTextAlign(TCurses::HA_CENTER);
 		frame2->addChild(scoreLabel[i]);
 	}
 }

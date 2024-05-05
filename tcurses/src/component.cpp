@@ -173,13 +173,13 @@ void Component::doBoxVertical() {
 	
 		// Alinea horizontalmente cada componente
 		switch (c->getHAlign()) {
-		case Component::HA_LEFT:
+		case HA_LEFT:
 			c->setX(0);
 			break;
-		case Component::HA_RIGHT:
+		case HA_RIGHT:
 			c->setX(w - c->getW());
 			break;
-		case Component::HA_CENTER:
+		case HA_CENTER:
 			c->setX(w / 2 - c->getW() / 2);
 		}
 	}
@@ -221,13 +221,13 @@ void Component::doBoxHorizontal() {
 		
 		// Alinea verticalmente cada componente
 		switch (c->getVAlign()) {
-		case Component::VA_TOP:
+		case VA_TOP:
 			c->setY(0);
 			break;
-		case Component::VA_BOTTOM:
+		case VA_BOTTOM:
 			c->setY(h - c->getH());
 			break;
-		case Component::VA_CENTER:
+		case VA_CENTER:
 			c->setY(h / 2 - c->getH() / 2);
 		}
 	}

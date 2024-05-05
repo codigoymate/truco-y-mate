@@ -20,14 +20,14 @@ namespace truco {
  * @param playerName nombre del jugador.
  */
 PlayerFrame::PlayerFrame(const std::string playerName) : Frame() {
-	this->setLayout(TCurses::Component::LY_VERTICAL);
+	this->setLayout(TCurses::LY_VERTICAL);
 	auto label = std::make_shared<TCurses::Label>(playerName);
 	label->setMaxH(1);
 	this->addChild(label);
-	label->setHTextAlign(TCurses::Component::HA_CENTER);
+	label->setHTextAlign(TCurses::HA_CENTER);
 
 	auto frame = std::make_shared<Frame>();
-	frame->setLayout(TCurses::Component::LY_HORIZONTAL);
+	frame->setLayout(TCurses::LY_HORIZONTAL);
 	this->addChild(frame);
 	for (unsigned i = 0; i < 3; i ++) {
 		cards[i] = std::make_shared<CardComponent>();
