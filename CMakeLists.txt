@@ -6,3 +6,4 @@ project(TrucoArgentino LANGUAGES CXX)
 
 add_subdirectory(tcurses)
 add_subdirectory(truco)
+add_subdirectory(testing_tcurses)
